@@ -170,6 +170,8 @@ public class CoverPageBody extends ContentPanel {
 		this.add(centerVBox);
 		this.setWidth(WIDTH);
 		this.setHeight(HEIGHT);
+		
+//		this.setBodyStyle("background:white url('img/map.jpg') no-repeat top left; background-size: 40%;");
 
 	}
 }

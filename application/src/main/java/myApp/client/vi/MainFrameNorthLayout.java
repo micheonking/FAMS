@@ -35,7 +35,7 @@ public class MainFrameNorthLayout extends BorderLayoutContainer {
 		// FAMS
 		Image image = new Image();
 		image.setResource(ResourceIcon.INSTANCE.getLogo());
-		image.setPixelSize(120, 40);
+		image.setPixelSize(300, 34);
 		header.add(image, new BoxLayoutData(new Margins(2, 0, 0, 10)));
 
 		BoxLayoutData boxLayoutData = new BoxLayoutData(new Margins(0, 0, 0, 0)); 
@@ -44,7 +44,7 @@ public class MainFrameNorthLayout extends BorderLayoutContainer {
 		header.add(new Label(), boxLayoutData);
 		 
 		String userInfo = LoginUser.getUserName() + " 님" ; ;
-		userInfo = "<p style='color:#ffffff; font-size:14px; font-weight:normal'>" + userInfo + "</p>" ; 
+		userInfo = "<p style='color:#606060; font-size:14px; font-weight:normal'>" + userInfo + "</p>" ; 
 		
 		SafeHtml safeEscapedHtml = SafeHtmlUtils.fromTrustedString(userInfo);
 		
@@ -52,9 +52,9 @@ public class MainFrameNorthLayout extends BorderLayoutContainer {
 		
 		header.add(label, new BoxLayoutData(new Margins(9, 0, 0, 0)));
 		
-		TextButton logoutButton = new TextButton(new TextButtonCell(new WhiteGreyButtonCellAppearance<>()));
+		TextButton logoutButton = new TextButton(new TextButtonCell(new WhiteButtonCellAppearance<>()));
 		logoutButton.setText("");
-		logoutButton.setIcon(ResourceIcon.INSTANCE.reload32Button());
+		logoutButton.setIcon(ResourceIcon.INSTANCE.closeButton());
 		
 		logoutButton.setBorders(false);
 		logoutButton.setWidth(35);
@@ -70,9 +70,9 @@ public class MainFrameNorthLayout extends BorderLayoutContainer {
 		header.add(logoutButton, new BoxLayoutData(new Margins(7, 40, 0, 0)));
 
 		ContentPanel cp = new ContentPanel();
-		cp.setBodyStyle("backgroundColor:#024059; color:red"); // http://www.w3schools.com/colors/colors_names.asp 페이지 참조
+		cp.setBodyStyle("backgroundColor:#ffffff; color:red"); // http://www.w3schools.com/colors/colors_names.asp 페이지 참조
 
-		cp.add(header, new BoxLayoutData(new Margins(4, 4, 4, 4)));
+		cp.add(header, new BoxLayoutData(new Margins(4, 4, 8, 4)));
 		
 		cp.forceLayout();
 		cp.setHeaderVisible(false);
