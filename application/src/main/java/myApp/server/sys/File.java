@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.GridDataModel;
-import myApp.client.vi.sys.model.Sys01_CompanyModel;
+import myApp.client.vi.sys.model.Sys01_CmpInfoModel;
 import myApp.server.utils.db.UpdateDataModel;
 
 public class File {
@@ -32,12 +32,13 @@ public class File {
 	}
 	
 	public void update(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
-		UpdateDataModel<Sys01_CompanyModel> updateModel = new UpdateDataModel<Sys01_CompanyModel>(); 
-		updateModel.updateModel(sqlSession, request.getList(), mapperName, result);
+		String usrNo = request.getStringParam("usrNo");
+		UpdateDataModel<Sys01_CmpInfoModel> updateModel = new UpdateDataModel<Sys01_CmpInfoModel>(); 
+		updateModel.updateModel(sqlSession, request.getList(), mapperName, usrNo, result);
 	}
 
 	public void delete(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
-		UpdateDataModel<Sys01_CompanyModel> updateModel = new UpdateDataModel<Sys01_CompanyModel>(); 
+		UpdateDataModel<Sys01_CmpInfoModel> updateModel = new UpdateDataModel<Sys01_CmpInfoModel>(); 
 		updateModel.deleteModel(sqlSession, request.getList(), mapperName, result);
 	}
 }

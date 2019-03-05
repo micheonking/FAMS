@@ -20,7 +20,7 @@ public class MainFrameSouthLayout extends ContentPanel {
 		Label textHTML = new HTML(
 				"<center><font size='1' color=#fdfdfd><p style='background-color:#2b579a;'>Copyright ⓒ Korea Fund Service. All Rights Reserved. E-Mail : admin@k-fs.co.kr</p></font></center>");
 
-		vlc.add(textHTML, new VerticalLayoutData(1, -1, new Margins(5, 0, 5, 0)));
+		vlc.add(textHTML, new VerticalLayoutData(1, -1, new Margins(5, 0, 0, 0)));
 
 		this.add(vlc);
 	}

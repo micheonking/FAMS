@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="sys06_role_menu">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.sys.model.Sys06_RoleMenuModel" >
+		<id     column="sys06_role_menu_id" property="roleMenuId"/>
+		<result column="sys06_role_id"      property="roleId"/>
+		<result column="sys06_cmp_menu_id"  property="cmpMenuId"/>
+		<result column="sys06_use_yn"       property="useYn"/>
+		<result column="sys06_rmk"          property="rmk"/>
+		<result column="sys06_ins_usr_no"   property="insUsrNo"/>
+		<result column="sys06_ins_dt"       property="insDate"/>
+		<result column="sys06_upd_usr_no"   property="updUsrNo"/>
+		<result column="sys06_upd_dt"       property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="Long">
+		select 	*
+		from 	sys06_role_menu
+		where	sys06_role_menu_id = #{roleMenuId}
+	</select>
+
+</mapper>

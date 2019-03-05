@@ -1,9 +1,7 @@
 package myApp.client.vi.sys;
 
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.sencha.gxt.widget.core.client.ContentPanel;
-import com.sencha.gxt.widget.core.client.TabPanel;
+import com.sencha.gxt.widget.core.client.PlainTabPanel;
 import com.sencha.gxt.widget.core.client.container.MarginData;
 
 public class Sys00_Admin extends ContentPanel {
@@ -12,24 +10,18 @@ public class Sys00_Admin extends ContentPanel {
 
 		this.setHeading("시스템 관리자");
 		this.setBorders(true);
-		SafeHtml button1Html = SafeHtmlUtils.fromTrustedString(
-				"<div style='border: 1px solid white; padding: 15px; height: auto; '><font color='#ffffff' style='font-size:20px;font-weight:bold'>시스템 관리자</font></div>");
-
-		this.setHeading(button1Html);
-//		this.setBodyStyle("backgroundColor:#ffffff; color:#606060"); // http://www.w3schools.com/colors/colors_names.asp 페이지 참조
 		
-		TabPanel tabPanel = new TabPanel();
+		PlainTabPanel tabPanel = new PlainTabPanel();
 		
-		Sys01_Tab_Company tabCompany = new Sys01_Tab_Company();
-		tabPanel.add(tabCompany, "고객정보");
+		Sys01_Tab_CmpInfo tabCmpInfo = new Sys01_Tab_CmpInfo();
+		tabPanel.add(tabCmpInfo, "회사정보");
 
-		Sys06_Tab_Menu tabMenu = new Sys06_Tab_Menu();
+		Sys03_Tab_Menu tabMenu = new Sys03_Tab_Menu();
 		tabPanel.add(tabMenu, "메뉴구성");
-		
-		Sys08_CodeKind tabCode = new Sys08_CodeKind();
-		tabPanel.add(tabCode, "공통코드");
+
+		Sys50_Tab_TermsDict tabCode = new Sys50_Tab_TermsDict();
+		tabPanel.add(tabCode, "용어사전");
 		
 		this.add(tabPanel, new MarginData(3));
-		
 	}
 }

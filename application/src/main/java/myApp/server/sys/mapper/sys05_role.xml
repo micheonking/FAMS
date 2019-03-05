@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="sys05_role">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.sys.model.Sys05_RoleModel" >
+		<id     column="sys05_role_id"      property="roleId"/>
+		<result column="sys05_role_nm"      property="roleName"/>
+		<result column="sys05_seq"          property="seq"/>
+		<result column="sys05_cmp_cd"       property="cmpCode"/>
+		<result column="sys05_rmk"          property="rmk"/>
+		<result column="sys05_ins_usr_no"   property="insUsrNo"/>
+		<result column="sys05_ins_dt"       property="insDate"/>
+		<result column="sys05_upd_usr_no"   property="updUsrNo"/>
+		<result column="sys05_upd_dt"       property="updDate"/>
+		
+		<result column="sys05_usr_role_yn"	property="usrRoleYn"/>
+		
+		<association property="usrRoleModel" 
+			javaType="myApp.client.vi.sys.model.Sys07_UsrRoleModel" 
+			resultMap="sys07_usr_role.mapper"
+		/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="Long">
+		select 	* 
+		from 	sys05_role
+		where 	sys05_role_id = #{roleId} 
+	</select>
+
+	<select id="selectByName" resultMap="mapper" parameterType="HashMap"> 
+		select 	* 
+		  from 	sys05_role
+		 where 	sys05_cmp_cd = #{cmpCode}
+		   and  sys05_role_nm like #{roleName} 
+		 order by sys05_seq
+	</select>
+
+	<select id="selectByUsrNo" resultMap="mapper" parameterType="HashMap" >
+		select 	sys05_role.* 
+	         ,  sys07_usr_role.* 
+			 ,  case when sys07_usr_role_id is null then 'false' else 'true' end sys05_usr_role_yn 
+		  from 	sys05_role 
+	         ,  sys07_usr_role
+		 where 	sys05_role_id = sys07_role_id(+)
+		   and  sys05_cmp_cd = sys07_cmp_cd(+)
+		   and  sys05_cmp_cd = #{cmpCode}
+		   and  sys07_usr_No(+) = #{usrNo}
+		 order by sys05_seq 
+	</select>
+
+</mapper>
