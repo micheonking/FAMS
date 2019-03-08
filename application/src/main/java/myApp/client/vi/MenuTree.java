@@ -107,7 +107,7 @@ public class MenuTree implements InterfaceServiceCall{
 		if(result.getStatus() < 0){
 			Info.display("메뉴조회 오류", result.getMessage());
 		}
-		else { 
+		else {
 			menuTree.getStore().clear(); // 깨끗이 비운다. 
 			for (GridDataModel dataModel: result.getResult()) {
 				// 서버에서 전체 트리를 한번에 가져온 후 트리를 구성한다.  

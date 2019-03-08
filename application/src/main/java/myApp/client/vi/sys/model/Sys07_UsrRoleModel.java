@@ -97,5 +97,4 @@ public class Sys07_UsrRoleModel implements GridDataModel {
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
-	
 }

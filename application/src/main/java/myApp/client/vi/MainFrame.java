@@ -46,7 +46,7 @@ public class MainFrame extends BorderLayoutContainer {
 		tabPanel.setTabScroll(true);
 		tabPanel.add(new TabBorder(), "My Page"); // my page setting
 		VerticalLayoutContainer vlc = new VerticalLayoutContainer(); 
-		vlc.add(tabPanel, new VerticalLayoutData(1, 1, new Margins(4,4,0,4)));
+		vlc.add(tabPanel, new VerticalLayoutData(1, 1, new Margins(4,4,0,0)));
 		this.setCenterWidget(vlc);
 		
 		//------------------------------------------------------------

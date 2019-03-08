@@ -22,7 +22,12 @@ public class Sys04_CmpMenuModel implements GridDataModel {
 
 	private String	seqStr;
 	private boolean useYnFlag;
+	private String  roleMenuYn;
+	private boolean roleMenuYnFlag;
+
 	private Sys03_MenuModel menuModel = new Sys03_MenuModel();
+	private Sys06_RoleMenuModel roleMenuModel = new Sys06_RoleMenuModel();
+
 	private List<GridDataModel> childList;
 
 	@Override
@@ -173,6 +178,38 @@ public class Sys04_CmpMenuModel implements GridDataModel {
 
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
+	}
+
+	public Sys06_RoleMenuModel getRoleMenuModel() {
+		return roleMenuModel;
+	}
+
+	public void setRoleMenuModel(Sys06_RoleMenuModel roleMenuModel) {
+		this.roleMenuModel = roleMenuModel;
+	}
+
+	public String getRoleMenuYn() {
+		return roleMenuYn;
+	}
+
+	public void setRoleMenuYn(String roleMenuYn) {
+		this.roleMenuYn = roleMenuYn;
+	}
+
+	public boolean getRoleMenuYnFlag() {
+		if("Y".equals(getRoleMenuYn())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void setRoleMenuYnFlag(boolean roleMenuYnFlag) {
+		if (roleMenuYnFlag) {
+			setRoleMenuYn("Y");
+		} else {
+			setRoleMenuYn("N");
+		}
 	}
 	
 }

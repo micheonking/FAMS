@@ -7,11 +7,14 @@ import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.Window;
+import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.FormPanel;
@@ -119,14 +122,29 @@ public class Sys03_Lookup_EditMenu extends Window implements Editor<Sys03_MenuMo
 	}
 	
 	private void delete(){
-		TreeGridDelete<Sys03_MenuModel> service = new TreeGridDelete<Sys03_MenuModel>();
-		List<Sys03_MenuModel> checkedList = treeGrid.getSelectionModel().getSelectedItems() ; 
-		service.delete(treeGrid.getTreeStore(), checkedList, "sys.Sys03_Menu.delete", new InterfaceCallback() {
+		final ConfirmMessageBox msgBox = new ConfirmMessageBox("확인", "삭제하시겠습니까?");
+		msgBox.addDialogHideHandler(new DialogHideHandler() {
 			@Override
-			public void execute() {
-				hide(); 
+			public void onDialogHide(DialogHideEvent event) {
+				switch (event.getHideButton()) {
+				case YES:
+					TreeGridDelete<Sys03_MenuModel> service = new TreeGridDelete<Sys03_MenuModel>();
+					List<Sys03_MenuModel> checkedList = treeGrid.getSelectionModel().getSelectedItems() ; 
+					service.delete(treeGrid.getTreeStore(), checkedList, "sys.Sys03_Menu.delete", new InterfaceCallback() {
+						@Override
+						public void execute() {
+							hide(); 
+						}
+					});
+					break;
+				case NO:
+				default:
+					break;
+				}
 			}
 		});
+		msgBox.setWidth(300);
+		msgBox.show();
 	}
 
 }

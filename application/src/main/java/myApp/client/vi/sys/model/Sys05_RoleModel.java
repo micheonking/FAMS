@@ -16,7 +16,9 @@ public class Sys05_RoleModel implements GridDataModel {
 	private String  updUsrNo ;
 	private Date    updDate ;
 	
-	private Boolean usrRoleYn = false;
+	private String 	usrRoleYn;
+	private boolean usrRoleYnFlag;
+
 	private Sys07_UsrRoleModel usrRoleModel = new Sys07_UsrRoleModel();
 
 	@Override
@@ -101,20 +103,36 @@ public class Sys05_RoleModel implements GridDataModel {
 		this.updDate = updDate;
 	}
 
-	public Boolean getUsrRoleYn() {
-		return usrRoleYn;
-	}
-
-	public void setUsrRoleYn(Boolean usrRoleYn) {
-		this.usrRoleYn = usrRoleYn;
-	}
-
 	public Sys07_UsrRoleModel getUsrRoleModel() {
 		return usrRoleModel;
 	}
 
 	public void setUsrRoleModel(Sys07_UsrRoleModel usrRoleModel) {
 		this.usrRoleModel = usrRoleModel;
+	}
+
+	public String getUsrRoleYn() {
+		return usrRoleYn;
+	}
+
+	public void setUsrRoleYn(String usrRoleYn) {
+		this.usrRoleYn = usrRoleYn;
+	}
+
+	public boolean getUsrRoleYnFlag() {
+		if("Y".equals(getUsrRoleYn())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void setUsrRoleYnFlag(boolean usrRoleYnFlag) {
+		if(usrRoleYnFlag) {
+			setUsrRoleYn("Y");
+		} else {
+			setUsrRoleYn("N");
+		}
 	}
 	
 }

@@ -16,6 +16,8 @@ public class Sys08_DptInfoModel implements GridDataModel {
 	private Date    insDate ;
 	private String  updUsrNo ;
 	private Date    updDate ;
+	
+	private boolean useYnFlag;
 
 	@Override
 	public void setKeyId(Long id) {
@@ -105,6 +107,22 @@ public class Sys08_DptInfoModel implements GridDataModel {
 
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
+	}
+
+	public boolean getUseYnFlag() {
+		if("Y".equals(getUseYn())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void setUseYnFlag(boolean useYnFlag) {
+		if(useYnFlag) {
+			setUseYn("Y");
+		} else {
+			setUseYn("N");
+		}
 	}
 	
 }

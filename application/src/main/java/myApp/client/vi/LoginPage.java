@@ -64,7 +64,7 @@ public class LoginPage implements InterfaceServiceCall {
 		loginFieldLabel.setLabelWidth(60);
 		loginFieldLabel.setWidth(264);
 //		loginId.setText("ADMIN");
-		loginId.setText("yiChun");
+		loginId.setText("00000");
 		loginId.addKeyPressHandler(new KeyPressHandler() {
 			@Override
 			public void onKeyPress(KeyPressEvent event) {

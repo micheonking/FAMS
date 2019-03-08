@@ -10,7 +10,7 @@ import myApp.client.utils.GridDataModel;
 import myApp.client.vi.sys.model.Sys07_UsrRoleModel;
 import myApp.server.utils.db.UpdateDataModel;
 
-public class Sys05_UserRole { 
+public class Sys07_UsrRole { 
 	
 //	String mapperName = "sys05_user_role"; 
 //	

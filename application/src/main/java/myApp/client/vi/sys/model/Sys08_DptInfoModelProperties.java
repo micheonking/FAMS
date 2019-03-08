@@ -20,5 +20,6 @@ public interface Sys08_DptInfoModelProperties extends PropertyAccess<Sys08_DptIn
 	ValueProvider<Sys08_DptInfoModel, Date  > insDate() ;
 	ValueProvider<Sys08_DptInfoModel, String> updUsrNo() ;
 	ValueProvider<Sys08_DptInfoModel, Date  > updDate() ;
-	
+
+	ValueProvider<Sys08_DptInfoModel, Boolean> useYnFlag() ;
 }

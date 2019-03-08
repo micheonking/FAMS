@@ -2,6 +2,7 @@ package myApp.client.vi.sys.model;
 
 import java.util.Date;
 
+import com.google.gwt.editor.client.Editor.Path;
 import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
@@ -24,5 +25,8 @@ public interface Sys02_UsrInfoModelProperties extends PropertyAccess<Sys02_UsrIn
 	ValueProvider<Sys02_UsrInfoModel, Date  > insDate() ;
 	ValueProvider<Sys02_UsrInfoModel, String> updUsrNo() ;
 	ValueProvider<Sys02_UsrInfoModel, Date  > updDate() ;
+	
+	@Path("dptInfoModel.dptName")
+	ValueProvider<Sys02_UsrInfoModel, String> dptName();
 	
 }

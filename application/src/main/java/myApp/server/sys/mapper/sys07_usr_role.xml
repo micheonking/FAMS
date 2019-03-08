@@ -17,32 +17,8 @@
 
 	<select id="selectById" resultMap="mapper" parameterType="Long" > 
 		select 	*
-		from 	sys07_usr_role
-		where 	sys07_usr_role_id = #{usrRoleId}
+		  from 	sys07_usr_role
+		 where 	sys07_usr_role_id = #{usrRoleId}
 	</select>
-	 
-<!-- 	<insert id="insert"> -->
-<!-- 	 	<selectKey keyProperty="usrRoleId" resultType="Long" order="BEFORE"> -->
-<!-- 			select seq.nextval from dual -->
-<!-- 		</selectKey> -->
-		
-<!-- 		insert into sys07_usr_role -->
-<!-- 	  	(	sys07_usr_role_id -->
-<!-- 	  	, 	sys05_user_id  -->
-<!-- 	  	, 	sys05_role_id  -->
-<!-- 	  	, 	sys05_seq -->
-<!-- 	  	, 	sys05_note ) -->
-<!-- 	  	values  -->
-<!-- 	  	(	#{userRoleId} -->
-<!-- 	  	, 	#{userId} -->
-<!-- 	  	, 	#{roleId} -->
-<!-- 	  	, 	#{seq} -->
-<!-- 	  	, 	#{note} ) -->
-<!-- 	</insert> -->
-
-<!-- 	<delete id="delete" parameterType="Long" > -->
-<!-- 		delete from sys05_user_role -->
-<!-- 		where sys05_user_role_id = #{userRoleId} -->
-<!-- 	</delete> -->
 
 </mapper>

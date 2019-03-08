@@ -9,6 +9,7 @@ import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.Window;
+import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
@@ -16,7 +17,9 @@ import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent.CollapseHandler;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.CheckBox;
@@ -274,14 +277,29 @@ public class Sys04_Lookup_EditMenu extends Window implements Editor<Sys04_CmpMen
 	}
 	
 	private void delete(){
-		TreeGridDelete<Sys04_CmpMenuModel> service = new TreeGridDelete<Sys04_CmpMenuModel>();
-		List<Sys04_CmpMenuModel> checkedList = treeGrid.getSelectionModel().getSelectedItems() ; 
-		service.delete(treeGrid.getTreeStore(), checkedList, "sys.Sys04_CmpMenu.delete", new InterfaceCallback() {
+		final ConfirmMessageBox msgBox = new ConfirmMessageBox("확인", "삭제하시겠습니까?");
+		msgBox.addDialogHideHandler(new DialogHideHandler() {
 			@Override
-			public void execute() {
-				hide(); 
+			public void onDialogHide(DialogHideEvent event) {
+				switch (event.getHideButton()) {
+				case YES:
+					TreeGridDelete<Sys04_CmpMenuModel> service = new TreeGridDelete<Sys04_CmpMenuModel>();
+					List<Sys04_CmpMenuModel> checkedList = treeGrid.getSelectionModel().getSelectedItems() ; 
+					service.delete(treeGrid.getTreeStore(), checkedList, "sys.Sys04_CmpMenu.delete", new InterfaceCallback() {
+						@Override
+						public void execute() {
+							hide(); 
+						}
+					});
+					break;
+				case NO:
+				default:
+					break;
+				}
 			}
 		});
+		msgBox.setWidth(300);
+		msgBox.show();
 	}
 
 }

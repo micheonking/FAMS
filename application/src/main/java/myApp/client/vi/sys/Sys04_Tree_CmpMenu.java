@@ -8,6 +8,8 @@ import com.sencha.gxt.core.client.Style.SelectionMode;
 import com.sencha.gxt.widget.core.client.button.ButtonBar;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.CollapseEvent;
+import com.sencha.gxt.widget.core.client.event.CollapseEvent.CollapseHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
@@ -24,6 +26,7 @@ import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.GridDataModel;
 import myApp.client.utils.SimpleMessage;
+import myApp.client.vi.LoginUser;
 import myApp.client.vi.sys.model.Sys04_CmpMenuModel;
 import myApp.client.vi.sys.model.Sys04_CmpMenuModelProperties;
 
@@ -42,6 +45,12 @@ public class Sys04_Tree_CmpMenu extends VerticalLayoutContainer implements Inter
 			@Override
 			public void execute() {
 				retrieve();
+			}
+		});
+		cmpComboBox.addCollapseHandler(new CollapseHandler() {
+			@Override
+			public void onCollapse(CollapseEvent event) {
+				retrieve();				
 			}
 		});
 		FieldLabel cmpField = new FieldLabel(cmpComboBox, "회사선택 ");
@@ -121,6 +130,7 @@ public class Sys04_Tree_CmpMenu extends VerticalLayoutContainer implements Inter
 		gridBuilder.addCell(properties.moveCell(), 60, "이동", moveCell);
 
 		gridBuilder.addText(properties.seqStr(), 60, "순서");
+		gridBuilder.addBoolean(properties.useYnFlag(), 40, "사용");
 		gridBuilder.addText(properties.className(), 200, "클래스명");
 		gridBuilder.addText(properties.rmk(), 200, "비고");
 		
@@ -131,6 +141,7 @@ public class Sys04_Tree_CmpMenu extends VerticalLayoutContainer implements Inter
 		actionName = "insertInitMenu";
 		ServiceRequest request = new ServiceRequest("sys.Sys04_CmpMenu.insertInitMenu");
 		request.addParam("cmpCode", cmpComboBox.getCode());
+		request.addParam("usrNo", LoginUser.getUsrNo());
 		ServiceCall service = new ServiceCall();
 		service.execute(request, this);
 	}
