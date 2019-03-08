@@ -18,8 +18,17 @@
 
 	<select id="selectById" resultMap="mapper" parameterType="Long" > 
 		select 	*
-		from 	sys08_dpt_info
-		where 	sys08_dpt_info_id = #{dptInfoid}
+		  from 	sys08_dpt_info
+		 where 	sys08_dpt_info_id = #{dptInfoid}
 	</select>
- 
+
+	<select id="selectByName" resultMap="mapper" parameterType="HashMap" > 
+		select 	*
+		  from 	sys08_dpt_info
+		 where 	sys08_cmp_cd = #{cmpCode}
+		   and  sys08_dpt_nm like #{dptName}
+		   and  sys08_use_yn = 'Y'
+		  
+	</select>
+
 </mapper>

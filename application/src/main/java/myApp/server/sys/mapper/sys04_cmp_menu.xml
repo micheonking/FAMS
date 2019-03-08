@@ -16,12 +16,27 @@
 		<result column="sys04_ins_dt"       property="insDate"/>
 		<result column="sys04_upd_usr_no"   property="updUsrNo"/>
 		<result column="sys04_upd_dt"       property="updDate"/>
+		
+		<result column="sys04_role_menu_yn" property="roleMenuYn"/>
 
 		<association property="menuModel" 
 			javaType="myApp.client.vi.sys.model.Sys03_MenuModel" 
 			resultMap="sys03_menu.mapper"
 		/>
+
+		<association property="roleMenuModel" 
+			javaType="myApp.client.vi.sys.model.Sys06_RoleMenuModel" 
+			resultMap="sys06_role_menu.mapper"
+		/>
+
 	</resultMap>
+
+	<select id="selectByCmpCode" resultMap="mapper" parameterType="String" > 
+		select  *
+		  from  sys04_cmp_menu
+		 where  sys04_cmp_cd = #{cmpCode}
+		 order by sys04_seq
+	</select>
 
 	<select id="selectById" resultMap="mapper" parameterType="Long" > 
 		select 	*
@@ -62,6 +77,24 @@
 		   and  sys07_cmp_cd = sys04_cmp_cd 
 		   and  sys07_role_id = sys06_role_id
 		   and  sys07_usr_no = #{usrNo}
+		 order by sys04_seq
+	</select>
+	
+	<select id="selectByRoleId" resultMap="mapper" parameterType="HashMap" > 
+		select  sys03_menu.*
+		     ,  sys04_cmp_menu.*
+		     ,  sys06_role_menu.*
+		     ,  case when sys06_role_menu_id is null then 'N' else 'Y' end sys04_role_menu_yn
+		  from 	sys03_menu 
+		     ,  sys04_cmp_menu
+		     ,  sys06_role_menu
+		 where  sys04_menu_id = sys03_menu_id(+)
+		   and  sys04_use_yn = 'Y'
+		   and  sys04_cmp_cd = #{cmpCode}
+		   and  sys04_prnt_id = #{prntId}
+		   and  sys04_cmp_menu_id = sys06_cmp_menu_id(+)
+		   and  sys06_use_yn(+) = 'Y'
+		   and  sys06_role_id(+) = #{roleId}
 		 order by sys04_seq
 	</select>
 

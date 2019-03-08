@@ -19,5 +19,8 @@ public interface Sys05_RoleModelProperties extends PropertyAccess<Sys05_RoleMode
 	ValueProvider<Sys05_RoleModel, Date  > insDate() ;
 	ValueProvider<Sys05_RoleModel, String> updUsrNo() ;
 	ValueProvider<Sys05_RoleModel, Date  > updDate() ;
+
+	ValueProvider<Sys05_RoleModel, String> usrRoleYn() ;
+	ValueProvider<Sys05_RoleModel, Boolean> usrRoleYnFlag() ;
 	
 }

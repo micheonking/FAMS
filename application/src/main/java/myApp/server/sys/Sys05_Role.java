@@ -28,12 +28,6 @@ public class Sys05_Role {
 		result.setRetrieveResult(1, "sys05_role.selectByUsrNo", list);
 	}
 	
-//	public void selectByNotAssigned(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
-//		Long userId = request.getLongParam("userId"); 
-//		List<GridDataModel> userRoleList = sqlSession.selectList(mapperName + ".selectByNotAssigned", userId) ;
-//		result.setRetrieveResult(userRoleList.size(), "미등록 권한정보 조회", userRoleList);
-//	}
-
 	public void updateUsrRole(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 		
 		// delete all by userId
@@ -46,7 +40,7 @@ public class Sys05_Role {
 
 		for(GridDataModel dataModel : request.getList()) {
 			Sys05_RoleModel roleModel = (Sys05_RoleModel)dataModel;
-			if(roleModel.getUsrRoleYn()) { 
+			if(roleModel.getUsrRoleYnFlag()) { 
 				Sys07_UsrRoleModel insertModel = new Sys07_UsrRoleModel();
 				insertModel.setUsrRoleId(sqlSession.selectOne("getSeq"));
 				insertModel.setCmpCode(roleModel.getCmpCode());
@@ -66,7 +60,7 @@ public class Sys05_Role {
 		}
 		
 		if(deleteList.size()>0) {
-			updateModel.deleteModel(sqlSession, deleteList, "sys05_user_role", result); // delete
+			updateModel.deleteModel(sqlSession, deleteList, "sys07_usr_role", result); // delete
 		}
 		
 		Map<String, Object> param = new HashMap<String, Object>(); 
@@ -84,7 +78,7 @@ public class Sys05_Role {
 	}
 
 	public void delete(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
-		UpdateDataModel<Sys05_RoleModel> updateModel = new UpdateDataModel<Sys05_RoleModel>(); 
+		UpdateDataModel<GridDataModel> updateModel = new UpdateDataModel<GridDataModel>(); 
 		updateModel.deleteModel(sqlSession, request.getList(), "sys05_role", result);
 	}
 }

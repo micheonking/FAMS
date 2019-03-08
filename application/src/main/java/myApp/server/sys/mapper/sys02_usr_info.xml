@@ -8,6 +8,7 @@
 		<result column="sys02_usr_no"       property="usrNo"/>
 		<result column="sys02_usr_nm"       property="usrName"/>
 		<result column="sys02_cmp_cd"       property="cmpCode"/>
+		<result column="sys02_dpt_cd"       property="dptCode"/>
 		<result column="sys02_email"        property="email"/>
 		<result column="sys02_tel_no"       property="telNo"/>
 		<result column="sys02_use_yn"       property="useYn"/>
@@ -61,6 +62,7 @@
 		   and  sys02_cmp_cd = sys08_cmp_cd
 		   and  sys02_dpt_cd = sys08_dpt_cd
 		   and  sys02_cmp_cd = #{cmpCode}
+		   and  sys08_dpt_nm like #{dptName}
 		   and	sys02_usr_nm like #{usrName}
 		 order by sys02_usr_nm
 	</select>

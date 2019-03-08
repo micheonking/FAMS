@@ -35,17 +35,23 @@ public class Sys02_UsrInfo {
 	public void selectByUsrName(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 
 		String usrName = request.getStringParam("usrName");
-		
 		if(usrName == null){
 			usrName = "";
 		}
-		usrName = "%" + usrName + "%"; 
+		usrName = "%" + usrName + "%";
+		
+		String dptName = request.getStringParam("dptName");
+		if(dptName == null){
+			dptName = "";
+		}
+		dptName = "%" + dptName + "%";
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("cmpCode", request.getStringParam("cmpCode"));
 		param.put("usrName", usrName); 
+		param.put("dptName", dptName);
 
-		List<GridDataModel> list = sqlSession.selectList("sys02_usr_info.selectByUserName", param);
+		List<GridDataModel> list = sqlSession.selectList("sys02_usr_info.selectByUsrName", param);
 		result.setRetrieveResult(1, "select ok", list);
 	}
 

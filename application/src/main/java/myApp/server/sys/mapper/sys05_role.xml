@@ -39,7 +39,7 @@
 	<select id="selectByUsrNo" resultMap="mapper" parameterType="HashMap" >
 		select 	sys05_role.* 
 	         ,  sys07_usr_role.* 
-			 ,  case when sys07_usr_role_id is null then 'false' else 'true' end sys05_usr_role_yn 
+			 ,  case when sys07_usr_role_id is null then 'N' else 'Y' end sys05_usr_role_yn 
 		  from 	sys05_role 
 	         ,  sys07_usr_role
 		 where 	sys05_role_id = sys07_role_id(+)

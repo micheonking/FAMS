@@ -19,5 +19,5 @@ public interface Sys07_UsrRoleModelProperties extends PropertyAccess<Sys07_UsrRo
 	ValueProvider<Sys07_UsrRoleModel, Date  > insDate() ;
 	ValueProvider<Sys07_UsrRoleModel, String> updUsrNo() ;
 	ValueProvider<Sys07_UsrRoleModel, Date  > updDate() ;
-	
+
 }

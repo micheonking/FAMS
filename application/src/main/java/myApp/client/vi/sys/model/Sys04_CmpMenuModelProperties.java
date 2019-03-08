@@ -26,8 +26,11 @@ public interface Sys04_CmpMenuModelProperties extends PropertyAccess<Sys04_CmpMe
 
 	ValueProvider<Sys04_CmpMenuModel, String>  seqStr() ;
 	ValueProvider<Sys04_CmpMenuModel, Boolean> useYnFlag();
-	ValueProvider<Sys04_CmpMenuModel, String> 	editCell();
-	ValueProvider<Sys04_CmpMenuModel, String> 	moveCell();
+	ValueProvider<Sys04_CmpMenuModel, String> roleMenuYn();
+	ValueProvider<Sys04_CmpMenuModel, Boolean> roleMenuYnFlag();
+
+	ValueProvider<Sys04_CmpMenuModel, String>  editCell();
+	ValueProvider<Sys04_CmpMenuModel, String>  moveCell();
 
 	@Path("menuModel.className")
 	ValueProvider<Sys04_CmpMenuModel, String> className();

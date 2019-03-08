@@ -14,14 +14,18 @@ public class MenuOpener {
 			return (Widget) GWT.create(myApp.client.vi.sys.Sys05_Tab_Role.class);
 		}
 
-//		if ("Sys06_Tab_RoleMenu.class".equals(className)) {
-//			return (Widget) GWT.create(myApp.client.vi.sys.Sys06_Tab_RoleMenu.class);
-//		}
-//
-//		if ("Sys07_Tab_UsrRole.class".equals(className)) {
-//			return (Widget) GWT.create(myApp.client.vi.sys.Sys07_Tab_UsrRole.class);
-//		}
-		
+		if ("Sys06_Tab_RoleMenu.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.sys.Sys06_Tab_RoleMenu.class);
+		}
+
+		if ("Sys07_Tab_UsrRole.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.sys.Sys07_Tab_UsrRole.class);
+		}
+
+		if ("Sys08_Tab_DptInfo.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.sys.Sys08_Tab_DptInfo.class);
+		}
+
 		return null;
 	}
 

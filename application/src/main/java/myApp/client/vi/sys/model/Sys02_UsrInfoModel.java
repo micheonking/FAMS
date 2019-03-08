@@ -13,6 +13,7 @@ public class Sys02_UsrInfoModel implements GridDataModel {
 	private String  dptCode ;
 	private String  email ;
 	private String  telNo ;
+	private String  useYn ;
 	private String  tmpPwd ;
 	private String  rmk ;
 	private String  insUsrNo ;
@@ -151,5 +152,13 @@ public class Sys02_UsrInfoModel implements GridDataModel {
 
 	public void setDptInfoModel(Sys08_DptInfoModel dptInfoModel) {
 		this.dptInfoModel = dptInfoModel;
+	}
+
+	public String getUseYn() {
+		return useYn;
+	}
+
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
 	}
 }
