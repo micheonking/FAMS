@@ -50,10 +50,26 @@ public class Sys02_UsrInfo {
 		param.put("cmpCode", request.getStringParam("cmpCode"));
 		param.put("usrName", usrName); 
 		param.put("dptName", dptName);
+		
+		System.out.println("dptName    : "   + dptName);
+		System.out.println("usrName    : "   + usrName);
+//		System.out.println("cmpCode    : "   + cmpCode);
 
 		List<GridDataModel> list = sqlSession.selectList("sys02_usr_info.selectByUsrName", param);
 		result.setRetrieveResult(1, "select ok", list);
 	}
+	
+	public void userPw(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
+		
+		Map<String,Object> param = new HashMap<String, Object>();
+		param.put("usrInfoId", request.getLongParam("usrInfoId"));
+		param.put("tmpPwd", request.getStringParam("newPw"));
+		
+		sqlSession.update("sys02_usr_info.userPw", param);
+		result.setStatus(1); //1:정상
+		
+	}
+	
 
 	public void selectByCmpCode(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 		List<GridDataModel> list = sqlSession.selectList("sys02_usr_info.selectByCmpCode", LoginUser.getCmpCode());

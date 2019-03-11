@@ -78,5 +78,12 @@
 		   and  sys02_cmp_cd = #{cmpCode}
 		 order by sys02_usr_nm
 	</select>
+	
+	<update id="userPw"  parameterType="HashMap" > 
+	update 	sys02_usr_info
+	   set 	sys02_tmp_pwd = #{tmpPwd}
+	where	sys02_usr_info_id = #{usrInfoId}
+	</update>
+	
 
 </mapper>

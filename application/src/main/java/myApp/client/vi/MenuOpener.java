@@ -10,6 +10,9 @@ public class MenuOpener {
 
 	private Widget createTab(String className) {
 
+		if ("Sys02_Tab_UsrInfo.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.sys.Sys02_Tab_UsrInfo.class);
+		}
 		if ("Sys05_Tab_Role.class".equals(className)) {
 			return (Widget) GWT.create(myApp.client.vi.sys.Sys05_Tab_Role.class);
 		}
