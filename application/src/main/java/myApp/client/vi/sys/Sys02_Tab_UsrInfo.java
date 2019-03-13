@@ -6,7 +6,10 @@ import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.core.client.GWT;
 import com.sencha.gxt.core.client.Style.SelectionMode;
 import com.sencha.gxt.core.client.util.Margins;
+import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.event.TriggerClickEvent;
 import com.sencha.gxt.widget.core.client.event.TriggerClickEvent.TriggerClickHandler;
 import com.sencha.gxt.widget.core.client.form.TextField;
@@ -66,6 +69,7 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 			public void execute(Object result) {
 				Sys08_DptInfoModel data = (Sys08_DptInfoModel) result;
 				dptName.setText(data.getDptName());
+				Info.display("", ""+dptName.getText());
 			}
 		});
 	}
@@ -74,12 +78,20 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 		Sys02_UsrInfoModelProperties properties = GWT.create(Sys02_UsrInfoModelProperties.class);
 		GridBuilder<Sys02_UsrInfoModel> gridBuilder = new GridBuilder<Sys02_UsrInfoModel>(properties.keyId());  
 		gridBuilder.setChecked(SelectionMode.SINGLE);
+		//돋보기 이벤트 사용시 에러!!!!!!!!!
+//			dptName.addTriggerClickHandler(new TriggerClickHandler(){
+//			@Override
+//			public void onTriggerClick(TriggerClickEvent event) {
+//				openLookupDptInfo();
+//			}
+//		}); 
+//		gridBuilder.addText(properties.usrNo(), 100, "사번", dptName);
 		gridBuilder.addText(properties.usrNo(), 100, "사번", new TextField());
-		gridBuilder.addText(properties.usrName(), 250, "사원명", new TextField());
-		gridBuilder.addText(properties.dptCode(), 250, "부서", new TextField());
-		gridBuilder.addText(properties.telNo(), 250, "연락처", new TextField());
-		gridBuilder.addText(properties.email(), 250, "Email", new TextField());
-		gridBuilder.addText(properties.useYn(), 250, "사용여부", new TextField());
+		gridBuilder.addText(properties.usrName(), 150, "사원명", new TextField());
+		gridBuilder.addText(properties.dptCode(), 150, "부서", new TextField());
+		gridBuilder.addText(properties.telNo(), 150, "연락처", new TextField());
+		gridBuilder.addText(properties.email(), 150, "Email", new TextField());
+		gridBuilder.addBoolean(properties.useYnFlag(), 70, "사용여부");
 		ActionCell<String> tmpPwdUpdButton = new ActionCell<String>("변경하기", new ActionCell.Delegate<String>() {
 
 			@Override
@@ -96,7 +108,7 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 			}
 		});
 		
-		gridBuilder.addCell(properties.tmpPwd(), 150, "임시비밀번호", tmpPwdUpdButton);
+		gridBuilder.addCell(properties.tmpPwd(), 100, "임시비밀번호", tmpPwdUpdButton);
 		return gridBuilder.getGrid(); 
 	}
 
@@ -104,13 +116,7 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 	public void retrieve() {
 		GridRetrieveData<Sys02_UsrInfoModel> service = new GridRetrieveData<Sys02_UsrInfoModel>(grid.getStore()); 
 		service.addParam("cmpCode", LoginUser.getCmpCode());
-		String dptName = searchText.getText().replaceAll(" ", "");
-		if(dptName == null) {
-			dptName = "%";
-		} else {
-			dptName = "%" + dptName + "%";
-		}
-		service.addParam("dptName", dptName);
+		service.addParam("dptName", dptName.getText());
 		service.addParam("usrName",usrName.getText());
 		service.retrieve("sys.Sys02_UsrInfo.selectByUsrName");
 	}
@@ -132,8 +138,33 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 
 	@Override
 	public void deleteRow(){
+		final ConfirmMessageBox msgBox = new ConfirmMessageBox("삭제확인", "선택한 사원의 정보를삭제하시겠습니까?");
+		msgBox.addDialogHideHandler(new DialogHideHandler() {
+			@Override
+			public void onDialogHide(DialogHideEvent event) {
+				switch (event.getHideButton()) {
+				case YES:
 		GridDeleteData<Sys02_UsrInfoModel> service = new GridDeleteData<Sys02_UsrInfoModel>();
 		List<Sys02_UsrInfoModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
 		service.delete(grid.getStore(), checkedList, "sys.Sys02_UsrInfo.delete");
+					break;
+				case NO:
+				default:
+					break;
+				}
+			}
+
+//			@Override
+//			public void onDialogHide(DialogHideEvent event) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+		});
+		msgBox.setWidth(300);
+		msgBox.show();
+		
+		
+		
+		
 	}
 }

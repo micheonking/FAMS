@@ -26,6 +26,8 @@ public interface Sys02_UsrInfoModelProperties extends PropertyAccess<Sys02_UsrIn
 	ValueProvider<Sys02_UsrInfoModel, String> updUsrNo() ;
 	ValueProvider<Sys02_UsrInfoModel, Date  > updDate() ;
 	
+	ValueProvider<Sys02_UsrInfoModel, Boolean> 	useYnFlag();
+	
 	@Path("dptInfoModel.dptName")
 	ValueProvider<Sys02_UsrInfoModel, String> dptName();
 	

@@ -53,7 +53,6 @@ public class Sys02_UsrInfo {
 		
 		System.out.println("dptName    : "   + dptName);
 		System.out.println("usrName    : "   + usrName);
-//		System.out.println("cmpCode    : "   + cmpCode);
 
 		List<GridDataModel> list = sqlSession.selectList("sys02_usr_info.selectByUsrName", param);
 		result.setRetrieveResult(1, "select ok", list);

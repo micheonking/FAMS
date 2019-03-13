@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com02_dtl_cd">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com02_DtlCdModel" >
+		<id     column="COM02_DTL_CD_ID"     property="dtlCdId"/>
+		<result column="COM02_COM_CD"        property="comCode"/>
+		<result column="COM02_COM_DTL_CD"    property="comDtlCode"/>
+		<result column="com02_dtl_nm"        property="dtlName"/>
+		<result column="com02_use_yn"        property="useYn"/>
+		<result column="com02_rmk"   		 property="rmk"/>
+		<result column="com02_ins_usr_no"    property="insUsrNo"/>
+		<result column="com02_ins_dt"   	 property="insDate"/>
+		<result column="com02_upd_usr_no"    property="updUsrNo"/>
+		<result column="com02_upd_dt"        property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com02_dtl_cd 
+		where	com02_dtl_cd_id = #{dtlCdId}
+	</select>
+	
+	<select id="selectByComCode" resultMap="mapper" > 
+		select 	*
+		from 	com02_dtl_cd
+		where 	com02_com_cd = #{comCode} 
+	</select>
+
+</mapper>

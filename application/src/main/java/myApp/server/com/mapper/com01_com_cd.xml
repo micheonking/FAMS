@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com01_com_cd">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com01_ComCdModel" >
+		<id     column="com01_com_cd_id"     property="comCdId"/>
+		<result column="com01_com_cd"        property="comCode"/>
+		<result column="com01_com_nm"        property="comName"/>
+		<result column="com01_use_yn"        property="useYn"/>
+		<result column="com01_rmk"           property="rmk"/>
+		<result column="com01_ins_usr_no"    property="insUsrNo"/>
+		<result column="com01_ins_dt"        property="insDate"/>
+		<result column="com01_upd_usr_no"    property="updUsrNo"/>
+		<result column="com01_upd_dt"        property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com01_com_cd 
+		where	com01_com_cd_id = #{comCdId}
+	</select>
+	
+	<select id="selectBySearText" resultMap="mapper" parameterType="HashMap" > 
+		select 	*
+		from 	com01_com_cd
+		where   com01_com_nm||com01_com_cd like #{searText} 
+	
+	</select>
+
+</mapper>

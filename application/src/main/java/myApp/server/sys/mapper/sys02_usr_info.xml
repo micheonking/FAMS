@@ -80,9 +80,9 @@
 	</select>
 	
 	<update id="userPw"  parameterType="HashMap" > 
-	update 	sys02_usr_info
-	   set 	sys02_tmp_pwd = #{tmpPwd}
-	where	sys02_usr_info_id = #{usrInfoId}
+		update 	sys02_usr_info
+		   set 	sys02_tmp_pwd = #{tmpPwd}
+		 where 	sys02_usr_info_id = #{usrInfoId}
 	</update>
 	
 

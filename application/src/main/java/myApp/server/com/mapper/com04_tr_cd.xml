@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com04_tr_cd">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com04_TrCdModel" >
+		<id     column="com04_tr_cd_id"    	     property="trCdId"/>
+		<result column="com04_tr_cd"        	 property="trCode"/>
+		<result column="com04_tr_nm"      	 	 property="trName"/>
+		<result column="com04_tr_occ_typ_cd"	 property="trOccTypeCode"/>
+		<result column="com04_seq"        		 property="seq"/>
+		<result column="com04_appl_proc_yn"      property="applProcYn"/>
+		<result column="com04_acc_snd_yn"   	 property="accSndYn"/>
+		<result column="com04_ins_usr_no"        property="insUsrNo"/>
+		<result column="com04_ins_dt"   	     property="insDate"/>
+		<result column="com04_upd_usr_no"    	 property="updusrNO"/>
+		<result column="com04_upd_dt"         	 property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com04_tr_cd 
+		where	com04_tr_cd_id = #{trCdId}
+	</select>
+
+</mapper>
