@@ -91,7 +91,7 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 		gridBuilder.addText(properties.dptCode(), 150, "부서", new TextField());
 		gridBuilder.addText(properties.telNo(), 150, "연락처", new TextField());
 		gridBuilder.addText(properties.email(), 150, "Email", new TextField());
-//		gridBuilder.addBoolean(properties.useYnFlag(), 70, "사용여부");
+		gridBuilder.addBoolean(properties.useYnFlag(), 70, "사용여부");
 		ActionCell<String> tmpPwdUpdButton = new ActionCell<String>("변경하기", new ActionCell.Delegate<String>() {
 
 			@Override
