@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com03_dtl_cd_grp">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com03_DtlCdGrpModel" >
+		<id     column="com03_dtl_cd_grp_id"     property="dtlCdGrpId"/>
+		<result column="com03_cmp_cd"        	 property="cmpCode"/>
+		<result column="com03_grp_cd"       	 property="grpCode"/>
+		<result column="com03_com_cd"    		 property="comCode"/>
+		<result column="com03_com_dtl_cd"        property="comDtlCode"/>
+		<result column="com03_dtl_nm"       	 property="dtlName"/>
+		<result column="com03_rmk"   		  	 property="rmk"/>
+		<result column="com03_ins_usr_no"        property="insUsrNo"/>
+		<result column="com03_ins_dt"   	     property="insDate"/>
+		<result column="com03_upd_usr_no"    	 property="updusrNO"/>
+		<result column="com03_upd_dt"         	 property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com03_dtl_cd_grp 
+		where	com03_dtl_cd_grp_id = #{dtlCdGrpId}
+	</select>
+
+</mapper>

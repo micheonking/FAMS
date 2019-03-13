@@ -28,6 +28,12 @@ public class MenuOpener {
 		if ("Sys08_Tab_DptInfo.class".equals(className)) {
 			return (Widget) GWT.create(myApp.client.vi.sys.Sys08_Tab_DptInfo.class);
 		}
+		
+		if ("Com01_Tab_ComCode.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.com.Com01_Tab_ComCode.class);
+		}
+		
+		
 
 		return null;
 	}

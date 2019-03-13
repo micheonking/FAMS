@@ -21,6 +21,8 @@ public class Sys02_UsrInfoModel implements GridDataModel {
 	private String  updUsrNo ;
 	private Date    updDate ;
 	
+	private Boolean useYnFlag ;
+	
 	private Sys01_CmpInfoModel cmpInfoModel = new Sys01_CmpInfoModel();
 	private Sys08_DptInfoModel dptInfoModel = new Sys08_DptInfoModel();
 
@@ -161,4 +163,23 @@ public class Sys02_UsrInfoModel implements GridDataModel {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
+
+	public Boolean getUseYnFlag() {
+		if("Y".equals(getUseYn())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void setUseYnFlag(Boolean useYnFlag) {
+		if(useYnFlag) {
+			setUseYn("Y");
+		} else {
+			setUseYn("N");
+		}
+	}
+	
+	
+	
 }

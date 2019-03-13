@@ -49,6 +49,10 @@ public class Sys08_Tab_DptInfo extends BorderLayoutContainer implements Interfac
 		gridBuilder.addText(properties.dptName(), 250, "부서명", new TextField());
 		gridBuilder.addBoolean(properties.useYnFlag(), 50, "사용");
 		gridBuilder.addText(properties.rmk(), 300, "비고", new TextField());
+		gridBuilder.addText(properties.insUsrNo(), 300, "생성자사번", new TextField());
+		gridBuilder.addDate(properties.insDate(), 300, "생성일자", new TextField());
+		gridBuilder.addText(properties.updUsrNo(), 300, "수정자 사번", new TextField());
+		gridBuilder.addDate(properties.updDate(), 300, "수정일자", new TextField());
 		return gridBuilder.getGrid(); 
 	}
 
