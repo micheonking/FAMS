@@ -89,7 +89,6 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 	public void retrieve() {
 		GridRetrieveData<Com01_ComCdModel> service = new GridRetrieveData<Com01_ComCdModel>(grid.getStore()); 
 		service.addParam("searText", codeNameField.getText());
-		Info.display("", "searText   :   [ "+codeNameField.getText()+" ]");
 		service.retrieve("com.Com01_ComCode.selectBySearText");
 	}
 
