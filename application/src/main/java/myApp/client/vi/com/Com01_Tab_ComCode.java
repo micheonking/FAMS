@@ -128,9 +128,5 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 		});
 		msgBox.setWidth(300);
 		msgBox.show();
-		
-		
-		
-		
 	}
 }

@@ -181,5 +181,4 @@ public class Sys02_UsrInfoModel implements GridDataModel {
 	}
 	
 	
-	
 }

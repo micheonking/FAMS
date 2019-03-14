@@ -1,6 +1,5 @@
 package myApp.client.vi.com;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -10,7 +9,6 @@ import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 
-import myApp.client.field.LookupTriggerField;
 import myApp.client.grid.GridBuilder;
 import myApp.client.grid.InterfaceGridOperate;
 import myApp.client.grid.SearchBarBuilder;
@@ -26,8 +24,6 @@ import myApp.client.vi.com.model.Com02_DtlCdModelProperties;
 public class Com02_edit_DtlCode extends VerticalLayoutContainer implements InterfaceGridOperate {
 	private String comCode;
 	private Grid<Com02_DtlCdModel> grid = this.buildGrid();
-	private LookupTriggerField dptName = new LookupTriggerField();
-	private TextField codeNameField = new TextField();
 	private TextButton updateButton, insertButton, deleteButton;
 	
 	public Com02_edit_DtlCode() {
@@ -57,9 +53,8 @@ public class Com02_edit_DtlCode extends VerticalLayoutContainer implements Inter
 	public void retrieveCode(Com01_ComCdModel dtlCode){
 			this.comCode = dtlCode.getComCode();
 			this.retrieve();
-		}
+	}
 	
-
 	@Override
 	public void retrieve() {
 		grid.getStore().clear();
