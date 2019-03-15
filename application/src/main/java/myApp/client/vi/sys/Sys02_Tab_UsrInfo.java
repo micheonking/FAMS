@@ -41,7 +41,6 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);
 		searchBarBuilder.addLookupTriggerField(dptName, "부서", 300,40);
 		dptName.addTriggerClickHandler(new TriggerClickHandler() {
-			
 			@Override
 			public void onTriggerClick(TriggerClickEvent event) {
 			openLookupDptInfo();	
@@ -71,20 +70,18 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 				openLookupDptInfoGrid();
 			}
 		}); 
-		gridBuilder.addText(properties.usrNo(), 100, "사번", new TextField());
+		gridBuilder.addText(properties.usrNo(), 100, "사번");
 		gridBuilder.addText(properties.usrName(), 150, "사원명", new TextField());
 		gridBuilder.addText(properties.dptName(), 150, "부서", dptName);
 		gridBuilder.addText(properties.telNo(), 150, "연락처", new TextField());
 		gridBuilder.addText(properties.email(), 150, "Email", new TextField());
 		gridBuilder.addBoolean(properties.useYnFlag(), 70, "사용여부");
 		ActionCell<String> tmpPwdUpdButton = new ActionCell<String>("변경하기", new ActionCell.Delegate<String>() {
-
 			@Override
 			public void execute(String object) {
 				Sys02_UsrInfoModel userInfoModel = grid.getSelectionModel().getSelectedItem();
 				Sys02_Lookup_userPw pwUpd = new Sys02_Lookup_userPw();
 				pwUpd.open(userInfoModel.getTmpPwd(), userInfoModel.getUsrInfoId(), new InterfaceCallbackResult() {
-					
 					@Override
 					public void execute(Object result) {
 						retrieve();
@@ -153,9 +150,9 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 			public void onDialogHide(DialogHideEvent event) {
 				switch (event.getHideButton()) {
 				case YES:
-		GridDeleteData<Sys02_UsrInfoModel> service = new GridDeleteData<Sys02_UsrInfoModel>();
-		List<Sys02_UsrInfoModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
-		service.delete(grid.getStore(), checkedList, "sys.Sys02_UsrInfo.delete");
+					GridDeleteData<Sys02_UsrInfoModel> service = new GridDeleteData<Sys02_UsrInfoModel>();
+					List<Sys02_UsrInfoModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
+					service.delete(grid.getStore(), checkedList, "sys.Sys02_UsrInfo.delete");
 					break;
 				case NO:
 				default:
@@ -165,6 +162,5 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 		});
 		msgBox.setWidth(300);
 		msgBox.show();
-		
 	}
 }

@@ -10,15 +10,13 @@ import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
+import com.sencha.gxt.widget.core.client.event.RowClickEvent;
+import com.sencha.gxt.widget.core.client.event.RowClickEvent.RowClickHandler;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
-import com.sencha.gxt.widget.core.client.info.Info;
-import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
-import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
 
-import myApp.client.field.LookupTriggerField;
 import myApp.client.grid.GridBuilder;
 import myApp.client.grid.InterfaceGridOperate;
 import myApp.client.grid.SearchBarBuilder;
@@ -33,9 +31,8 @@ import myApp.client.vi.com.model.Com01_ComCdModelProperties;
 public class Com01_Tab_ComCode extends BorderLayoutContainer implements InterfaceGridOperate {
 	
 	private Grid<Com01_ComCdModel> grid = this.buildGrid();
-	private LookupTriggerField dptName = new LookupTriggerField();
 	private TextField codeNameField = new TextField();
-	private Com02_edit_DtlCode dtlCodeGrid = new Com02_edit_DtlCode();
+	private Com02_Grid_DtlCode dtlCodeGrid = new Com02_Grid_DtlCode();
 	
 	public Com01_Tab_ComCode() {
 		
@@ -62,15 +59,13 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 		this.setWestWidget(vlc, westLayoutData);
 		this.setCenterWidget(dtlCodeGrid);
 		
-		grid.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<Com01_ComCdModel>(){
+		grid.addRowClickHandler(new RowClickHandler() {
 			@Override
-			public void onSelectionChanged(SelectionChangedEvent<Com01_ComCdModel> event) {
-				Com01_ComCdModel dtlCode = grid.getSelectionModel().getSelectedItem(); 
+			public void onRowClick(RowClickEvent event) {
+				Com01_ComCdModel dtlCode = grid.getSelectionModel().getSelectedItem();
 				dtlCodeGrid.retrieveCode(dtlCode); //.getComCode());
 			}
-
-		}); 
-		
+		});
 		this.retrieve();
 	}
 	
@@ -78,10 +73,10 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 		Com01_ComCdModelProperties properties = GWT.create(Com01_ComCdModelProperties.class);
 		GridBuilder<Com01_ComCdModel> gridBuilder = new GridBuilder<Com01_ComCdModel>(properties.keyId());  
 		gridBuilder.setChecked(SelectionMode.SINGLE);
-		gridBuilder.addText(properties.comCode(), 100, "공통코드", new TextField());
-		gridBuilder.addText(properties.comName(), 200, "공토코드명", new TextField());
-		gridBuilder.addBoolean(properties.useYnFlag(), 150, "사용여부");
-		gridBuilder.addText(properties.rmk(), 311, "비고", new TextField());
+		gridBuilder.addText(properties.comCode(), 150, "공통코드", new TextField());
+		gridBuilder.addText(properties.comName(), 200, "공통코드명", new TextField());
+		gridBuilder.addBoolean(properties.useYnFlag(), 70, "사용여부");
+		gridBuilder.addText(properties.rmk(), 300, "비고", new TextField());
 		return gridBuilder.getGrid(); 
 	}
 
@@ -103,7 +98,6 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 	public void insertRow(){
 		Com01_ComCdModel insertModel = new Com01_ComCdModel();
 		GridInsertRow<Com01_ComCdModel> service = new GridInsertRow<Com01_ComCdModel>();
-		Info.display("", "ComCode     :   "+insertModel.getComCode());
 		service.insertRow(grid, insertModel);
 	}
 
@@ -126,7 +120,7 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 			}
 
 		});
-		msgBox.setWidth(300);
-		msgBox.show();
+			msgBox.setWidth(300);
+			msgBox.show();
 	}
 }

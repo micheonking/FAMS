@@ -21,12 +21,9 @@ public class Com01_ComCode {
 			searText = "";
 		}
 		searText = "%" + searText + "%";
-		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("searText", searText); 
-		
 		System.out.println("searText  is   :   "+searText);
-		
 		List<GridDataModel> list = sqlSession.selectList("com01_com_cd.selectBySearText", param);
 		result.setRetrieveResult(1, "select ok", list);
 	}
