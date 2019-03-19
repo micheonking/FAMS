@@ -3,7 +3,7 @@
 
 <mapper namespace="com01_com_cd">
 
-	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com01_ComCdModel" >
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com01_ComCodeModel" >
 		<id     column="com01_com_cd_id"     property="comCdId"/>
 		<result column="com01_com_cd"        property="comCode"/>
 		<result column="com01_com_nm"        property="comName"/>
@@ -24,7 +24,7 @@
 	<select id="selectBySearText" resultMap="mapper" parameterType="HashMap" > 
 		select 	*
 		from 	com01_com_cd
-		where   com01_com_nm||com01_com_cd like #{searText} 
+		where   UPPER(com01_com_nm||com01_com_cd) like UPPER(#{searText}) 
 	
 	</select>
 

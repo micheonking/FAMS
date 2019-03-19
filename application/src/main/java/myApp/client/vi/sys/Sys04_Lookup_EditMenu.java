@@ -28,7 +28,6 @@ import com.sencha.gxt.widget.core.client.form.LongField;
 import com.sencha.gxt.widget.core.client.form.StringComboBox;
 import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.form.TextField;
-import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 
 import myApp.client.resource.ResourceIcon;

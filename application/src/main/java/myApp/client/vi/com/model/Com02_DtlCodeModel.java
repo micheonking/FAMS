@@ -5,11 +5,11 @@ import java.util.List;
 
 import myApp.client.utils.GridDataModel;
 
-public class Com02_DtlCdModel implements GridDataModel { 
+public class Com02_DtlCodeModel implements GridDataModel { 
 
 	private Long    dtlCdId ;
 	private String  comCode ;
-	private String  comDtlCode ;
+	private String  dtlCode ;
 	private String  dtlName ;
 	private String  useYn ;
 	private String  rmk ;
@@ -46,12 +46,12 @@ public class Com02_DtlCdModel implements GridDataModel {
 		this.comCode = comCode;
 	}
 
-	public String getComDtlCode() {
-		return comDtlCode;
+	public String getDtlCode() {
+		return dtlCode;
 	}
 
-	public void setComDtlCode(String comDtlCode) {
-		this.comDtlCode = comDtlCode;
+	public void setDtlCode(String dtlCode) {
+		this.dtlCode = dtlCode;
 	}
 
 	public String getDtlName() {

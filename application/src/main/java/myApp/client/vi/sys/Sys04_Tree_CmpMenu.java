@@ -5,11 +5,14 @@ import java.util.List;
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.core.client.GWT;
 import com.sencha.gxt.core.client.Style.SelectionMode;
+import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.ButtonBar;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent.CollapseHandler;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
@@ -19,6 +22,7 @@ import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import myApp.client.grid.CommonComboBoxField;
 import myApp.client.grid.GridBuilder;
 import myApp.client.service.DBUtil;
+import myApp.client.service.GridDeleteData;
 import myApp.client.service.InterfaceCallback;
 import myApp.client.service.InterfaceServiceCall;
 import myApp.client.service.ServiceCall;
@@ -29,6 +33,7 @@ import myApp.client.utils.SimpleMessage;
 import myApp.client.vi.LoginUser;
 import myApp.client.vi.sys.model.Sys04_CmpMenuModel;
 import myApp.client.vi.sys.model.Sys04_CmpMenuModelProperties;
+import myApp.client.vi.sys.model.Sys08_DptInfoModel;
 
 public class Sys04_Tree_CmpMenu extends VerticalLayoutContainer implements InterfaceServiceCall {
 	
@@ -68,12 +73,26 @@ public class Sys04_Tree_CmpMenu extends VerticalLayoutContainer implements Inter
 		});
 		buttonBar.add(retrieveButton);
 		
-		TextButton createInitButton = new TextButton("초기메뉴 등록");
+		TextButton createInitButton = new TextButton("메뉴초기화");
 		createInitButton.setWidth(120);
 		createInitButton.addSelectHandler(new SelectHandler() {
 			@Override
 			public void onSelect(SelectEvent event) {
-				insertInitMenu();
+				final ConfirmMessageBox msgBox = new ConfirmMessageBox("확인", "메뉴초기화시 메뉴 및 메뉴권한그룹, 부서정보, 사용자정보등이 삭제됩니다. 초기화하시겠습니까?");
+				msgBox.addDialogHideHandler(new DialogHideHandler() {
+					@Override
+					public void onDialogHide(DialogHideEvent event) {
+						switch (event.getHideButton()) {
+						case YES:
+							insertInitMenu();
+						case NO:
+						default:
+							break;
+						}
+					}
+				});
+				msgBox.setWidth(300);
+				msgBox.show();
 			}
 		});
 		buttonBar.add(createInitButton);

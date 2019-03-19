@@ -1,17 +1,11 @@
 package myApp.client.grid;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent.CollapseHandler;
-import com.sencha.gxt.widget.core.client.event.ExpandEvent;
-import com.sencha.gxt.widget.core.client.event.ExpandEvent.ExpandHandler;
-import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.StringComboBox;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.info.Info;
@@ -22,16 +16,14 @@ import myApp.client.service.ServiceCall;
 import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.GridDataModel;
-import myApp.client.vi.LoginUser;
-import myApp.client.vi.sys.model.Sys09_CodeModel;
+import myApp.client.vi.com.model.Com02_DtlCodeModel;
 
 public class ComboBoxField extends StringComboBox implements InterfaceServiceCall {
 	
-	private Map<String, Sys09_CodeModel> codeMap = new HashMap<String, Sys09_CodeModel>();
-	private Sys09_CodeModel altCodeModel = new Sys09_CodeModel(); 
+	private Map<String, Com02_DtlCodeModel> codeMap = new HashMap<String, Com02_DtlCodeModel>();
+	private Com02_DtlCodeModel altCodeModel = new Com02_DtlCodeModel(); 
 	
-	private String kindCode = null; 
-	private Date applyDate = null; 
+	private String kindCode = null;
 	private InterfaceCallback callback;
 	
 	public ComboBoxField(String KindCode){
@@ -73,8 +65,8 @@ public class ComboBoxField extends StringComboBox implements InterfaceServiceCal
     	}); 
 	}
 	private void setAltCode(String code, String codeName) {
-		this.altCodeModel.setCode(code);
-		this.altCodeModel.setName(codeName);
+		this.altCodeModel.setDtlCode(code);
+		this.altCodeModel.setDtlName(codeName);
 	}
 	private void makeComboBoxField(String kindCode) {
 		this.kindCode= kindCode; 
@@ -83,40 +75,19 @@ public class ComboBoxField extends StringComboBox implements InterfaceServiceCal
 		this.retrieve();
 	}
 
-	public void setCodeList(Date applyDate) {
-		this.applyDate = applyDate; 
-		this.retrieve();
-	}
-	
 	public String getCode(){
-  		Sys09_CodeModel code = codeMap.get(this.getCurrentValue()); 
+		Com02_DtlCodeModel code = codeMap.get(this.getCurrentValue()); 
   		if(code != null){
-  			return code.getCode(); 
+  			return code.getDtlCode(); 
   		}
   		else {
   			return null; 
   		}
   	}
 	
-	public void retrieve(Date applyDate) {
-		if(!this.isExpanded()) {
-			this.applyDate = applyDate; 
-			this.callback = new InterfaceCallback() {
-				@Override
-				public void execute() {
-					expand(); 
-				}
-			}; 
-			this.retrieve();
-		}
-	}
-	
 	public void retrieve() {
-		ServiceRequest request = new ServiceRequest("sys.Sys09_Code.selectByCodeKind");
-//		request.putLongParam("companyId", LoginUser.getCompanyId()); 
-		request.putStringParam("kindCode", this.kindCode);
-		request.putDateParam("applyDate", this.applyDate); // 기준일이 null이면 서버에서 오늘일자로 조회한다.
-		
+		ServiceRequest request = new ServiceRequest("com.Com02_DtlCode.selectByComCode");
+		request.putStringParam("comCode", this.kindCode);
 		ServiceCall service = new ServiceCall();
 		service.execute(request, this);
 	}
@@ -133,25 +104,37 @@ public class ComboBoxField extends StringComboBox implements InterfaceServiceCal
 		}
 		
 		// 추가코드가 있으면 먼저 넣는다. 
-		if(this.altCodeModel.getName() != null) {
-			codeMap.put(this.altCodeModel.getName(), this.altCodeModel);
-			this.add(altCodeModel.getName());
+		if(this.altCodeModel.getDtlName() != null) {
+			codeMap.put(this.altCodeModel.getDtlName(), this.altCodeModel);
+			this.add(altCodeModel.getDtlName());
 		}
+		
+		int i=0;
+		String initCodeName = null;
 		
 		for (GridDataModel model: result.getResult()) {
-			Sys09_CodeModel code = (Sys09_CodeModel)model ;
+			Com02_DtlCodeModel code = (Com02_DtlCodeModel)model ;
 			
-			if(codeMap.get(code.getName()) == null) {
+			if(codeMap.get(code.getDtlName()) == null) {
 				// 코드명이 같은게 있으면 Skip한다. 
-				codeMap.put(code.getName(), code);
-				this.add(code.getName());
+				codeMap.put(code.getDtlName(), code);
+				this.add(code.getDtlName());
+				
+				if(i==0) {
+					initCodeName = code.getDtlName();
+				}
+				i++;
 			}
-			
 		}
 		
+		if(this.altCodeModel.getDtlName() == null) {
+			this.setText(initCodeName);
+		} else {
+			this.setText(this.altCodeModel.getDtlName());
+		}
+
 		if(this.callback != null) {
 			this.callback.execute();
 		}
-		
 	}
 }

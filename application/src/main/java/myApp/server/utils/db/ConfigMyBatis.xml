@@ -72,6 +72,8 @@
 	<mapper resource="myApp/server/com/mapper/com02_dtl_cd.xml"/>
 	<mapper resource="myApp/server/com/mapper/com03_dtl_cd_grp.xml"/>
 	<mapper resource="myApp/server/com/mapper/com04_tr_cd.xml"/>
+
+	<mapper resource="myApp/server/itm/mapper/itm01_itm.xml"/>
 	
 <!-- 	<mapper resource="myApp/server/sys/mapper/sys03_company_menu.xml"/> -->
 <!-- 	<mapper resource="myApp/server/sys/mapper/sys04_role.xml"/> -->

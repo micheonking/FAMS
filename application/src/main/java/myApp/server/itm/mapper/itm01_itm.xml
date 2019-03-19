@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="itm01_itm">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.itm.model.Itm01_ItmModel" >
+		<id     column="itm01_itm_id"                   property="itmId"/>
+		<result column="itm01_cmp_cd"                   property="cmpCode"/>
+		<result column="itm01_itm_cd"                   property="itmCode"/>
+		<result column="itm01_info_stt_dt"              property="infoSttDate"/>
+		<result column="itm01_info_end_dt"              property="infoEndDate"/>
+		<result column="itm01_lclass_cd"                property="lclassCode"/>
+		<result column="itm01_mclass_cd"                property="mclassCode"/>
+		<result column="itm01_itm_nm"                   property="itmName"/>
+		<result column="itm01_itm_abbr"                 property="itmAbbr"/>
+		<result column="itm01_itm_enm"                  property="itmEName"/>
+		<result column="itm01_itm_eabbr"                property="itmEAbbr"/>
+		<result column="itm01_isin"                     property="isin"/>
+		<result column="itm01_itm_sht_cd"               property="itmShtCode"/>
+		<result column="itm01_cusip"                    property="cusip"/>
+		<result column="itm01_sedol"                    property="sedol"/>
+		<result column="itm01_iss_dt"                   property="issDate"/>
+		<result column="itm01_mat_dt"                   property="matDate"/>
+		<result column="itm01_list_dt"                  property="listDate"/>
+		<result column="itm01_list_typ_cd"              property="listTypeCode"/>
+		<result column="itm01_ntn_cd"                   property="ntnCode"/>
+		<result column="itm01_area_cd"                  property="areaCode"/>
+		<result column="itm01_krx_typ_cd"               property="krxTypeCode"/>
+		<result column="itm01_tax_typ_cd"               property="taxTypeCode"/>
+		<result column="itm01_iss_corp_cd"              property="issCorpCode"/>
+		<result column="itm01_org_iss_corp_cd"          property="orgIssCorpCode"/>
+		<result column="itm01_mng_co_cd"                property="mngCoCode"/>
+		<result column="itm01_grt_typ_cd"               property="grtTypeCode"/>
+		<result column="itm01_grt_corp_cd"              property="grtCorpCode"/>
+		<result column="itm01_wh_typ_cd"                property="whTypeCode"/>
+		<result column="itm01_abro_wh_typ_cd"           property="abroWhTypeCode"/>
+		<result column="itm01_clo_mon"                  property="cloMonth"/>
+		<result column="itm01_pay_cur_cd"               property="payCurCode"/>
+		<result column="itm01_rcv_cur_cd"               property="rcvCurCode"/>
+		<result column="itm01_evl_cur_cd"               property="evlCurCode"/>
+		<result column="itm01_pub_prv_typ_cd"           property="pubPrvTypeCode"/>
+		<result column="itm01_data_rcv_yn"              property="dataRcvYn"/>
+		<result column="itm01_data_rcv_apy_unt_cd"      property="dataRcvPayUntCode"/>
+		<result column="itm01_data_rcv_cd"              property="dataRcvCode"/>
+		<result column="itm01_data_rcv_co"              property="dataRcvCo"/>
+		<result column="itm01_deal_unt"                 property="dealUnt"/>
+		<result column="itm01_par"                      property="par"/>
+		<result column="itm01_evl_typ_cd"               property="evlTypeCode"/>
+		<result column="itm01_rdm_pl_calc_typ_cd"       property="rdmPlCalcTypeCode"/>
+		<result column="itm01_new_reg_dt"               property="newRegDate"/>
+		<result column="itm01_mkt_prc_apy_frml_cd"      property="mktPrcApyFrmlCode"/>
+		<result column="itm01_tax_pos_typ_cd"           property="taxPosTypeCode"/>
+		<result column="itm01_rcvb_int_calc_frml_cd"    property="rcvbIntCalcFrmlCode"/>
+		<result column="itm01_ast_mng_frml_cd"          property="astMngFrmlCode"/>
+		<result column="itm01_evl_frml_cd"              property="evlFrmlCode"/>
+		<result column="itm01_dtl_class_cd"             property="dtlClassCode"/>
+		<result column="itm01_ins_usr_no"               property="insUsrNo"/>
+		<result column="itm01_ins_dt"                   property="insDate"/>
+		<result column="itm01_upd_usr_no"               property="updUsrNo"/>
+		<result column="itm01_upd_dt"                   property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		  from 	itm01_itm 
+		 where	itm01_itm_id = #{itmId}
+	</select>
+
+	<select id="selectByItmCode" resultMap="mapper" parameterType="HashMap" >
+		select 	*
+		  from 	itm01_itm 
+		 where  itm01_cmp_cd = #{cmpCode}
+		   and  itm01_itm_cd = #{itmCode}
+	</select>
+
+	<select id="selectBySearchText" resultMap="mapper" parameterType="HashMap" >	<!-- 종목공통 popup용 -->
+		select 	distinct
+		        rownum as itm01_itm_id
+		     ,  itm01_itm_cd
+		     ,  itm01_itm_abbr
+		     ,  itm01_itm_nm
+		  from 	itm01_itm 
+		 where	itm01_cmp_cd in ('00000',#{cmpCode})
+		   and  sysdate between itm01_info_stt_dt and itm01_info_end_dt
+		   and  itm01_lclass_cd = #{lClassCode}
+		   and  ( ( #{abroTypCode} = '1' and
+		            itm01_ntn_cd = 'KR'  ) or
+		          ( #{abroTypCode} != '1' and
+		            itm01_ntn_cd != 'KR'  ) )
+		   and  UPPER(itm01_itm_cd||itm01_itm_nm||itm01_itm_abbr) like UPPER(#{searchText})
+	</select>
+
+	<select id="selectOneItmName" resultType="String" parameterType="HashMap" > 
+		select 	itm01_itm_abbr
+		  from 	itm01_itm
+		 where	itm01_cmp_cd = #{cmpCode}
+		   and  itm01_itm_cd = #{itmCode}
+		   and  sysdate between itm01_info_stt_dt and itm01_info_end_dt
+	</select>
+
+</mapper>

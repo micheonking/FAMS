@@ -32,8 +32,10 @@ public class MenuOpener {
 		if ("Com01_Tab_ComCode.class".equals(className)) {
 			return (Widget) GWT.create(myApp.client.vi.com.Com01_Tab_ComCode.class);
 		}
-		
-		
+
+		if ("Itm01_Tab_Itm.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.itm.Itm01_Tab_Itm.class);
+		}
 
 		return null;
 	}

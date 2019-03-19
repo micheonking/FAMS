@@ -27,7 +27,7 @@ import myApp.client.utils.InterfaceCallbackResult;
 import myApp.client.utils.SimpleMessage;
 import myApp.client.vi.sys.model.Sys02_UsrInfoModel;
 
-public class Sys02_Lookup_userPw extends Window implements Editor<Sys02_UsrInfoModel> , InterfaceServiceCall {
+public class Sys02_Lookup_UsrPwChg extends Window implements Editor<Sys02_UsrInfoModel> , InterfaceServiceCall {
 
 	private InterfaceCallbackResult callback;
 	Grid<Sys02_UsrInfoModel> grid;

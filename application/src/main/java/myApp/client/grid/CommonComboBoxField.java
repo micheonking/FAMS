@@ -178,6 +178,6 @@ public class CommonComboBoxField extends StringComboBox implements InterfaceServ
 		if(this.callback != null) {
 			this.callback.execute();
 		}
-
 	}
+	
 }

@@ -3,10 +3,10 @@
 
 <mapper namespace="com02_dtl_cd">
 
-	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com02_DtlCdModel" >
-		<id     column="COM02_DTL_CD_ID"     property="dtlCdId"/>
-		<result column="COM02_COM_CD"        property="comCode"/>
-		<result column="COM02_COM_DTL_CD"    property="comDtlCode"/>
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com02_DtlCodeModel" >
+		<id     column="com02_dtl_cd_id"     property="dtlCdId"/>
+		<result column="com02_com_cd"        property="comCode"/>
+		<result column="com02_dtl_cd"    	 property="dtlCode"/>
 		<result column="com02_dtl_nm"        property="dtlName"/>
 		<result column="com02_use_yn"        property="useYn"/>
 		<result column="com02_rmk"   		 property="rmk"/>
@@ -18,14 +18,23 @@
 
 	<select id="selectById" resultMap="mapper" parameterType="long" > 
 		select 	*
-		from 	com02_dtl_cd 
-		where	com02_dtl_cd_id = #{dtlCdId}
+		  from 	com02_dtl_cd 
+		 where	com02_dtl_cd_id = #{dtlCdId}
 	</select>
 	
-	<select id="selectByComCode" resultMap="mapper" > 
+	<select id="selectByComCode" resultMap="mapper" parameterType="String" > 
 		select 	*
-		from 	com02_dtl_cd
-		where 	com02_com_cd = #{comCode} 
+		  from 	com02_dtl_cd
+		 where 	com02_com_cd = #{comCode}
+		   and  com02_use_yn = 'Y'
+		 order by com02_dtl_cd
+	</select>
+
+	<select id="selectByComCodeAll" resultMap="mapper" parameterType="String" > 
+		select 	*
+		  from 	com02_dtl_cd
+		 where 	com02_com_cd = #{comCode}
+		 order by com02_dtl_cd
 	</select>
 
 </mapper>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com04_tr_cd">
 
-	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com04_TrCdModel" >
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com04_TrCodeModel" >
 		<id     column="com04_tr_cd_id"    	     property="trCdId"/>
 		<result column="com04_tr_cd"        	 property="trCode"/>
 		<result column="com04_tr_nm"      	 	 property="trName"/>

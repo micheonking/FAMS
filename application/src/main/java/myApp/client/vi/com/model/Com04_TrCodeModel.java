@@ -5,7 +5,7 @@ import java.util.List;
 
 import myApp.client.utils.GridDataModel;
 
-public class Com04_TrCdModel implements GridDataModel { 
+public class Com04_TrCodeModel implements GridDataModel { 
 
 	private Long    trCdId ;
 	private String  trCode ;

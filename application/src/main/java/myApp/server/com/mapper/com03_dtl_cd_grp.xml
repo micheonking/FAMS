@@ -3,12 +3,12 @@
 
 <mapper namespace="com03_dtl_cd_grp">
 
-	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com03_DtlCdGrpModel" >
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com03_DtlCodeGrpModel" >
 		<id     column="com03_dtl_cd_grp_id"     property="dtlCdGrpId"/>
 		<result column="com03_cmp_cd"        	 property="cmpCode"/>
 		<result column="com03_grp_cd"       	 property="grpCode"/>
 		<result column="com03_com_cd"    		 property="comCode"/>
-		<result column="com03_com_dtl_cd"        property="comDtlCode"/>
+		<result column="com03_dtl_cd"            property="dtlCode"/>
 		<result column="com03_dtl_nm"       	 property="dtlName"/>
 		<result column="com03_rmk"   		  	 property="rmk"/>
 		<result column="com03_ins_usr_no"        property="insUsrNo"/>
