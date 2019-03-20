@@ -5,7 +5,7 @@ import java.util.List;
 
 import myApp.client.utils.GridDataModel;
 
-public class Com04_TrCdModel implements GridDataModel { 
+public class Com04_TrCodeModel implements GridDataModel { 
 
 	private Long    trCdId ;
 	private String  trCode ;
@@ -20,6 +20,7 @@ public class Com04_TrCdModel implements GridDataModel {
 	private Date    updDate ;
 	
 	private boolean  applProcYnFlag ;
+	private boolean  accSndYnFlag ;
 	
 	@Override
 	public void setKeyId(Long id) {
@@ -125,7 +126,7 @@ public class Com04_TrCdModel implements GridDataModel {
 		} else {
 			return false;
 		}
-		}
+	}
 
 	public void setApplProcYnFlag(boolean applProcYnFlag) {
 		if(applProcYnFlag) {
@@ -133,7 +134,23 @@ public class Com04_TrCdModel implements GridDataModel {
 		} else {
 			this.applProcYn = "N";
 		}
+	}
+
+	public boolean isAccSndYnFlag() {
+		if("Y".equals(getAccSndYn())) {
+			return true;
+		} else {
+			return false;
 		}
+	}
+
+	public void setAccSndYnFlag(boolean accSndYnFlag) {
+		if(accSndYnFlag) {
+			this.accSndYn = "Y";
+		} else {
+			this.accSndYn = "N";
+		}
+	}
 
 	
 }

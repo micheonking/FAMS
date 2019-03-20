@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="jnl03_tr_map">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.jnl.model.Jnl03_TrMapModel" >
+		<id     column="jnl03_tr_map_id"     	property="trMapId"/>
+		<result column="jnl03_cmp_cd"        	property="compCode"/>
+		<result column="jnl03_tr_cd"      		property="trCode"/>
+		<result column="jnl03_abro_typ_cd"      property="abrotypeCode"/>
+		<result column="jnl03_itm_lclass"   	property="itmLcalss"/>
+		<result column="jnl03_jnl_grp_cd"   	property="jnlGrpCode"/>
+		<result column="jnl03_tgt_tr_typ_cd"    property="tgtTrTypeCode"/>
+		<result column="jnl03_liqdt_typ_cd"    	property="liqdtTypeCode"/>
+		<result column="jnl03_liqdt_io_typ_cd"  property="liqdtIoTypeCode"/>
+		<result column="jnl03_pl_amt_typ_cd"    property="plAmtTypeCode"/>
+		<result column="jnl03_drcr_chg_psb_yn"  property="drcrChgPsbYn"/>
+		<result column="jnl03_bok_proc_typ_cd"  property="bokProcTypeCode"/>
+		<result column="jnl03_use_yn"        	property="useYn"/>
+		<result column="jnl03_ins_usr_no"       property="insUsrNo"/>
+		<result column="jnl03_ins_dt"       	property="insDate"/>
+		<result column="jnl03_upd_usr_no"       property="updUsrNo"/>
+		<result column="jnl03_upd_dt"        	property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	jnl03_tr_map 
+		where	jnl03_tr_map_id = #{trMapId}
+	</select>
+
+</mapper>

@@ -72,6 +72,23 @@
 	<mapper resource="myApp/server/com/mapper/com02_dtl_cd.xml"/>
 	<mapper resource="myApp/server/com/mapper/com03_dtl_cd_grp.xml"/>
 	<mapper resource="myApp/server/com/mapper/com04_tr_cd.xml"/>
+	<mapper resource="myApp/server/com/mapper/com05_acnt_cd.xml"/>
+	<mapper resource="myApp/server/com/mapper/com06_corp.xml"/>
+	<mapper resource="myApp/server/com/mapper/com07_corp_acnt.xml"/>
+	<mapper resource="myApp/server/com/mapper/com08_fee_rt.xml"/>
+	<mapper resource="myApp/server/com/mapper/com09_tax_rt.xml"/>
+	<mapper resource="myApp/server/com/mapper/com10_tax_sys.xml"/>
+	<mapper resource="myApp/server/com/mapper/com11_dt.xml"/>
+	<mapper resource="myApp/server/com/mapper/com15_biz_dt.xml"/>
+	<mapper resource="myApp/server/com/mapper/com16_proc_mnt.xml"/>
+	
+	<mapper resource="myApp/server/jnl/mapper/jnl01_repr_acnt_cd.xml"/>
+	<mapper resource="myApp/server/jnl/mapper/jnl02_jnl_grp.xml"/>
+	<mapper resource="myApp/server/jnl/mapper/jnl03_tr_map.xml"/>
+<!-- 	<mapper resource="myApp/server/jnl/mapper/jnl04_real_acnt_map.xml"/> -->
+	<mapper resource="myApp/server/jnl/mapper/jnl05_tmp_jnl.xml"/>
+<!-- 	<mapper resource="myApp/server/jnl/mapper/jnl06_jnl.xml"/> -->
+<!-- 	<mapper resource="myApp/server/jnl/mapper/jnl07_gen_ldger.xml"/> -->
 	
 <!-- 	<mapper resource="myApp/server/sys/mapper/sys03_company_menu.xml"/> -->
 <!-- 	<mapper resource="myApp/server/sys/mapper/sys04_role.xml"/> -->
