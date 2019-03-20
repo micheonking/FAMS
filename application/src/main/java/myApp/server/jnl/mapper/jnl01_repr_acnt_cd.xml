@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="jnl01_repr_acnt_cd">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.jnl.model.Jnl01_ReprAcntCodeModel" >
+		<id     column="jnl01_repr_acnt_cd_id"     property="reprAcntCodeId"/>
+		<result column="jnl01_repr_acnt_cd"        property="reprAcntCode"/>
+		<result column="jnl01_repr_acnt_nm"        property="reprAcntName"/>
+		<result column="jnl01_acnt_att_cd"         property="acntAttCode"/>
+		<result column="jnl01_tgt_repr_acnt_cd"    property="tgtReprAcntCode"/>
+		<result column="jnl01_bok_mag_yn"    	   property="bokMagYn"/>
+		<result column="jnl01_exrt_apy_typ_cd"     property="exrtApyTypeCode"/>
+		<result column="jnl01_rmk"    			   property="rmk"/>
+		<result column="jnl01_ins_usr_no"          property="insUsrNo"/>
+		<result column="jnl01_ins_dt"              property="insDate"/>
+		<result column="jnl01_upd_usr_no"          property="updUsrNo"/>
+		<result column="jnl01_upd_dt"        	   property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	jnl01_repr_acnt_cd 
+		where	jnl01_repr_acnt_cd_id = #{reprAcntCodeId}
+	</select>
+	
+</mapper>

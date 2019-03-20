@@ -25,7 +25,6 @@
 		select 	*
 		from 	com01_com_cd
 		where   com01_com_nm||com01_com_cd like #{searText} 
-	
 	</select>
 
 </mapper>

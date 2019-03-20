@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="jnl06_jnl">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.jnl.model.jnl06_JnlModel" >
+		<id     column="jnl06_jnl_id"  		 	    property="jnlId"/>
+		<result column="jnl06_opr_id"        		property="oprId"/>
+		<result column="jnl06_jnl_dt"      			property="jnlDate"/>
+		<result column="jnl06_seq"     				property="seq"/>
+		<result column="jnl06_dr_acnt_cd"   		property="drAcntCode"/>
+		<result column="jnl06_dr_krw_amt"   		property="drKrwAmt"/>
+		<result column="jnl06_dr_for_amt"    		property="drForAmt"/>
+		<result column="jnl06_dr_usd_amt"    		property="drUsdAmt"/>
+		<result column="jnl06_cr_acnt_cd" 			property="crAcntCode"/>
+		<result column="jnl06_cr_krw_amt"  		    property="crKrwAmt"/>
+		<result column="jnl06_cr_for_amt"       	property="crForAmt"/>
+		<result column="jnl06_cr_usd_amt"       	property="crUsdAmt"/>
+		<result column="jnl06_ins_usr_no"       	property="insUsrNo"/>
+		<result column="jnl06_ins_dt"        		property="insDate"/>
+		<result column="jnl06_upd_usr_no"        	property="updUsrNo"/>
+		<result column="jnl06_upd_dt"        		property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	jnl06_jnl 
+		where	jnl06_jnl_id = #{jnlId}
+	</select>
+
+</mapper>

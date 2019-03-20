@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com05_acnt_cd">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com05_AcntCodeModel" >
+		<id     column="com05_acnt_cd_id"    	 property="acntCodeId"/>
+		<result column="com05_cmp_cd"        	 property="cmpCode"/>
+		<result column="com05_acc_cd"        	 property="accCode"/>
+		<result column="com05_acc_knm"        	 property="accKname"/>
+		<result column="com05_acc_enm2"       	 property="accEname2"/>
+		<result column="com05_dr_cr_typ_cd"	 	 property="drCrTypeCode"/>
+		<result column="com05_chd_prnt_typ_cd"   property="chdPrntTypeCode"/>
+		<result column="com05_acc_lvl_cd"        property="accLvlCode"/>
+		<result column="com05_prnt_acc_cd"   	 property="prntAccCode"/>
+		<result column="com05_acc_att_cd"        property="accAttCode"/>
+		<result column="com05_tlg_att_cd"        property="tlgAttCode"/>
+		<result column="com05_seq"    	 		 property="seq"/>
+		<result column="com05_prnt_acc_cd1"      property="prntAccCode1"/>
+		<result column="com05_prnt_acc_cd2"      property="prntAccCode2"/>
+		<result column="com05_prnt_acc_cd3"      property="prntAccCode3"/>
+		<result column="com05_prnt_acc_cd4"      property="prntAccCode4"/>
+		<result column="com05_prnt_acc_cd5"      property="prntAccCode5"/>
+		<result column="com05_tgt_acc_cd"        property="tgtAccCode"/>
+		<result column="com05_ustl_yn"         	 property="ustlYn"/>
+		<result column="com05_use_yn"         	 property="useYn"/>
+		<result column="com05_bal_mag_yn"        property="balMagYn"/>
+		<result column="com05_ins_usr_no"        property="insUsrNo"/>
+		<result column="com05_ins_dt"         	 property="insDate"/>
+		<result column="com05_upd_usr_no"        property="updusrNo"/>
+		<result column="com05_upd_dt"         	 property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com05_acnt_cd 
+		where	com05_acnt_cd_id = #{acntCodeId}
+	</select>
+
+</mapper>

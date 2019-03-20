@@ -27,7 +27,6 @@ public class Com01_ComCdModel implements GridDataModel {
 	public Long getKeyId() {
 		return this.getComCdId();
 	}
-	
 
 	public Long getComCdId() {
 		return comCdId;
@@ -116,9 +115,4 @@ public class Com01_ComCdModel implements GridDataModel {
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
-
-	
-	
-
-	
 }

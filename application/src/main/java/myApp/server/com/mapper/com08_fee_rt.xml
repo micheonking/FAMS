@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com08_fee_rt">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com08_FeeRtModel" >
+		<id     column="com08_fee_rt_id"    	property="feeRtId"/>
+		<result column="com08_cmp_cd"        	property="cmpCode"/>
+		<result column="com08_fee_cd"        	property="feeCode"/>
+		<result column="com08_tr_co_cd"        	property="trCoCode"/>
+		<result column="com08_stt_amt"      	property="sttAmt"/>
+		<result column="com08_end_amt"	 	 	property="endAmt"/>
+		<result column="com08_fee_rt"   	 	property="feeRt"/>
+		<result column="com08_add_amt"       	property="addAmt"/>
+		<result column="com08_use_yn"   		property="useYn"/>
+		<result column="com08_ins_usr_no" 		property="insUsrNo"/>
+		<result column="com08_ins_dt"      		property="insDate"/>
+		<result column="com08_upd_usr_no " 		property="updUsrNo"/>
+		<result column="com08_upd_dt"      		property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com08_fee_rt 
+		where	com08_fee_rt_id = #{feeRtId}
+	</select>
+	
+	<select id="selectBySearText" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com08_fee_rt 
+	</select>
+
+</mapper>

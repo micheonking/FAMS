@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com06_corp">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com06_CorpModel" >
+		<id     column="com06_corp_id"    		 property="corpId"/>
+		<result column="com06_cmp_cd"        	 property="cmpCode"/>
+		<result column="com06_corp_cd"        	 property="corpCode"/>
+		<result column="com06_corp_nm"        	 property="corpName"/>
+		<result column="com06_corp_typ_cd"       property="corpTypeCode"/>
+		<result column="com06_biz_reg_no"	 	 property="bizRegNo"/>
+		<result column="com06_corp_reg_no"   	 property="corpRegNo"/>
+		<result column="com06_grp_corp_cd"       property="grpCorpCode"/>
+		<result column="com06_stl_bnk_cd"   	 property="stlBnkCode"/>
+		<result column="com06_stl_bnk_acnt_no"   property="stlBnkAcntNo"/>
+		<result column="com06_ksc_corp_cd"       property="kscCorpCode"/>
+		<result column="com06_stn_ind_class_cd " property="stnIndClassCode"/>
+		<result column="com06_est_dt"      		 property="estDate"/>
+		<result column="com06_repr_nm"     		 property="reprName"/>
+		<result column="com06_tel_no"      		 property="telNo"/>
+		<result column="com06_addr"      		 property="addr"/>
+		<result column="com06_ind_typ_cd"        property="intTypeCode"/>
+		<result column="com06_abro_typ_cd"       property="abroTypeCode"/>
+		<result column="com06_dsh_typ_cd"        property="dshTypeCode"/>
+		<result column="com06_use_yn"         	 property="useYn"/>
+		<result column="com06_ins_usr_no"        property="insUsrNo"/>
+		<result column="com06_ins_dt"        	 property="insDate"/>
+		<result column="com06_upd_usr_no"        property="updusrNo"/>
+		<result column="com06_upd_dt"        	 property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com06_corp 
+		where	com06_corp_id = #{corpId}
+	</select>
+
+</mapper>

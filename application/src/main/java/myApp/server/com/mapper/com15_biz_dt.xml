@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com15_biz_dt">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com15_BizDtModel" >
+		<id     column="com15_biz_dt_id"    		property="bizDtId"/>
+		<result column="com15_cmp_cd"    			property="cmpCode"/>
+		<result column="com15_biz_dt"     			property="bizDate"/>
+		<result column="com15_ins_usr_no"      		property="insUsrNo"/>
+		<result column="com15_ins_dt"      			property="insDate"/>
+		<result column="com15_upd_usr_no " 			property="updUsrNo"/>
+		<result column="com15_upd_dt"      			property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com15_biz_dt
+		where	com15_biz_dt_id = #{bizDtId}
+	</select>
+
+</mapper>

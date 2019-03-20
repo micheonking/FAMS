@@ -36,7 +36,7 @@ public class Com01_Tab_ComCode extends BorderLayoutContainer implements Interfac
 	
 	public Com01_Tab_ComCode() {
 		
-		LabelToolItem code = new LabelToolItem("▶ 공통코드/공통코드명");
+		LabelToolItem code = new LabelToolItem("공통코드/공통코드명");
 		code.setWidth(90);
 		
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);

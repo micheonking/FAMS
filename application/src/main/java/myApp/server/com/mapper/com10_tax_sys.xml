@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com10_tat_sys">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com10_TaxSysModel" >
+		<id     column="com10_tax_sys_id"    			property="taxSysId"/>
+		<result column="com10_tax_sys_typ_cd"    		property="taxSysTypeCode"/>
+		<result column="com10_tax_rt_typ_cd"     		property="taxRtTypeCode"/>
+		<result column="com10_trs_rul_apy_typ_cd"      	property="trsRulApyTypeCode"/>
+		<result column="com10_trs_rul_tgt_typ_cd"      	property="trsRulTgtTypCode"/>
+		<result column="com10_apy_sdd"	 				property="appSdd"/>
+		<result column="com10_apy_edd" 					property="apyEdd"/>
+		<result column="com10_trs_rul_xtnc_typ_cd"      property="trsRulXtncTypeCode"/>
+		<result column="com10_ins_usr_no"      			property="insUsrNo"/>
+		<result column="com10_ins_dt"      				property="insDate"/>
+		<result column="com10_upd_usr_no " 				property="updUsrNo"/>
+		<result column="com10_upd_dt"      				property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com10_tat_sys 
+		where	com10_tax_sys_id = #{taxSysId}
+	</select>
+
+</mapper>
