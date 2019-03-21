@@ -32,7 +32,23 @@ public class MenuOpener {
 		if ("Com01_Tab_ComCode.class".equals(className)) {
 			return (Widget) GWT.create(myApp.client.vi.com.Com01_Tab_ComCode.class);
 		}
-
+		
+		if ("Com04_Tab_TrCode.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.com.Com04_Tab_TrCode.class);
+		}
+		
+		if ("Com08_Tab_FeeRate.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.com.Com08_Tab_FeeRate.class);
+		}
+		
+		if ("Com09_Tab_TaxRate.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.com.Com09_Tab_TaxRate.class);
+		}
+		
+		if ("Com10_TaxSys.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.com.Com10_TaxSys.class);
+		}
+		
 		if ("Itm01_Tab_Itm.class".equals(className)) {
 			return (Widget) GWT.create(myApp.client.vi.itm.Itm01_Tab_Itm.class);
 		}

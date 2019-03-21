@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com16_proc_mnt">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com16_ProcMntModel" >
+		<id     column="com16_proc_mnt_id"    		property="procMntId"/>
+		<result column="com16_cmp_cd"    			property="cmpCode"/>
+		<result column="com16_std_dt"     			property="stdDate"/>
+		<result column="com16_fnd_cd"      			property="fndCode"/>
+		<result column="com16_biz_stt_yn"      		property="bizSttYn"/>
+		<result column="com16_tdy_rgh_yn " 			property="tdyRghYn"/>
+		<result column="com16_print_rcv_yn"      	property="printRcvYn"/>
+		<result column="com16_tr_clo_yn"      		property="trCloYn"/>
+		<result column="com16_mkt_prc_yn"      		property="mktPrcYn"/>
+		<result column="com16_clo_chk_yn"      		property="cloChkYn"/>
+		<result column="com16_clo_yn"      			property="cloYn"/>
+		<result column="com16_biz_end_yn"      		property="bizEndYn"/>
+		<result column="com16_ins_usr_no"      		property="insUsrNo"/>
+		<result column="com16_ins_dt"      			property="insDate"/>
+		<result column="com16_upd_usr_no"      		property="updUsrNo"/>
+		<result column="com16_upd_dt"      			property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com16_proc_mnt
+		where	com16_proc_mnt_id = #{procMntId}
+	</select>
+
+</mapper>

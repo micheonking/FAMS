@@ -13,7 +13,7 @@
 		<result column="com04_acc_snd_yn"   	 property="accSndYn"/>
 		<result column="com04_ins_usr_no"        property="insUsrNo"/>
 		<result column="com04_ins_dt"   	     property="insDate"/>
-		<result column="com04_upd_usr_no"    	 property="updusrNO"/>
+		<result column="com04_upd_usr_no"    	 property="updusrNo"/>
 		<result column="com04_upd_dt"         	 property="updDate"/>
 	</resultMap>
 
@@ -21,6 +21,12 @@
 		select 	*
 		from 	com04_tr_cd 
 		where	com04_tr_cd_id = #{trCdId}
+	</select>
+
+	<select id="selectBySearText" resultMap="mapper" parameterType="HashMap" > 
+		select 	*
+		from 	com04_tr_cd
+		where   com04_tr_nm||com04_tr_cd like #{searText} 
 	</select>
 
 </mapper>

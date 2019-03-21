@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com09_tax_rt">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com09_TaxRtModel" >
+		<id     column="com09_tax_rt_id"    			property="taxRtId"/>
+		<result column="com09_tax_rt_typ_cd"    		property="taxRtTypeCode"/>
+		<result column="com09_wh_co_typ_cd"     		property="whCoTypeCode"/>
+		<result column="com09_apy_sdd"        			property="apySdd"/>
+		<result column="com09_apy_edd"      			property="apyEdd"/>
+		<result column="com09_apy_tax_rt"	 			property="apyTaxRt"/>
+		<result column="com09_rax_rt_apy_pos_typ_cd" 	property="raxApyPosTypeCode"/>
+		<result column="com09_use_yn"       			property="useYn"/>
+		<result column="com09_ins_usr_no" 				property="insUsrNo"/>
+		<result column="com09_ins_dt"      				property="insDate"/>
+		<result column="com09_upd_usr_no " 				property="updUsrNo"/>
+		<result column="com09_upd_dt"      				property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com09_tax_rt 
+		where	com09_tax_rt_id = #{taxRtId}
+	</select>
+
+</mapper>
