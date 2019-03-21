@@ -25,7 +25,6 @@
 		select 	*
 		from 	com01_com_cd
 		where   UPPER(com01_com_nm||com01_com_cd) like UPPER(#{searText}) 
-	
 	</select>
 
 </mapper>

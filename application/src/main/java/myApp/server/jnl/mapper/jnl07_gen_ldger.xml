@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="jnl07_gen_ldger">
+
+	<resultMap 	id="mapper" type="myApp.client.vi.jnl.model.jnl07_GenLdgerModel" >
+		<id     column="jnl07_gen_ldger_id"  	    property="genIdgerId"/>
+		<result column="jnl07_cmp_cd"        		property="cmpCode"/>
+		<result column="jnl07_evl_dt"      			property="evlDate"/>
+		<result column="jnl07_fnd_cd"     			property="fndCode"/>
+		<result column="jnl07_acnt_cd"   			property="acntCode"/>
+		<result column="jnl07_evl_clo_typ_cd"   	property="evlCloTypeCode"/>
+		<result column="jnl07_dr_tdy_bal"    		property="drTdyBal"/>
+		<result column="jnl07_dr_tdy_diff"    		property="drTdydiff"/>
+		<result column="jnl07_dr_pdy_bal" 			property="drPdyBal"/>
+		<result column="jnl07_cr_tdy_bal"  		    property="crTdyBal"/>
+		<result column="jnl07_cr_tdy_diff"       	property="crTdyDiff"/>
+		<result column="jnl07_cr_pdy_bal"       	property="crPdyBal"/>
+		<result column="jnl07_ins_usr_no"       	property="insUsrNo"/>
+		<result column="jnl07_ins_dt"        		property="insDate"/>
+		<result column="jnl07_upd_usr_no"        	property="updUsrNo"/>
+		<result column="jnl07_upd_dt"        		property="updDate"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	jnl07_gen_ldger 
+		where	jnl07_gen_ldger_id = #{genIdgerId}
+	</select>
+
+</mapper>

@@ -13,7 +13,7 @@
 		<result column="com03_rmk"   		  	 property="rmk"/>
 		<result column="com03_ins_usr_no"        property="insUsrNo"/>
 		<result column="com03_ins_dt"   	     property="insDate"/>
-		<result column="com03_upd_usr_no"    	 property="updusrNO"/>
+		<result column="com03_upd_usr_no"    	 property="updusrNo"/>
 		<result column="com03_upd_dt"         	 property="updDate"/>
 	</resultMap>
 
