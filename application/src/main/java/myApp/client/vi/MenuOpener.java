@@ -48,6 +48,10 @@ public class MenuOpener {
 		if ("Com10_TaxSys.class".equals(className)) {
 			return (Widget) GWT.create(myApp.client.vi.com.Com10_TaxSys.class);
 		}
+		
+		if ("Itm01_Tab_Itm.class".equals(className)) {
+			return (Widget) GWT.create(myApp.client.vi.itm.Itm01_Tab_Itm.class);
+		}
 
 		return null;
 	}

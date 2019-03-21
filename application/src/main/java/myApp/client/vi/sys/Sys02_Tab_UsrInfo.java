@@ -24,7 +24,9 @@ import myApp.client.service.GridInsertRow;
 import myApp.client.service.GridRetrieveData;
 import myApp.client.service.GridUpdate;
 import myApp.client.utils.InterfaceCallbackResult;
+import myApp.client.utils.InterfaceCallbackResult2;
 import myApp.client.vi.LoginUser;
+import myApp.client.vi.com.Com00_DptLookupField;
 import myApp.client.vi.sys.model.Sys02_UsrInfoModel;
 import myApp.client.vi.sys.model.Sys02_UsrInfoModelProperties;
 import myApp.client.vi.sys.model.Sys08_DptInfoModel;
@@ -33,19 +35,25 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 
 	private  Sys02_UsrInfoModelProperties properties = GWT.create(Sys02_UsrInfoModelProperties.class);
 	private Grid<Sys02_UsrInfoModel> grid = this.buildGrid();
-	private LookupTriggerField dptName = new LookupTriggerField();
+	private Com00_DptLookupField dptName;
 	private TextField usrName = new TextField();
-	
+
 	public Sys02_Tab_UsrInfo() {
-		
+
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);
-		searchBarBuilder.addLookupTriggerField(dptName, "부서", 300,40);
-		dptName.addTriggerClickHandler(new TriggerClickHandler() {
+		dptName = new Com00_DptLookupField(200, true, new InterfaceCallbackResult2() {
 			@Override
-			public void onTriggerClick(TriggerClickEvent event) {
-			openLookupDptInfo();	
+			public void execute(Object result) {
+			}
+			@Override
+			public void enterKeyDown() {
+				retrieve();
+			}
+			@Override
+			public void onCollapse() {
 			}
 		});
+		searchBarBuilder.getSearchBar().add(dptName);
 		searchBarBuilder.addTextField(usrName, "사원검색", 200, 60, true);
 		searchBarBuilder.addRetrieveButton();
 		searchBarBuilder.addUpdateButton();
@@ -80,7 +88,7 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 			@Override
 			public void execute(String object) {
 				Sys02_UsrInfoModel userInfoModel = grid.getSelectionModel().getSelectedItem();
-				Sys02_Lookup_userPw pwUpd = new Sys02_Lookup_userPw();
+				Sys02_Lookup_UsrPwChg pwUpd = new Sys02_Lookup_UsrPwChg();
 				pwUpd.open(userInfoModel.getTmpPwd(), userInfoModel.getUsrInfoId(), new InterfaceCallbackResult() {
 					@Override
 					public void execute(Object result) {
@@ -107,22 +115,11 @@ public class Sys02_Tab_UsrInfo extends BorderLayoutContainer implements Interfac
 		});		
 	}
 
-	protected void openLookupDptInfo() {
-		Sys08_Lookup_DptInfo lookupDpt = new Sys08_Lookup_DptInfo();
-		lookupDpt.open(new InterfaceCallbackResult() {
-			@Override
-			public void execute(Object result) {
-				Sys08_DptInfoModel data = (Sys08_DptInfoModel) result;
-				dptName.setText(data.getDptName());
-			}
-		});
-	}
-
 	@Override
 	public void retrieve() {
 		GridRetrieveData<Sys02_UsrInfoModel> service = new GridRetrieveData<Sys02_UsrInfoModel>(grid.getStore()); 
 		service.addParam("cmpCode", LoginUser.getCmpCode());
-		service.addParam("dptName", dptName.getText());
+		service.addParam("dptName", dptName.getDptName());
 		service.addParam("usrName",usrName.getText());
 		service.retrieve("sys.Sys02_UsrInfo.selectByUsrName");
 	}

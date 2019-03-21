@@ -5,53 +5,37 @@ import java.util.List;
 
 import myApp.client.utils.GridDataModel;
 
-public class Com03_DtlCdGrpModel implements GridDataModel { 
+public class Com02_DtlCodeModel implements GridDataModel { 
 
-	private Long    dtlCdGrpId ;
-	private String  cmpCode ;
-	private String  grpCode ;
+	private Long    dtlCdId ;
 	private String  comCode ;
-	private String  comDtlCode ;
+	private String  dtlCode ;
 	private String  dtlName ;
+	private String  useYn ;
 	private String  rmk ;
 	private String  insUsrNo ;
 	private Date    insDate ;
 	private String  updUsrNo ;
 	private Date    updDate ;
 
+	private boolean useYnFlag;
 
 	@Override
 	public void setKeyId(Long id) {
-		this.dtlCdGrpId = id;
+		this.dtlCdId = id;
 	}
 
 	@Override
 	public Long getKeyId() {
-		return this.getDtlCdGrpId(); 
+		return this.getDtlCdId(); 
 	}
 
-	public Long getDtlCdGrpId() {
-		return dtlCdGrpId;
+	public Long getDtlCdId() {
+		return dtlCdId;
 	}
 
-	public void setDtlCdGrpId(Long dtlCdGrpId) {
-		this.dtlCdGrpId = dtlCdGrpId;
-	}
-
-	public String getCmpCode() {
-		return cmpCode;
-	}
-
-	public void setCmpCode(String cmpCode) {
-		this.cmpCode = cmpCode;
-	}
-
-	public String getGrpCode() {
-		return grpCode;
-	}
-
-	public void setGrpCode(String grpCode) {
-		this.grpCode = grpCode;
+	public void setDtlCdId(Long dtlCdId) {
+		this.dtlCdId = dtlCdId;
 	}
 
 	public String getComCode() {
@@ -62,12 +46,12 @@ public class Com03_DtlCdGrpModel implements GridDataModel {
 		this.comCode = comCode;
 	}
 
-	public String getComDtlCode() {
-		return comDtlCode;
+	public String getDtlCode() {
+		return dtlCode;
 	}
 
-	public void setComDtlCode(String comDtlCode) {
-		this.comDtlCode = comDtlCode;
+	public void setDtlCode(String dtlCode) {
+		this.dtlCode = dtlCode;
 	}
 
 	public String getDtlName() {
@@ -78,12 +62,37 @@ public class Com03_DtlCdGrpModel implements GridDataModel {
 		this.dtlName = dtlName;
 	}
 
+	public String getUseYn() {
+		return useYn;
+	}
+
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
+	}
+
 	public String getRmk() {
 		return rmk;
 	}
 
 	public void setRmk(String rmk) {
 		this.rmk = rmk;
+	}
+
+	public boolean isUseYnFlag() {
+		if("Y".equals(getUseYn())) {
+			return true;
+		} else {
+			return false;
+		}
+		}
+
+	public void setUseYnFlag(boolean useYnFlag) {
+		if(useYnFlag) {
+			this.useYn = "Y";
+		} else {
+			this.useYn = "N";
+		}
+		
 	}
 
 	public String getInsUsrNo() {
@@ -117,9 +126,6 @@ public class Com03_DtlCdGrpModel implements GridDataModel {
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
-	
-	
-	
 	
 	
 }

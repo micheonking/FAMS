@@ -26,8 +26,6 @@ import myApp.client.service.ServiceResult;
 import myApp.client.utils.InterfaceCallbackResult;
 import myApp.client.utils.SimpleMessage;
 import myApp.client.vi.LoginUser;
-import myApp.client.vi.sys.model.Sys03_MenuModel;
-import myApp.client.vi.sys.model.Sys03_MenuModelProperties;
 import myApp.client.vi.sys.model.Sys08_DptInfoModel;
 import myApp.client.vi.sys.model.Sys08_DptInfoModelProperties;
 
@@ -148,7 +146,7 @@ public class Sys08_Lookup_DptInfo extends Window implements InterfaceServiceCall
 				this.callback.execute(selectModel);
 			}
 			else {
-				new SimpleMessage("선택한 화면이 없습니다."); 
+				new SimpleMessage("선택한 부서가 없습니다."); 
 				return; 
 			}
 		}

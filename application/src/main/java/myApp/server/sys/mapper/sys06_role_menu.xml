@@ -21,4 +21,12 @@
 		where	sys06_role_menu_id = #{roleMenuId}
 	</select>
 
+	<delete id="deleteBycmpCode"  parameterType="String" > 
+		delete
+		  from  sys06_role_menu
+		 where 	sys06_role_id in ( select sys05_role_id
+		                             from sys05_role
+		                            where sys05_cmp_cd = #{cmpCode} )
+	</delete>
+
 </mapper>

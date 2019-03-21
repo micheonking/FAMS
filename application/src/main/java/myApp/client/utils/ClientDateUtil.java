@@ -62,6 +62,11 @@ public class ClientDateUtil {
 		return date;
 	}
 
+	public static String toDate(String format, Date date) {
+		String strDate = DateTimeFormat.getFormat(format).format(date);
+		return strDate;
+	}
+
 	public static Date getToday() {
 		Date date = new Date();
 		String strToDay = DateTimeFormat.getFormat("yyyy-MM-dd").format(date);

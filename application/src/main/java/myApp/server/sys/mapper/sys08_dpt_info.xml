@@ -28,7 +28,12 @@
 		 where 	sys08_cmp_cd = #{cmpCode}
 		   and  sys08_dpt_nm like #{dptName}
 		   and  sys08_use_yn = 'Y'
-		  
 	</select>
+
+	<delete id="deleteBycmpCode"  parameterType="String" > 
+		delete
+		  from  sys08_dpt_info
+		 where 	sys08_cmp_cd = #{cmpCode}
+	</delete>
 
 </mapper>
