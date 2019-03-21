@@ -23,4 +23,6 @@ public interface Com09_TaxRtModelProperties extends PropertyAccess<Com09_TaxRtMo
 	ValueProvider<Com09_TaxRtModel, Date>	insDate() ;
 	ValueProvider<Com09_TaxRtModel, String>	updUsrNo() ;
 	ValueProvider<Com09_TaxRtModel, Date>	updDate() ;
+	
+	ValueProvider<Com09_TaxRtModel,Boolean>	useYnFlag() ;
 }

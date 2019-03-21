@@ -36,7 +36,7 @@ public class Com04_Tab_TrCode extends BorderLayoutContainer implements Interface
 		
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);
 		searchBarBuilder.addTextField(trNameField, "거래코드명 ", 300, 80, true);
-		searchBarBuilder.addComboBox (trOccTypeComboBox, "거래 발생 구분", 200, 100      );
+		searchBarBuilder.addComboBox (trOccTypeComboBox, "거래 발생 구분", 200, 100);
 		trOccTypeComboBox.setValue("전체");
 		searchBarBuilder.addRetrieveButton();
 		searchBarBuilder.addUpdateButton();

@@ -28,17 +28,19 @@ import myApp.client.vi.com.model.Com08_FeeRtModelProperties;
 public class Com08_Tab_FeeRate extends BorderLayoutContainer implements InterfaceGridOperate {
 	
 	private Grid<Com08_FeeRtModel> grid = this.buildGrid();
-	private TextField codeNameField = new TextField();
+	private TextField trCodeNameField = new TextField();
 	private ComboBoxField feeRateCombo = new ComboBoxField("");
 	
 	public Com08_Tab_FeeRate() {
 		
-		LabelToolItem code = new LabelToolItem("수수료율 관리");
-		code.setWidth(60);
-		
+//		LabelToolItem code = new LabelToolItem("수수료율 관리");
+//		code.setWidth(60);
+//		
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);
-		searchBarBuilder.getSearchBar().add(code);
-		searchBarBuilder.addTextField(codeNameField, " ", 300, 60, true);
+		searchBarBuilder.addComboBox(feeRateCombo,"수수료 구분",300,100);
+		feeRateCombo.setValue("전체");
+//		searchBarBuilder.getSearchBar().add(code);
+		searchBarBuilder.addTextField(trCodeNameField, "매매처 ", 300, 60, true);
 		searchBarBuilder.addRetrieveButton();
 		searchBarBuilder.addUpdateButton();
 		searchBarBuilder.addInsertButton();
@@ -56,10 +58,10 @@ public class Com08_Tab_FeeRate extends BorderLayoutContainer implements Interfac
 		GridBuilder<Com08_FeeRtModel> gridBuilder = new GridBuilder<Com08_FeeRtModel>(properties.keyId());  
 		gridBuilder.setChecked(SelectionMode.SINGLE);
 		gridBuilder.addText(properties.cmpCode(), 150, "회사코드", new TextField());
-		gridBuilder.addText(properties.feeCode(), 150, "수수료코드", new TextField());
 		gridBuilder.addText(properties.trCoCode(), 150, "매매처코드", new TextField());
 		gridBuilder.addText(properties.sttAmt(), 200, "시작금액", new TextField());
 		gridBuilder.addText(properties.endAmt(), 200, "종료금액", new TextField());
+		gridBuilder.addText(properties.feeCode(), 150, "수수료코드", new TextField());
 		gridBuilder.addText(properties.feeRt(), 200, "수수료율", new TextField());
 		gridBuilder.addText(properties.addAmt(), 200, "가산금액", new TextField());
 		gridBuilder.addBoolean(properties.useYnFlag(), 70, "말소여부");
@@ -69,7 +71,7 @@ public class Com08_Tab_FeeRate extends BorderLayoutContainer implements Interfac
 	@Override
 	public void retrieve() {
 		GridRetrieveData<Com08_FeeRtModel> service = new GridRetrieveData<Com08_FeeRtModel>(grid.getStore()); 
-		service.addParam("searText", codeNameField.getText());
+		service.addParam("searText", trCodeNameField.getText());
 		service.retrieve("com.Com08_FeeRate.selectBySearText");
 	}
 
