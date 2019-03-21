@@ -56,9 +56,17 @@ public class Sys04_CmpMenu {
 
 		Long cnt = sqlSession.selectOne("sys04_cmp_menu.countCmpMenu", cmpCode);
 		if(cnt>0) {
-			result.setStatus(-1);
-			result.setMessage("이미 메뉴가 존재합니다.");
-			return;
+//			result.setStatus(-1);
+//			result.setMessage("이미 메뉴가 존재합니다.");
+//			return;
+			
+			// 메뉴초기화
+			sqlSession.delete("sys02_usr_info.deleteBycmpCode" , cmpCode);	// MASTER USER 삭제 (sys02_usr_info)
+			sqlSession.delete("sys08_dpt_info.deleteBycmpCode" , cmpCode);	// MASTER 부서정보 삭제 (sys08_dpt_info)
+			sqlSession.delete("sys06_role_menu.deleteBycmpCode", cmpCode);	// 시스템관리자 Role 기본메뉴 삭제 (sys06_role_menu)
+			sqlSession.delete("sys07_usr_role.deleteBycmpCode" , cmpCode);	// 시스템관리자 Role MASTER USER 삭제 (sys07_usr_role)
+			sqlSession.delete("sys05_role.deleteBycmpCode"     , cmpCode);	// 시스템관리자 Role 삭제 (sys05_role)
+			sqlSession.delete("sys04_cmp_menu.deleteBycmpCode" , cmpCode);	// 메뉴 삭제 (sys04_cmp_menu)
 		}
 
 		//-----------------------------------------------------------

@@ -49,4 +49,10 @@
 		 order by sys05_seq 
 	</select>
 
+	<delete id="deleteBycmpCode"  parameterType="String" > 
+		delete
+		  from  sys05_role
+		 where 	sys05_cmp_cd = #{cmpCode}
+	</delete>
+	
 </mapper>

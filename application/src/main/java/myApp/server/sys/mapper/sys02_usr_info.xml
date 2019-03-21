@@ -84,6 +84,11 @@
 		   set 	sys02_tmp_pwd = #{tmpPwd}
 		 where 	sys02_usr_info_id = #{usrInfoId}
 	</update>
-	
+
+	<delete id="deleteBycmpCode"  parameterType="String" > 
+		delete
+		  from  sys02_usr_info
+		 where 	sys02_cmp_cd = #{cmpCode}
+	</delete>
 
 </mapper>

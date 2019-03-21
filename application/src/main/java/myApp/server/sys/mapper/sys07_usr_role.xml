@@ -21,4 +21,10 @@
 		 where 	sys07_usr_role_id = #{usrRoleId}
 	</select>
 
+	<delete id="deleteBycmpCode"  parameterType="String" > 
+		delete
+		  from  sys07_usr_role
+		 where 	sys07_cmp_cd = #{cmpCode}
+	</delete>
+
 </mapper>

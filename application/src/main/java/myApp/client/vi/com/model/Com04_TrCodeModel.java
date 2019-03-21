@@ -151,6 +151,5 @@ public class Com04_TrCodeModel implements GridDataModel {
 			this.accSndYn = "N";
 		}
 	}
-
 	
 }

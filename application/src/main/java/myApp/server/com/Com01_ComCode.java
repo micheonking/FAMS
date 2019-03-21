@@ -10,7 +10,7 @@ import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.GridDataModel;
 import myApp.client.vi.LoginUser;
-import myApp.client.vi.com.model.Com01_ComCdModel;
+import myApp.client.vi.com.model.Com01_ComCodeModel;
 import myApp.server.utils.db.UpdateDataModel;
 
 public class Com01_ComCode {
@@ -30,12 +30,12 @@ public class Com01_ComCode {
 	
 	public void update(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 		String usrNo = request.getStringParam("usrNo");
-		UpdateDataModel<Com01_ComCdModel> updateModel = new UpdateDataModel<Com01_ComCdModel>(); 
+		UpdateDataModel<Com01_ComCodeModel> updateModel = new UpdateDataModel<Com01_ComCodeModel>(); 
 		updateModel.updateModel(sqlSession, request.getList(), "com01_com_cd", usrNo, result);
 	}
 
 	public void delete(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
-		UpdateDataModel<Com01_ComCdModel> updateModel = new UpdateDataModel<Com01_ComCdModel>(); 
+		UpdateDataModel<Com01_ComCodeModel> updateModel = new UpdateDataModel<Com01_ComCodeModel>(); 
 		updateModel.deleteModel(sqlSession, request.getList(), "com01_com_cd", result);
 	}
 }

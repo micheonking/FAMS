@@ -66,6 +66,7 @@
 		select  *
 		  from  sys03_menu 
 	         ,  sys04_cmp_menu
+	         ,  sys05_role
 		     ,  sys06_role_menu
 	         ,  sys07_usr_role 
 		 where  sys04_menu_id = sys03_menu_id(+)
@@ -74,7 +75,9 @@
 		   and  sys04_prnt_id = #{prntId}
 		   and  sys06_cmp_menu_id = sys04_cmp_menu_id
 		   and  sys06_use_yn = 'Y'
-		   and  sys07_cmp_cd = sys04_cmp_cd 
+		   and  sys07_cmp_cd = sys04_cmp_cd
+		   and  sys07_cmp_cd = sys05_cmp_cd
+		   and  sys07_role_id = sys05_role_id
 		   and  sys07_role_id = sys06_role_id
 		   and  sys07_usr_no = #{usrNo}
 		 order by sys04_seq
@@ -87,33 +90,26 @@
 		     ,  case when sys06_role_menu_id is null then 'N' else 'Y' end sys04_role_menu_yn
 		  from 	sys03_menu 
 		     ,  sys04_cmp_menu
-		     ,  sys06_role_menu
+		     ,  ( select sys06_role_menu.*
+		            from sys05_role
+		               , sys06_role_menu
+		           where sys05_role_id = sys06_role_id
+		             and sys05_cmp_cd = #{cmpCode}
+		             and sys06_use_yn = 'Y'
+		        ) sys06_role_menu
 		 where  sys04_menu_id = sys03_menu_id(+)
 		   and  sys04_use_yn = 'Y'
 		   and  sys04_cmp_cd = #{cmpCode}
 		   and  sys04_prnt_id = #{prntId}
 		   and  sys04_cmp_menu_id = sys06_cmp_menu_id(+)
-		   and  sys06_use_yn(+) = 'Y'
 		   and  sys06_role_id(+) = #{roleId}
 		 order by sys04_seq
 	</select>
 
-	<insert id="insertInitMenu" parameterType="String" >
-		insert
-		  into sys04_cmp_menu
-		select sys03_menu_id
-		     , #{cmpCode}
-		     , sys03_menu_id
-		     , sys03_menu_nm
-		     , sys03_prnt_id
-		     , sys03_seq
-		     , 'Y'
-		     , null
-		     , 'ADMIN'
-		     , SYSDATE
-		     , null
-		     , null
-		  from sys03_menu 
-	</insert>
-
+	<delete id="deleteBycmpCode"  parameterType="String" > 
+		delete
+		  from  sys04_cmp_menu
+		 where 	sys04_cmp_cd = #{cmpCode}
+	</delete>
+	
 </mapper>

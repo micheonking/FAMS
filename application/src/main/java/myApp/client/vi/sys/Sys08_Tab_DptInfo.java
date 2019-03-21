@@ -5,7 +5,10 @@ import java.util.List;
 import com.google.gwt.core.client.GWT;
 import com.sencha.gxt.core.client.Style.SelectionMode;
 import com.sencha.gxt.core.client.util.Margins;
+import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 
@@ -17,6 +20,7 @@ import myApp.client.service.GridInsertRow;
 import myApp.client.service.GridRetrieveData;
 import myApp.client.service.GridUpdate;
 import myApp.client.vi.LoginUser;
+import myApp.client.vi.com.model.Com02_DtlCodeModel;
 import myApp.client.vi.sys.model.Sys08_DptInfoModel;
 import myApp.client.vi.sys.model.Sys08_DptInfoModelProperties;
 
@@ -49,10 +53,6 @@ public class Sys08_Tab_DptInfo extends BorderLayoutContainer implements Interfac
 		gridBuilder.addText(properties.dptName(), 250, "부서명", new TextField());
 		gridBuilder.addBoolean(properties.useYnFlag(), 50, "사용");
 		gridBuilder.addText(properties.rmk(), 300, "비고", new TextField());
-		gridBuilder.addText(properties.insUsrNo(), 300, "생성자사번", new TextField());
-		gridBuilder.addDate(properties.insDate(), 300, "생성일자", new TextField());
-		gridBuilder.addText(properties.updUsrNo(), 300, "수정자 사번", new TextField());
-		gridBuilder.addDate(properties.updDate(), 300, "수정일자", new TextField());
 		return gridBuilder.getGrid(); 
 	}
 
@@ -87,8 +87,22 @@ public class Sys08_Tab_DptInfo extends BorderLayoutContainer implements Interfac
 
 	@Override
 	public void deleteRow(){
-		GridDeleteData<Sys08_DptInfoModel> service = new GridDeleteData<Sys08_DptInfoModel>();
-		List<Sys08_DptInfoModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
-		service.delete(grid.getStore(), checkedList, "sys.Sys08_DptInfo.delete");
+		final ConfirmMessageBox msgBox = new ConfirmMessageBox("확인", "삭제하시겠습니까?");
+		msgBox.addDialogHideHandler(new DialogHideHandler() {
+			@Override
+			public void onDialogHide(DialogHideEvent event) {
+				switch (event.getHideButton()) {
+				case YES:
+					GridDeleteData<Sys08_DptInfoModel> service = new GridDeleteData<Sys08_DptInfoModel>();
+					List<Sys08_DptInfoModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
+					service.delete(grid.getStore(), checkedList, "sys.Sys08_DptInfo.delete");
+				case NO:
+				default:
+					break;
+				}
+			}
+		});
+		msgBox.setWidth(300);
+		msgBox.show();
 	}
 }

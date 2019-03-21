@@ -89,6 +89,8 @@
 	<mapper resource="myApp/server/jnl/mapper/jnl05_tmp_jnl.xml"/>
 <!-- 	<mapper resource="myApp/server/jnl/mapper/jnl06_jnl.xml"/> -->
 <!-- 	<mapper resource="myApp/server/jnl/mapper/jnl07_gen_ldger.xml"/> -->
+
+	<mapper resource="myApp/server/itm/mapper/itm01_itm.xml"/>
 	
 <!-- 	<mapper resource="myApp/server/sys/mapper/sys03_company_menu.xml"/> -->
 <!-- 	<mapper resource="myApp/server/sys/mapper/sys04_role.xml"/> -->
