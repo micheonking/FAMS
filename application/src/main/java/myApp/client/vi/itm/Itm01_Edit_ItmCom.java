@@ -1,8 +1,12 @@
 package myApp.client.vi.itm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.button.ButtonBar;
@@ -10,20 +14,27 @@ import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData;
+import com.sencha.gxt.widget.core.client.event.CollapseEvent;
+import com.sencha.gxt.widget.core.client.event.CollapseEvent.CollapseHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.LongField;
 import com.sencha.gxt.widget.core.client.form.TextField;
+import com.sencha.gxt.widget.core.client.grid.Grid;
+import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
 
 import myApp.client.field.LookupTriggerField;
 import myApp.client.field.MyDateField;
 import myApp.client.grid.ComboBoxField;
+import myApp.client.grid.CommonComboBoxField;
 import myApp.client.resource.ResourceIcon;
 import myApp.client.service.GridRetrieveData;
+import myApp.client.service.GridUpdate;
 import myApp.client.service.InterfaceCallback;
 import myApp.client.service.InterfaceServiceCall;
 import myApp.client.service.ServiceCall;
@@ -31,18 +42,18 @@ import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.InterfaceCallbackResult;
 import myApp.client.utils.InterfaceCallbackResult2;
+import myApp.client.utils.SimpleMessage;
 import myApp.client.vi.LoginUser;
 import myApp.client.vi.com.Com00_ItmLookupComboBox;
 import myApp.client.vi.itm.model.Itm01_ItmModel;
 
-public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmModel>, InterfaceServiceCall {
+public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmModel> {
 
 	Itm01_ItmModel itmModel = new Itm01_ItmModel();
 	interface EditDriver extends SimpleBeanEditorDriver<Itm01_ItmModel, Itm01_Edit_ItmCom> {
 	}
 	EditDriver editDriver = GWT.create(EditDriver.class);
 
-	private String			actionName;
 	private InterfaceCallbackResult callbackResult;
 
 	TextField           itmCode                 = new TextField();
@@ -63,43 +74,117 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 	MyDateField         matDateConv             = new MyDateField();
 	MyDateField         listDateConv            = new MyDateField();
 	MyDateField         newRegDateConv          = new MyDateField();
-	ComboBoxField       lclassCode              = new ComboBoxField("LCLASS_CD",null," ");
-	ComboBoxField       mclassCode              = new ComboBoxField("MCLASS_CD",null," ");
-	ComboBoxField       listTypeCode            = new ComboBoxField("LIST_TYP_CD",null," ");
-	ComboBoxField       ntnCode                 = new ComboBoxField("NTN_CD",null," ");
-	ComboBoxField       areaCode                = new ComboBoxField("AREA_CD",null," ");
-	ComboBoxField       krxTypeCode             = new ComboBoxField("KRX_TYP_CD",null," ");
-	ComboBoxField       taxTypeCode             = new ComboBoxField("TAX_TYP_CD",null," ");
-	ComboBoxField       grtTypeCode             = new ComboBoxField("GRT_TYP_CD",null," ");
-	ComboBoxField       whTypeCode              = new ComboBoxField("WH_TYP_CD",null," ");
-	ComboBoxField       abroWhTypeCode          = new ComboBoxField("ABRO_WH_TYP_CD",null," ");
-	ComboBoxField       payCurCode              = new ComboBoxField("CUR_CD",null," ");
-	ComboBoxField       rcvCurCode              = new ComboBoxField("CUR_CD",null," ");
-	ComboBoxField       evlCurCode              = new ComboBoxField("CUR_CD",null," ");
-	ComboBoxField       pubPrvTypeCode          = new ComboBoxField("PUB_PRV_TYP_CD",null," ");
-	ComboBoxField       dataRcvYn               = new ComboBoxField("YN",null," ");
-	ComboBoxField       dataRcvPayUntCode       = new ComboBoxField("DATA_RCV_APY_UNT_CD",null," ");
-	ComboBoxField       dataRcvCo               = new ComboBoxField("DATA_RCV_CO",null," ");
-	ComboBoxField       dealUnt                 = new ComboBoxField("DEAL_UNT",null," ");
-	ComboBoxField       evlTypeCode             = new ComboBoxField("EVL_TYP_CD",null," ");
-	ComboBoxField       rdmPlCalcTypeCode       = new ComboBoxField("RDM_PL_CALC_TYP_CD",null," ");
-	ComboBoxField       mktPrcApyFrmlCode       = new ComboBoxField("MKT_PRC_APY_FRML_CD",null," ");
-	ComboBoxField       taxPosTypeCode          = new ComboBoxField("TAX_POS_TYP_CD",null," ");
-	ComboBoxField       rcvbIntCalcFrmlCode     = new ComboBoxField("RCVB_INT_CALC_FRML_CD",null," ");
-	ComboBoxField       astMngFrmlCode          = new ComboBoxField("AST_MNG_FRML_CD",null," ");
-	ComboBoxField       evlFrmlCode             = new ComboBoxField("EVL_FRML_CD",null," ");
-//	ComboBoxField       dtlClassCode            = new ComboBoxField();
 	LookupTriggerField  issCorpCode             = new LookupTriggerField();
 	LookupTriggerField  orgIssCorpCode          = new LookupTriggerField();
 	LookupTriggerField  mngCoCode               = new LookupTriggerField();
 	LookupTriggerField  grtCorpCode             = new LookupTriggerField();
 
+	TextField lclassCode = new TextField();
+	ComboBoxField lclassName = new ComboBoxField("LCLASS_CD", null, " ", lclassCode);
+	
+	TextField mclassCode = new TextField();
+	CommonComboBoxField mclassName = new CommonComboBoxField("sys.Sys00_Common.selectMClassCode", null, " ", mclassCode);
+	
+	TextField listTypeCode = new TextField();
+	final ComboBoxField listTypeName = new ComboBoxField("LIST_TYP_CD", null, " ", listTypeCode);
+	
+	TextField ntnCode = new TextField();
+	ComboBoxField ntnName = new ComboBoxField("NTN_CD", null, " ", ntnCode);
+
+	TextField areaCode = new TextField();
+	ComboBoxField areaName = new ComboBoxField("AREA_CD", null, " ",areaCode);
+
+	TextField krxTypeCode = new TextField();
+	ComboBoxField krxTypeName = new ComboBoxField("KRX_TYP_CD", null, " ", krxTypeCode);
+
+	TextField taxTypeCode = new TextField();
+	ComboBoxField taxTypeName = new ComboBoxField("TAX_TYP_CD", null, " ", taxTypeCode);
+	
+	TextField grtTypeCode = new TextField();
+	ComboBoxField grtTypeName = new ComboBoxField("GRT_TYP_CD", null, " ", grtTypeCode);
+	
+	TextField whTypeCode = new TextField();
+	ComboBoxField whTypeName = new ComboBoxField("WH_TYP_CD", null, " ", whTypeCode);
+	
+	TextField abroWhTypeCode = new TextField();
+	ComboBoxField abroWhTypeName = new ComboBoxField("ABRO_WH_TYP_CD", null, " ", abroWhTypeCode);
+	
+	TextField pubPrvTypeCode = new TextField();
+	ComboBoxField pubPrvTypeName = new ComboBoxField("PUB_PRV_TYP_CD", null, " ", pubPrvTypeCode);
+
+	ComboBoxField payCurCode = new ComboBoxField("CUR_CD", null, " ");
+	ComboBoxField rcvCurCode = new ComboBoxField("CUR_CD", null, " ");
+	ComboBoxField evlCurCode = new ComboBoxField("CUR_CD", null, " ");
+	ComboBoxField dataRcvYn  = new ComboBoxField("YN"    , null, " ");
+	
+	TextField dataRcvPayUntCode = new TextField();
+	ComboBoxField dataRcvPayUntName = new ComboBoxField("DATA_RCV_APY_UNT_CD", null, " ", dataRcvPayUntCode);
+	
+	TextField dataRcvCo = new TextField();
+	ComboBoxField dataRcvCoName = new ComboBoxField("DATA_RCV_CO", null, " ", dataRcvCo);
+	
+	TextField dealUnt = new TextField();
+	ComboBoxField dealUntName = new ComboBoxField("DEAL_UNT", null, " ", dealUnt);
+	
+	TextField evlTypeCode = new TextField();
+	ComboBoxField evlTypeName = new ComboBoxField("EVL_TYP_CD", null, " ", evlTypeCode);
+	
+	TextField rdmPlCalcTypeCode = new TextField();
+	ComboBoxField rdmPlCalcTypeName = new ComboBoxField("RDM_PL_CALC_TYP_CD", null, " ", rdmPlCalcTypeCode);
+	
+	TextField mktPrcApyFrmlCode = new TextField();
+	ComboBoxField mktPrcApyFrmlName = new ComboBoxField("MKT_PRC_APY_FRML_CD", null, " ", mktPrcApyFrmlCode);
+	
+	TextField taxPosTypeCode = new TextField();
+	ComboBoxField taxPosTypeName = new ComboBoxField("TAX_POS_TYP_CD", null, " ", taxPosTypeCode);
+	
+	TextField rcvbIntCalcFrmlCode = new TextField();
+	ComboBoxField rcvbIntCalcFrmlName = new ComboBoxField("RCVB_INT_CALC_FRML_CD", null, " ", rcvbIntCalcFrmlCode);
+	
+	TextField astMngFrmlCode = new TextField();
+	ComboBoxField astMngFrmlName = new ComboBoxField("AST_MNG_FRML_CD", null, " ", astMngFrmlCode);
+	
+	TextField evlFrmlCode = new TextField();
+	ComboBoxField evlFrmlName = new ComboBoxField("EVL_FRML_CD", null, " ", evlFrmlCode);
+
+	//	ComboBoxField       dtlClassCode            = new ComboBoxField();
+
 	public void open() {
 		this.setHeaderVisible(false);
 		this.setBorders(false);
-		editDriver.initialize(this);
-
+		setInit();
+		setEvent();
 		makeForm();
+//		setReadOnly(true);
+		
+		TextButton updateButton = new TextButton("저장");
+		updateButton.setIcon(ResourceIcon.INSTANCE.save16Button());
+		updateButton.addSelectHandler(new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				update();
+			}
+		});
+		this.addButton(updateButton);
+		this.setButtonAlign(BoxLayoutPack.CENTER);
+	}
+
+	private void setEvent() {
+		lclassName.addCollapseHandler(new CollapseHandler() {
+			@Override
+			public void onCollapse(CollapseEvent event) {
+				resetMClass();
+			}
+		});
+	}
+
+	private void resetMClass() {
+		if(lclassName.getCode() == null) {
+			return ;
+		}
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("lClassCode", lclassName.getCode());
+		mclassName.retrieve("sys.Sys00_Common.selectMClassCode", param);
 	}
 
 	private void makeForm() {
@@ -147,12 +232,12 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row03 = new HorizontalLayoutContainer();
 
 		row03.add(new LabelToolItem("종목대분류"), labelLayout1);
-		row03.add(lclassCode, fieldLayout1);
+		row03.add(lclassName, fieldLayout1);
 
 		row03.add(new LabelToolItem(), termLayout1);
 
 		row03.add(new LabelToolItem("국가코드"), labelLayout2);
-		row03.add(ntnCode, fieldLayout2);
+		row03.add(ntnName, fieldLayout2);
 
 		row03.add(new LabelToolItem(), termLayout2);
 
@@ -165,12 +250,12 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row04 = new HorizontalLayoutContainer();
 
 		row04.add(new LabelToolItem("종목중분류"), labelLayout1);
-		row04.add(mclassCode, fieldLayout1);
+		row04.add(mclassName, fieldLayout1);
 
 		row04.add(new LabelToolItem(), termLayout1);
 
 		row04.add(new LabelToolItem("지역코드"), labelLayout2);
-		row04.add(areaCode, fieldLayout2);
+		row04.add(areaName, fieldLayout2);
 
 		row04.add(new LabelToolItem(), termLayout2);
 
@@ -193,7 +278,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		row05.add(new LabelToolItem(), termLayout2);
 
 		row05.add(new LabelToolItem("DATA수신처"), labelLayout3);
-		row05.add(dataRcvCo, fieldLayout3);
+		row05.add(dataRcvCoName, fieldLayout3);
 
 		//------------------------------------------------------
 		// ROW 06
@@ -211,7 +296,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		row06.add(new LabelToolItem(), termLayout2);
 
 		row06.add(new LabelToolItem("DATA수신적용단위"), labelLayout3);
-		row06.add(dataRcvPayUntCode, fieldLayout3);
+		row06.add(dataRcvPayUntName, fieldLayout3);
 
 		//------------------------------------------------------
 		// ROW 07
@@ -219,7 +304,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row07 = new HorizontalLayoutContainer();
 
 		row07.add(new LabelToolItem("상장구분"), labelLayout1);
-		row07.add(listTypeCode, fieldLayout1);
+		row07.add(listTypeName, fieldLayout1);
 
 		row07.add(new LabelToolItem(), termLayout1);
 
@@ -229,7 +314,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		row07.add(new LabelToolItem(), termLayout2);
 
 		row07.add(new LabelToolItem("시세적용방식"), labelLayout3);
-		row07.add(mktPrcApyFrmlCode, fieldLayout3);
+		row07.add(mktPrcApyFrmlName, fieldLayout3);
 
 		//------------------------------------------------------
 		// ROW 08
@@ -247,7 +332,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		row08.add(new LabelToolItem(), termLayout2);
 
 		row08.add(new LabelToolItem("평가구분"), labelLayout3);
-		row08.add(evlTypeCode, fieldLayout3);
+		row08.add(evlTypeName, fieldLayout3);
 		
 		//------------------------------------------------------
 		// ROW 09
@@ -260,12 +345,12 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		row09.add(new LabelToolItem(), termLayout1);
 
 		row09.add(new LabelToolItem("과세구분"), labelLayout2);
-		row09.add(taxTypeCode, fieldLayout2);
+		row09.add(taxTypeName, fieldLayout2);
 
 		row09.add(new LabelToolItem(), termLayout2);
 
 		row09.add(new LabelToolItem("장부가평가방식"), labelLayout3);
-		row09.add(evlFrmlCode, fieldLayout3);
+		row09.add(evlFrmlName, fieldLayout3);
 		
 		//------------------------------------------------------
 		// ROW 10
@@ -273,17 +358,18 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row10 = new HorizontalLayoutContainer();
 
 		row10.add(new LabelToolItem("액면"), labelLayout1);
+		par.setFormat(NumberFormat.getFormat("#,###"));
 		row10.add(par, fieldLayout1);
 
 		row10.add(new LabelToolItem(), termLayout1);
 
 		row10.add(new LabelToolItem("과세시점구분"), labelLayout2);
-		row10.add(taxPosTypeCode, fieldLayout2);
+		row10.add(taxPosTypeName, fieldLayout2);
 
 		row10.add(new LabelToolItem(), termLayout2);
 
 		row10.add(new LabelToolItem("상환손익계산구분"), labelLayout3);
-		row10.add(rdmPlCalcTypeCode, fieldLayout3);
+		row10.add(rdmPlCalcTypeName, fieldLayout3);
 		
 		//------------------------------------------------------
 		// ROW 11
@@ -291,17 +377,17 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row11 = new HorizontalLayoutContainer();
 
 		row11.add(new LabelToolItem("공모/사모"), labelLayout1);
-		row11.add(pubPrvTypeCode, fieldLayout1);
+		row11.add(pubPrvTypeName, fieldLayout1);
 
 		row11.add(new LabelToolItem(), termLayout1);
 
 		row11.add(new LabelToolItem("원천징수구분"), labelLayout2);
-		row11.add(whTypeCode, fieldLayout2);
+		row11.add(whTypeName, fieldLayout2);
 
 		row11.add(new LabelToolItem(), termLayout2);
 
 		row11.add(new LabelToolItem("미수이자계산방식"), labelLayout3);
-		row11.add(rcvbIntCalcFrmlCode, fieldLayout3);
+		row11.add(rcvbIntCalcFrmlName, fieldLayout3);
 		
 		//------------------------------------------------------
 		// ROW 12
@@ -309,17 +395,17 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row12 = new HorizontalLayoutContainer();
 
 		row12.add(new LabelToolItem("거래소구분"), labelLayout1);
-		row12.add(krxTypeCode, fieldLayout1);
+		row12.add(krxTypeName, fieldLayout1);
 
 		row12.add(new LabelToolItem(), termLayout1);
 
 		row12.add(new LabelToolItem("해외원천징수구분"), labelLayout2);
-		row12.add(abroWhTypeCode, fieldLayout2);
+		row12.add(abroWhTypeName, fieldLayout2);
 
 		row12.add(new LabelToolItem(), termLayout2);
 
 		row12.add(new LabelToolItem("원장관리방식"), labelLayout3);
-		row12.add(astMngFrmlCode, fieldLayout3);
+		row12.add(astMngFrmlName, fieldLayout3);
 		
 		//------------------------------------------------------
 		// ROW 13
@@ -327,7 +413,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		HorizontalLayoutContainer row13 = new HorizontalLayoutContainer();
 
 		row13.add(new LabelToolItem("매매단위"), labelLayout1);
-		row13.add(dealUnt, fieldLayout1);
+		row13.add(dealUntName, fieldLayout1);
 
 		//------------------------------------------------------
 		// ROW 14
@@ -340,7 +426,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		row14.add(new LabelToolItem(), termLayout1);
 
 		row14.add(new LabelToolItem("보증구분"), labelLayout2);
-		row14.add(grtTypeCode, fieldLayout2);
+		row14.add(grtTypeName, fieldLayout2);
 
 		row14.add(new LabelToolItem(), termLayout2);
 
@@ -364,6 +450,8 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 
 		row15.add(new LabelToolItem("원발행기관"), labelLayout3);
 		row15.add(orgIssCorpCode, fieldLayout3);
+
+		row15.add(lclassCode);
 		
 		VerticalLayoutContainer vlc = new VerticalLayoutContainer();
 		vlc.add(row01, new VerticalLayoutData(1, 30, new Margins(20,0,0,20)));
@@ -383,24 +471,137 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		vlc.add(row15, new VerticalLayoutData(1, 30, new Margins(35,0,0,20)));
 
 		this.add(vlc);
+		this.editDriver.edit(itmModel);
 	}
 
 	public void retrieve(String itmCode) {
-		actionName = "retrieve";
 		ServiceRequest request = new ServiceRequest("itm.Itm01_Itm.selectByItmCode");
 		request.putStringParam("cmpCode", LoginUser.getCmpCode());
 		request.putStringParam("itmCode", itmCode);
-		
 		ServiceCall service = new ServiceCall();
-		service.execute(request, this);
+		service.execute(request, new InterfaceServiceCall() {
+			@Override
+			public void getServiceResult(ServiceResult result) {
+				itmModel = (Itm01_ItmModel)result.getResult(0);
+				editDriver.edit(itmModel);
+			}
+		});
 	}
 
-	@Override
-	public void getServiceResult(ServiceResult result) {
-		if("retrieve".equals(this.actionName)) {
-			itmModel = (Itm01_ItmModel)result.getResult(0);
-			editDriver.edit(itmModel);
+	private boolean preUpdate(Itm01_ItmModel itmModel) {
+
+		//필수입력값Check
+		if(nullChk(itmModel.getItmCode())) {
+			new SimpleMessage("확인", "종목코드는 필수입력 항목입니다.");
+			return false;
 		}
+		
+		//종목명(약명)
+		if(nullChk(itmModel.getItmAbbr())) {
+			new SimpleMessage("확인", "종목명(약명)은 필수입력 항목입니다.");
+			return false;
+		}
+
+		//종목명(풀명)
+		if(nullChk(itmModel.getItmName())) {
+			new SimpleMessage("확인", "종목명(풀명)은 필수입력 항목입니다.");
+			return false;
+		}
+
+		//종목대분류
+		if(nullChk(itmModel.getLclassCode())) {
+			new SimpleMessage("확인", "종목대분류는 필수입력 항목입니다.");
+			return false;
+		}
+		//종목중분류
+		if(nullChk(itmModel.getMclassCode())) {
+			new SimpleMessage("확인", "종목중분류는 필수입력 항목입니다.");
+			return false;
+		}
+
+		return true;
+	}
+	
+	private boolean nullChk(String chk) {
+		if((chk == null)||("".equals(chk.replaceAll(" ", "")))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	protected void update() {
+		this.itmModel = editDriver.flush();
+		if(preUpdate(this.itmModel)) {
+			ServiceRequest request = new ServiceRequest("itm.Itm01_Itm.rowUpdate");
+			request.putModelParam("itmModel", this.itmModel);
+			request.putStringParam("usrNo", LoginUser.getUsrNo());
+			ServiceCall service = new ServiceCall();
+			service.execute(request, new InterfaceServiceCall() {
+				@Override
+				public void getServiceResult(ServiceResult result) {
+					ServiceResult serviceResult = (ServiceResult)result;
+					if(serviceResult.getStatus() > -1) {
+						new SimpleMessage("확인", serviceResult.getMessage(), 600);
+						return;
+					}
+				}
+			});
+		}
+	}
+
+	private void setReadOnly(boolean flag) {
+		itmCode.setReadOnly(flag);
+		infoSttDate.setReadOnly(flag);
+		infoEndDate.setReadOnly(flag);
+		itmName.setReadOnly(flag);
+		itmAbbr.setReadOnly(flag);
+		itmEName.setReadOnly(flag);
+		itmEAbbr.setReadOnly(flag);
+		isin.setReadOnly(flag);
+		itmShtCode.setReadOnly(flag);
+		cusip.setReadOnly(flag);
+		sedol.setReadOnly(flag);
+		dataRcvCode.setReadOnly(flag);
+		cloMonth.setReadOnly(flag);
+		par.setReadOnly(flag);
+		issDateConv.setReadOnly(flag);
+		matDateConv.setReadOnly(flag);
+		listDateConv.setReadOnly(flag);
+		newRegDateConv.setReadOnly(flag);
+		issCorpCode.setReadOnly(flag);
+		orgIssCorpCode.setReadOnly(flag);
+		mngCoCode.setReadOnly(flag);
+		grtCorpCode.setReadOnly(flag);
+		lclassName.setReadOnly(flag);
+		mclassName.setReadOnly(flag);
+		listTypeName.setReadOnly(flag);
+		ntnName.setReadOnly(flag);
+		areaName.setReadOnly(flag);
+		krxTypeName.setReadOnly(flag);
+		taxTypeName.setReadOnly(flag);
+		grtTypeName.setReadOnly(flag);
+		whTypeName.setReadOnly(flag);
+		abroWhTypeName.setReadOnly(flag);
+		pubPrvTypeName.setReadOnly(flag);
+		payCurCode.setReadOnly(flag);
+		rcvCurCode.setReadOnly(flag);
+		evlCurCode.setReadOnly(flag);
+		dataRcvYn.setReadOnly(flag);
+		dataRcvPayUntName.setReadOnly(flag);
+		dataRcvCoName.setReadOnly(flag);
+		dealUntName.setReadOnly(flag);
+		evlTypeName.setReadOnly(flag);
+		rdmPlCalcTypeName.setReadOnly(flag);
+		mktPrcApyFrmlName.setReadOnly(flag);
+		taxPosTypeName.setReadOnly(flag);
+		rcvbIntCalcFrmlName.setReadOnly(flag);
+		astMngFrmlName.setReadOnly(flag);
+		evlFrmlName.setReadOnly(flag);
+	}
+	
+	public void setInit() {
+		editDriver.initialize(this);
 	}
 
 }

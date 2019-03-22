@@ -6,6 +6,7 @@ import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
+import com.sencha.gxt.widget.core.client.info.Info;
 
 import myApp.client.resource.ResourceIcon;
 import myApp.client.utils.InterfaceCallbackResult2;
@@ -33,6 +34,19 @@ public class Itm01_Tab_Itm extends BorderLayoutContainer {
 			}
 			@Override
 			public void onCollapse() {
+				itmComPanel.setInit();
+				if("110".equals(itmLookup.getPrdTypCode())) {
+					Info.display("주식","");
+				}
+				else if("120".equals(itmLookup.getPrdTypCode())) {
+					Info.display("수익증권","");
+				}
+				else if("130".equals(itmLookup.getPrdTypCode())) {
+					Info.display("채권","");
+				}
+				else if("140".equals(itmLookup.getPrdTypCode())) {
+					Info.display("단기자금","");
+				}
 			}
 		});
 		searchBar.add(itmLookup);
@@ -57,7 +71,6 @@ public class Itm01_Tab_Itm extends BorderLayoutContainer {
 		itmComPanel = new Itm01_Edit_ItmCom();
 		itmComPanel.open();
 		this.setCenterWidget(itmComPanel, centerLayoutData);
-
 	}
 
 	protected void retrieve() {

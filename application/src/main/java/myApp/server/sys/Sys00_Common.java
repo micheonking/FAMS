@@ -15,4 +15,9 @@ public class Sys00_Common {
 		List<GridDataModel> list = sqlSession.selectList(sqlId) ;
 		result.setRetrieveResult(1, sqlId, list);
 	}
+
+	public void selectMClassCode(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
+		List<GridDataModel> list = sqlSession.selectList("sys00_common.selectMClassCode", request.getParam());
+		result.setRetrieveResult(1, "select ok", list);
+	}
 }

@@ -1,5 +1,7 @@
 package myApp.server.itm;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +10,7 @@ import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.GridDataModel;
 import myApp.client.vi.itm.model.Itm01_ItmModel;
+import myApp.client.vi.sys.model.Sys02_UsrInfoModel;
 import myApp.server.utils.db.UpdateDataModel;
 
 public class Itm01_Itm {
@@ -51,9 +54,25 @@ public class Itm01_Itm {
 		result.setRetrieveResult(list.size(), "select ok", list);
 	}
 
+	public void rowUpdate(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
+		
+		Itm01_ItmModel itmModel = (Itm01_ItmModel)request.getModelParam("itmModel");
+		String usrNo = request.getStringParam("usrNo");
+
+		System.out.println("itm01_itm.java =============");
+		System.out.println("itm01_itm.java ============= keyId   : " + itmModel.getItmId());
+		System.out.println("itm01_itm.java ============= itmCode : " + itmModel.getItmCode());
+
+		List<GridDataModel> list = new ArrayList<GridDataModel>();
+		list.add(itmModel);
+
+		UpdateDataModel<GridDataModel> updateData = new UpdateDataModel<GridDataModel>(); 
+		updateData.updateModel(sqlSession, list, "itm01_itm", usrNo, result);
+	}
+
 	public void update(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 		String usrNo = request.getStringParam("usrNo");
-		UpdateDataModel<Itm01_ItmModel> updateModel = new UpdateDataModel<Itm01_ItmModel>(); 
+		UpdateDataModel<Itm01_ItmModel> updateModel = new UpdateDataModel<Itm01_ItmModel>();
 		updateModel.updateModel(sqlSession, request.getList(), "itm01_itm", usrNo, result);
 	}
 

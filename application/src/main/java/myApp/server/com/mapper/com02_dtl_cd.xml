@@ -22,7 +22,7 @@
 		 where	com02_dtl_cd_id = #{dtlCdId}
 	</select>
 	
-	<select id="selectByComCode" resultMap="mapper" parameterType="String" > 
+	<select id="selectByComCode" resultMap="mapper" parameterType="String" >
 		select 	*
 		  from 	com02_dtl_cd
 		 where 	com02_com_cd = #{comCode}

@@ -15,4 +15,14 @@
 		 order by 2
 	</select>
 
+	<select id="selectMClassCode" resultMap="mapper" parameterType="HashMap" >
+		select 	com02_dtl_nm as name
+		     ,  com02_dtl_cd as code
+		  from 	com02_dtl_cd
+		 where 	com02_com_cd = 'MCLASS_CD'
+		   and  com02_dtl_cd like #{lClassCode}||'%'
+		   and  com02_use_yn = 'Y'
+		 order by com02_dtl_cd
+	</select>
+
 </mapper>

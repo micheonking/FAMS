@@ -137,7 +137,15 @@ public class Com00_ItmLookupField extends ContentPanel implements InterfaceServi
 	public String getItmName() {
 		return itmName.getText();
 	}
-	
+
+	public void setItmCode(String itmcode) {
+		this.itmCode.setText(itmcode);
+	}
+
+	public void setItmName(String itmName) {
+		this.itmName.setText(itmName);
+	}
+
 	public void setLClassName(String lClassName) {
 		this.lClassName = lClassName;
 	}

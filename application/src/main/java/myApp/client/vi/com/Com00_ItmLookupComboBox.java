@@ -38,6 +38,8 @@ public class Com00_ItmLookupComboBox extends ButtonBar {
 			@Override
 			public void onCollapse(CollapseEvent event) {
 				itmLookupField.setLClassName(itmLClassComboBox.getText());
+				itmLookupField.setItmCode(null);
+				itmLookupField.setItmName(null);
 				if(callBackResult2 != null) {
 					callBackResult2.onCollapse();
 				}

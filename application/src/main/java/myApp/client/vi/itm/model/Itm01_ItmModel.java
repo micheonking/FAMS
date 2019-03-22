@@ -62,6 +62,29 @@ public class Itm01_ItmModel implements GridDataModel {
 	private String  updUsrNo ;
 	private Date    updDate ;
 
+	private String  lclassName ;
+	private String  mclassName ;
+	private String  listTypeName ;
+	private String  ntnName ;
+	private String  areaName ;
+	private String  krxTypeName ;
+	private String  taxTypeName ;
+	private String  grtTypeName ;
+	private String  whTypeName ;
+	private String  abroWhTypeName ;
+	private String  pubPrvTypeName ;
+	private String  dataRcvPayUntName ;
+	private String  dataRcvCoName ;
+	private String  dealUntName ;
+	private String  evlTypeName ;
+	private String  rdmPlCalcTypeName ;
+	private String  mktPrcApyFrmlName ;
+	private String  taxPosTypeName ;
+	private String  rcvbIntCalcFrmlName ;
+	private String  astMngFrmlName ;
+	private String  evlFrmlName ;
+	private String  dtlClassName ;
+	
 	private Date  	infoSttDateConv ;
 	private Date  	infoEndDateConv ;
 	private Date  	issDateConv ;
@@ -528,36 +551,231 @@ public class Itm01_ItmModel implements GridDataModel {
 	}
 
 	public Date getIssDateConv() {
+		if(getIssDate() == null) {
+			return null;
+		}
 		return ClientDateUtil.toDate("yyyyMMdd", getIssDate());
 	}
 
 	public void setIssDateConv(Date issDateConv) {
-		this.issDate = ClientDateUtil.toDate("yyyyMMdd", issDateConv);
+		if(issDateConv != null) {
+			this.issDate = ClientDateUtil.toDate("yyyyMMdd", issDateConv);
+		}
 	}
 
 	public Date getMatDateConv() {
+		if(getMatDate() == null) {
+			return null;
+		}
 		return ClientDateUtil.toDate("yyyyMMdd", getMatDate());
 	}
 
 	public void setMatDateConv(Date matDateConv) {
-		this.matDate = ClientDateUtil.toDate("yyyyMMdd", matDateConv);
+		if(matDateConv != null) {
+			this.matDate = ClientDateUtil.toDate("yyyyMMdd", matDateConv);
+		}
 	}
 
 	public Date getListDateConv() {
+		if(getListDate() == null) {
+			return null;
+		}
 		return ClientDateUtil.toDate("yyyyMMdd", getListDate());
 	}
 
 	public void setListDateConv(Date listDateConv) {
-		this.listDate = ClientDateUtil.toDate("yyyyMMdd", listDateConv);
+		if(listDateConv != null) {
+			this.listDate = ClientDateUtil.toDate("yyyyMMdd", listDateConv);
+		}
 	}
 
 	public Date getNewRegDateConv() {
+		if (getNewRegDate() == null) {
+			return null;
+		}
 		return ClientDateUtil.toDate("yyyyMMdd", getNewRegDate());
 	}
 
 	public void setNewRegDateConv(Date newRegDateConv) {
-		this.newRegDate = ClientDateUtil.toDate("yyyyMMdd", newRegDateConv);
+		if(newRegDateConv != null) {
+			this.newRegDate = ClientDateUtil.toDate("yyyyMMdd", newRegDateConv);
+		}
 	}
-	
+
+	public String getLclassName() {
+		return lclassName;
+	}
+
+	public void setLclassName(String lclassName) {
+		this.lclassName = lclassName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public String getMclassName() {
+		return mclassName;
+	}
+
+	public void setMclassName(String mclassName) {
+		this.mclassName = mclassName;
+	}
+
+	public String getListTypeName() {
+		return listTypeName;
+	}
+
+	public void setListTypeName(String listTypeName) {
+		this.listTypeName = listTypeName;
+	}
+
+	public String getNtnName() {
+		return ntnName;
+	}
+
+	public void setNtnName(String ntnName) {
+		this.ntnName = ntnName;
+	}
+
+	public String getKrxTypeName() {
+		return krxTypeName;
+	}
+
+	public void setKrxTypeName(String krxTypeName) {
+		this.krxTypeName = krxTypeName;
+	}
+
+	public String getTaxTypeName() {
+		return taxTypeName;
+	}
+
+	public void setTaxTypeName(String taxTypeName) {
+		this.taxTypeName = taxTypeName;
+	}
+
+	public String getGrtTypeName() {
+		return grtTypeName;
+	}
+
+	public void setGrtTypeName(String grtTypeName) {
+		this.grtTypeName = grtTypeName;
+	}
+
+	public String getWhTypeName() {
+		return whTypeName;
+	}
+
+	public void setWhTypeName(String whTypeName) {
+		this.whTypeName = whTypeName;
+	}
+
+	public String getAbroWhTypeName() {
+		return abroWhTypeName;
+	}
+
+	public void setAbroWhTypeName(String abroWhTypeName) {
+		this.abroWhTypeName = abroWhTypeName;
+	}
+
+	public String getPubPrvTypeName() {
+		return pubPrvTypeName;
+	}
+
+	public void setPubPrvTypeName(String pubPrvTypeName) {
+		this.pubPrvTypeName = pubPrvTypeName;
+	}
+
+	public String getDataRcvPayUntName() {
+		return dataRcvPayUntName;
+	}
+
+	public void setDataRcvPayUntName(String dataRcvPayUntName) {
+		this.dataRcvPayUntName = dataRcvPayUntName;
+	}
+
+	public String getDataRcvCoName() {
+		return dataRcvCoName;
+	}
+
+	public void setDataRcvCoName(String dataRcvCoName) {
+		this.dataRcvCoName = dataRcvCoName;
+	}
+
+	public String getDealUntName() {
+		return dealUntName;
+	}
+
+	public void setDealUntName(String dealUntName) {
+		this.dealUntName = dealUntName;
+	}
+
+	public String getEvlTypeName() {
+		return evlTypeName;
+	}
+
+	public void setEvlTypeName(String evlTypeName) {
+		this.evlTypeName = evlTypeName;
+	}
+
+	public String getRdmPlCalcTypeName() {
+		return rdmPlCalcTypeName;
+	}
+
+	public void setRdmPlCalcTypeName(String rdmPlCalcTypeName) {
+		this.rdmPlCalcTypeName = rdmPlCalcTypeName;
+	}
+
+	public String getMktPrcApyFrmlName() {
+		return mktPrcApyFrmlName;
+	}
+
+	public void setMktPrcApyFrmlName(String mktPrcApyFrmlName) {
+		this.mktPrcApyFrmlName = mktPrcApyFrmlName;
+	}
+
+	public String getTaxPosTypeName() {
+		return taxPosTypeName;
+	}
+
+	public void setTaxPosTypeName(String taxPosTypeName) {
+		this.taxPosTypeName = taxPosTypeName;
+	}
+
+	public String getRcvbIntCalcFrmlName() {
+		return rcvbIntCalcFrmlName;
+	}
+
+	public void setRcvbIntCalcFrmlName(String rcvbIntCalcFrmlName) {
+		this.rcvbIntCalcFrmlName = rcvbIntCalcFrmlName;
+	}
+
+	public String getAstMngFrmlName() {
+		return astMngFrmlName;
+	}
+
+	public void setAstMngFrmlName(String astMngFrmlName) {
+		this.astMngFrmlName = astMngFrmlName;
+	}
+
+	public String getEvlFrmlName() {
+		return evlFrmlName;
+	}
+
+	public void setEvlFrmlName(String evlFrmlName) {
+		this.evlFrmlName = evlFrmlName;
+	}
+
+	public String getDtlClassName() {
+		return dtlClassName;
+	}
+
+	public void setDtlClassName(String dtlClassName) {
+		this.dtlClassName = dtlClassName;
+	}
 
 }

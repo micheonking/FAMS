@@ -49,7 +49,19 @@ public class ComboBoxField extends StringComboBox implements InterfaceServiceCal
 		this.setTriggerField(targetField);
 		this.makeComboBoxField(KindCode);
    	}  	
+	public ComboBoxField(String KindCode, TextField targetField, InterfaceCallback callback){
+		// 콤보선택 시 targetField값을 자동 설정한다.
+		this.callback = callback;
+		this.setTriggerField(targetField);
+		this.makeComboBoxField(KindCode);
+   	}  	
 	public ComboBoxField(String KindCode,  String code, String codeName, TextField targetField){
+		this.setTriggerField(targetField);
+		this.setAltCode(code, codeName);
+		this.makeComboBoxField(KindCode);
+  	}  	
+	public ComboBoxField(String KindCode,  String code, String codeName, TextField targetField, InterfaceCallback callback){
+		this.callback = callback; 
 		this.setTriggerField(targetField);
 		this.setAltCode(code, codeName);
 		this.makeComboBoxField(KindCode);
@@ -60,6 +72,7 @@ public class ComboBoxField extends StringComboBox implements InterfaceServiceCal
 		this.addCollapseHandler(new CollapseHandler(){
 			@Override
 			public void onCollapse(CollapseEvent event) {
+				
 				targetField.setValue(getCode());
 			}
     	}); 

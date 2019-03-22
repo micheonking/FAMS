@@ -58,16 +58,87 @@
 		<result column="itm01_ins_dt"                   property="insDate"/>
 		<result column="itm01_upd_usr_no"               property="updUsrNo"/>
 		<result column="itm01_upd_dt"                   property="updDate"/>
+
+		<result column="itm01_lclass_nm"                property="lclassName"/>
+		<result column="itm01_mclass_nm"                property="mclassName"/>
+		<result column="itm01_list_typ_nm"              property="listTypeName"/>
+		<result column="itm01_ntn_nm"                   property="ntnName"/>
+		<result column="itm01_area_nm"                  property="areaName"/>
+		<result column="itm01_krx_typ_nm"               property="krxTypeName"/>
+		<result column="itm01_tax_typ_nm"               property="taxTypeName"/>
+		<result column="itm01_grt_typ_nm"               property="grtTypeName"/>
+		<result column="itm01_wh_typ_nm"                property="whTypeName"/>
+		<result column="itm01_abro_wh_typ_nm"           property="abroWhTypeName"/>
+		<result column="itm01_pub_prv_typ_nm"           property="pubPrvTypeName"/>
+		<result column="itm01_data_rcv_apy_unt_nm"      property="dataRcvPayUntName"/>
+		<result column="itm01_data_rcv_co_nm"           property="dataRcvCoName"/>
+		<result column="itm01_deal_unt_nm"              property="dealUntName"/>
+		<result column="itm01_evl_typ_nm"               property="evlTypeName"/>
+		<result column="itm01_rdm_pl_calc_typ_nm"       property="rdmPlCalcTypeName"/>
+		<result column="itm01_mkt_prc_apy_frml_nm"      property="mktPrcApyFrmlName"/>
+		<result column="itm01_tax_pos_typ_nm"           property="taxPosTypeName"/>
+		<result column="itm01_rcvb_int_calc_frml_nm"    property="rcvbIntCalcFrmlName"/>
+		<result column="itm01_ast_mng_frml_nm"          property="astMngFrmlName"/>
+		<result column="itm01_evl_frml_nm"              property="evlFrmlName"/>
+		<result column="itm01_dtl_class_nm"             property="dtlClassName"/>
+
+
+		<result column="itm01_iss_corp_nm"              property="issCorpName"/>
+		<result column="itm01_org_iss_corp_nm"          property="orgIssCorpName"/>
+		<result column="itm01_mng_co_nm"                property="mngCoName"/>
+		<result column="itm01_grt_corp_nm"              property="grtCorpName"/>
 	</resultMap>
 
 	<select id="selectById" resultMap="mapper" parameterType="long" > 
-		select 	*
-		  from 	itm01_itm 
+		select 	itm01_itm.*
+		     ,  F_DTL_NM('LCLASS_CD'            , itm01_lclass_cd)              as itm01_lclass_nm
+		     ,  F_DTL_NM('MCLASS_CD'            , itm01_mclass_cd)              as itm01_mclass_nm
+		     ,  F_DTL_NM('LIST_TYP_CD'          , itm01_list_typ_cd)            as itm01_list_typ_nm
+		     ,  F_DTL_NM('NTN_CD'               , itm01_ntn_cd)                 as itm01_ntn_nm
+		     ,  F_DTL_NM('AREA_CD'              , itm01_area_cd)                as itm01_area_nm
+		     ,  F_DTL_NM('KRX_TYP_CD'           , itm01_krx_typ_cd)             as itm01_krx_typ_nm
+		     ,  F_DTL_NM('TAX_TYP_CD'           , itm01_tax_typ_cd)             as itm01_tax_typ_nm
+		     ,  F_DTL_NM('GRT_TYP_CD'           , itm01_grt_typ_cd)             as itm01_grt_typ_nm
+		     ,  F_DTL_NM('WH_TYP_CD'            , itm01_wh_typ_cd)              as itm01_wh_typ_nm
+		     ,  F_DTL_NM('ABRO_WH_TYP_CD'       , itm01_abro_wh_typ_cd)         as itm01_abro_wh_typ_nm
+		     ,  F_DTL_NM('PUB_PRV_TYP_CD'       , itm01_pub_prv_typ_cd)         as itm01_pub_prv_typ_nm
+		     ,  F_DTL_NM('DATA_RCV_APY_UNT_CD'  , itm01_data_rcv_apy_unt_cd)    as itm01_data_rcv_apy_unt_nm
+		     ,  F_DTL_NM('DATA_RCV_CO'          , itm01_data_rcv_co)            as itm01_data_rcv_co_nm
+		     ,  F_DTL_NM('DEAL_UNT'             , itm01_deal_unt)               as itm01_deal_unt_nm
+		     ,  F_DTL_NM('EVL_TYP_CD'           , itm01_evl_typ_cd)             as itm01_evl_typ_nm
+		     ,  F_DTL_NM('RDM_PL_CALC_TYP_CD'   , itm01_rdm_pl_calc_typ_cd)     as itm01_rdm_pl_calc_typ_nm
+		     ,  F_DTL_NM('MKT_PRC_APY_FRML_CD'  , itm01_mkt_prc_apy_frml_cd)    as itm01_mkt_prc_apy_frml_nm
+		     ,  F_DTL_NM('TAX_POS_TYP_CD'       , itm01_tax_pos_typ_cd)         as itm01_tax_pos_typ_nm
+		     ,  F_DTL_NM('RCVB_INT_CALC_FRML_CD', itm01_rcvb_int_calc_frml_cd)  as itm01_rcvb_int_calc_frml_nm
+		     ,  F_DTL_NM('AST_MNG_FRML_CD'      , itm01_ast_mng_frml_cd)        as itm01_ast_mng_frml_nm
+		     ,  F_DTL_NM('EVL_FRML_CD'          , itm01_evl_frml_cd)            as itm01_evl_frml_nm
+		  from 	itm01_itm
 		 where	itm01_itm_id = #{itmId}
 	</select>
 
 	<select id="selectByItmCode" resultMap="mapper" parameterType="HashMap" >
-		select 	*
+		select 	itm01_itm.*
+		     ,  F_DTL_NM('LCLASS_CD'            , itm01_lclass_cd)              as itm01_lclass_nm
+		     ,  F_DTL_NM('MCLASS_CD'            , itm01_mclass_cd)              as itm01_mclass_nm
+		     ,  F_DTL_NM('LIST_TYP_CD'          , itm01_list_typ_cd)            as itm01_list_typ_nm
+		     ,  F_DTL_NM('NTN_CD'               , itm01_ntn_cd)                 as itm01_ntn_nm
+		     ,  F_DTL_NM('AREA_CD'              , itm01_area_cd)                as itm01_area_nm
+		     ,  F_DTL_NM('KRX_TYP_CD'           , itm01_krx_typ_cd)             as itm01_krx_typ_nm
+		     ,  F_DTL_NM('TAX_TYP_CD'           , itm01_tax_typ_cd)             as itm01_tax_typ_nm
+		     ,  F_DTL_NM('GRT_TYP_CD'           , itm01_grt_typ_cd)             as itm01_grt_typ_nm
+		     ,  F_DTL_NM('WH_TYP_CD'            , itm01_wh_typ_cd)              as itm01_wh_typ_nm
+		     ,  F_DTL_NM('ABRO_WH_TYP_CD'       , itm01_abro_wh_typ_cd)         as itm01_abro_wh_typ_nm
+		     ,  F_DTL_NM('PUB_PRV_TYP_CD'       , itm01_pub_prv_typ_cd)         as itm01_pub_prv_typ_nm
+		     ,  F_DTL_NM('DATA_RCV_APY_UNT_CD'  , itm01_data_rcv_apy_unt_cd)    as itm01_data_rcv_apy_unt_nm
+		     ,  F_DTL_NM('DATA_RCV_CO'          , itm01_data_rcv_co)            as itm01_data_rcv_co_nm
+		     ,  F_DTL_NM('DEAL_UNT'             , itm01_deal_unt)               as itm01_deal_unt_nm
+		     ,  F_DTL_NM('EVL_TYP_CD'           , itm01_evl_typ_cd)             as itm01_evl_typ_nm
+		     ,  F_DTL_NM('RDM_PL_CALC_TYP_CD'   , itm01_rdm_pl_calc_typ_cd)     as itm01_rdm_pl_calc_typ_nm
+		     ,  F_DTL_NM('MKT_PRC_APY_FRML_CD'  , itm01_mkt_prc_apy_frml_cd)    as itm01_mkt_prc_apy_frml_nm
+		     ,  F_DTL_NM('TAX_POS_TYP_CD'       , itm01_tax_pos_typ_cd)         as itm01_tax_pos_typ_nm
+		     ,  F_DTL_NM('RCVB_INT_CALC_FRML_CD', itm01_rcvb_int_calc_frml_cd)  as itm01_rcvb_int_calc_frml_nm
+		     ,  F_DTL_NM('AST_MNG_FRML_CD'      , itm01_ast_mng_frml_cd)        as itm01_ast_mng_frml_nm
+		     ,  F_DTL_NM('EVL_FRML_CD'          , itm01_evl_frml_cd)            as itm01_evl_frml_nm
 		  from 	itm01_itm 
 		 where  itm01_cmp_cd = #{cmpCode}
 		   and  itm01_itm_cd = #{itmCode}

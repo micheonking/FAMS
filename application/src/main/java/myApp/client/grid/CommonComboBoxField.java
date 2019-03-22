@@ -34,6 +34,12 @@ public class CommonComboBoxField extends StringComboBox implements InterfaceServ
 		this.param = map;
 		this.makeComboBoxField(serviceName);
   	}
+	public CommonComboBoxField(String serviceName, Map map, TextField targetField, InterfaceCallback callback){
+		this.param = map;
+		this.callback = callback;
+		this.setTriggerField(targetField);
+		this.makeComboBoxField(serviceName);
+  	}
 	public CommonComboBoxField(String serviceName, Map map, InterfaceCallback callback){
 		this.param = map;
 		this.callback = callback;
@@ -70,7 +76,9 @@ public class CommonComboBoxField extends StringComboBox implements InterfaceServ
 		this.addCollapseHandler(new CollapseHandler(){
 			@Override
 			public void onCollapse(CollapseEvent event) {
+				Info.display("안타나???", "???");
 				targetField.setValue(getCode());
+				targetField.setText(getCode());
 			}
     	}); 
 	}
@@ -137,7 +145,6 @@ public class CommonComboBoxField extends StringComboBox implements InterfaceServ
 
 	@Override
 	public void getServiceResult(ServiceResult result) {
-		
 		this.getStore().clear();
 		this.codeMap.clear();
 		

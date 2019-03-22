@@ -57,7 +57,7 @@ public class UpdateDataModel<T extends GridDataModel> {
 		}
 		
 		for(GridDataModel dataModel: list){
-			IsNewData isNewData = new IsNewData(); // 신규 입력인지 변경인지를 확인한다. 
+			IsNewData isNewData = new IsNewData(); // 신규 입력인지 변경인지를 확인한다.
 			try {  
 				if(isNewData.isNewData(sqlSession, tableName, dataModel.getKeyId())) {
 					dataModel.setInsUsrNo(usrNo);

@@ -18,6 +18,7 @@ import myApp.client.service.GridDeleteData;
 import myApp.client.service.GridInsertRow;
 import myApp.client.service.GridRetrieveData;
 import myApp.client.service.GridUpdate;
+import myApp.client.service.InterfaceCallback;
 import myApp.client.vi.LoginUser;
 import myApp.client.vi.com.model.Com01_ComCodeModel;
 import myApp.client.vi.com.model.Com02_DtlCodeModel;
@@ -57,10 +58,16 @@ public class Com02_Grid_DtlCode extends VerticalLayoutContainer implements Inter
 	
 	@Override
 	public void retrieve() {
+		grid.mask("Loading");
 		grid.getStore().clear();
 		GridRetrieveData<Com02_DtlCodeModel> service = new GridRetrieveData<Com02_DtlCodeModel>(grid.getStore()); 
 		service.addParam("comCode", this.comCode);
-		service.retrieve("com.Com02_DtlCode.selectByComCodeAll");
+		service.retrieve("com.Com02_DtlCode.selectByComCodeAll", new InterfaceCallback() {
+			@Override
+			public void execute() {
+				grid.unmask();
+			}
+		});
 	}
 
 	@Override
