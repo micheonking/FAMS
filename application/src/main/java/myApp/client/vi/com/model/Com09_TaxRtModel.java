@@ -13,7 +13,8 @@ public class Com09_TaxRtModel implements GridDataModel {
 	private String  apySdd ;
 	private String  apyEdd ;
 	private String  apyTaxRt ;
-	private String  raxApyPosTypeCode ;
+	private String  taxRtApyPosTypeCode ;
+	private String  taxRtApyTypeCode ;
 	private String  useYn ;
 	private String  insUsrNo ;
 	private Date    insDate ;
@@ -21,6 +22,10 @@ public class Com09_TaxRtModel implements GridDataModel {
 	private Date    updDate ;
 	
 	private boolean  useYnFlag ;
+	private String  taxRtTypeName ;
+	private String  whCoTypeName ;
+	private String  taxRtApyPosTypeName;
+	private String  taxRtApyTypeName ;
 	
 	@Override
 	public void setKeyId(Long id) {
@@ -80,12 +85,21 @@ public class Com09_TaxRtModel implements GridDataModel {
 		this.apyTaxRt = apyTaxRt;
 	}
 
-	public String getRaxApyPosTypeCode() {
-		return raxApyPosTypeCode;
+	
+	public String getTaxRtApyPosTypeCode() {
+		return taxRtApyPosTypeCode;
 	}
 
-	public void setRaxApyPosTypeCode(String raxApyPosTypeCode) {
-		this.raxApyPosTypeCode = raxApyPosTypeCode;
+	public void setTaxRtApyPosTypeCode(String taxRtApyPosTypeCode) {
+		this.taxRtApyPosTypeCode = taxRtApyPosTypeCode;
+	}
+
+	public String getTaxRtApyTypeCode() {
+		return taxRtApyTypeCode;
+	}
+
+	public void setTaxRtApyTypeCode(String taxRtApyTypeCode) {
+		this.taxRtApyTypeCode = taxRtApyTypeCode;
 	}
 
 	public String getUseYn() {
@@ -142,6 +156,38 @@ public class Com09_TaxRtModel implements GridDataModel {
 		} else {
 			this.useYn = "N";
 		}
+	}
+
+	public String getTaxRtTypeName() {
+		return taxRtTypeName;
+	}
+
+	public void setTaxRtTypeName(String taxRtTypeName) {
+		this.taxRtTypeName = taxRtTypeName;
+	}
+
+	public String getWhCoTypeName() {
+		return whCoTypeName;
+	}
+
+	public void setWhCoTypeName(String whCoTypeName) {
+		this.whCoTypeName = whCoTypeName;
+	}
+
+	public String getTaxRtApyPosTypeName() {
+		return taxRtApyPosTypeName;
+	}
+
+	public void setTaxRtApyPosTypeName(String taxRtApyPosTypeName) {
+		this.taxRtApyPosTypeName = taxRtApyPosTypeName;
+	}
+
+	public String getTaxRtApyTypeName() {
+		return taxRtApyTypeName;
+	}
+
+	public void setTaxRtApyTypeName(String taxRtApyTypeName) {
+		this.taxRtApyTypeName = taxRtApyTypeName;
 	}
 	
 }

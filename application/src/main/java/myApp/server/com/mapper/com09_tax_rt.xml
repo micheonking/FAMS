@@ -10,7 +10,8 @@
 		<result column="com09_apy_sdd"        			property="apySdd"/>
 		<result column="com09_apy_edd"      			property="apyEdd"/>
 		<result column="com09_apy_tax_rt"	 			property="apyTaxRt"/>
-		<result column="com09_rax_rt_apy_pos_typ_cd" 	property="raxApyPosTypeCode"/>
+		<result column="com09_tax_rt_apy_pos_typ_cd" 	property="taxRtApyPosTypeCode"/>
+		<result column="com09_tax_rt_apy_typ_cd"	 	property="taxRtApyTypeCode"/>
 		<result column="com09_use_yn"       			property="useYn"/>
 		<result column="com09_ins_usr_no" 				property="insUsrNo"/>
 		<result column="com09_ins_dt"      				property="insDate"/>
@@ -22,6 +23,11 @@
 		select 	*
 		from 	com09_tax_rt 
 		where	com09_tax_rt_id = #{taxRtId}
+	</select>
+	
+	<select id="selectBySearText" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com09_tax_rt 
 	</select>
 
 </mapper>

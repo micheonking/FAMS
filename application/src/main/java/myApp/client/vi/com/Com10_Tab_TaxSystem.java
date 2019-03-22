@@ -11,7 +11,6 @@ import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
-import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
 
 import myApp.client.grid.ComboBoxField;
 import myApp.client.grid.GridBuilder;
@@ -22,19 +21,19 @@ import myApp.client.service.GridInsertRow;
 import myApp.client.service.GridRetrieveData;
 import myApp.client.service.GridUpdate;
 import myApp.client.vi.LoginUser;
-import myApp.client.vi.com.model.Com09_TaxRtModel;
-import myApp.client.vi.com.model.Com09_TaxRtModelProperties;
+import myApp.client.vi.com.model.Com10_TaxSysModel;
+import myApp.client.vi.com.model.Com10_TaxSysModelProperties;
 
-public class Com10_TaxSys extends BorderLayoutContainer implements InterfaceGridOperate {
+public class Com10_Tab_TaxSystem extends BorderLayoutContainer implements InterfaceGridOperate {
 	
-	private Grid<Com09_TaxRtModel> grid = this.buildGrid();
-	private ComboBoxField taxRtCombo = new ComboBoxField("");
+	private Grid<Com10_TaxSysModel> grid = this.buildGrid();
+	private ComboBoxField taxSysCombo = new ComboBoxField("");
 	
-	public Com10_TaxSys() {
+	public Com10_Tab_TaxSystem() {
 		
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);
-		searchBarBuilder.addComboBox(taxRtCombo,"세 제",200,100);
-		taxRtCombo.setValue("전체");
+		searchBarBuilder.addComboBox(taxSysCombo,"세 제",300,100);
+		taxSysCombo.setValue("전체");
 		searchBarBuilder.addRetrieveButton();
 		searchBarBuilder.addUpdateButton();
 		searchBarBuilder.addInsertButton();
@@ -47,38 +46,37 @@ public class Com10_TaxSys extends BorderLayoutContainer implements InterfaceGrid
 		this.retrieve();
 	}
 	
-	private Grid<Com09_TaxRtModel> buildGrid(){
-		Com09_TaxRtModelProperties properties = GWT.create(Com09_TaxRtModelProperties.class);
-		GridBuilder<Com09_TaxRtModel> gridBuilder = new GridBuilder<Com09_TaxRtModel>(properties.keyId());  
+	private Grid<Com10_TaxSysModel> buildGrid(){
+		Com10_TaxSysModelProperties properties = GWT.create(Com10_TaxSysModelProperties.class);
+		GridBuilder<Com10_TaxSysModel> gridBuilder = new GridBuilder<Com10_TaxSysModel>(properties.keyId());  
 		gridBuilder.setChecked(SelectionMode.SINGLE);
 		gridBuilder.addText(properties.taxRtTypeCode(), 150, "세율구분", new TextField());
-		gridBuilder.addText(properties.apySdd(), 150, "적응 초일", new TextField());
+		gridBuilder.addText(properties.appSdd(), 150, "적용 초일", new TextField());
 		gridBuilder.addText(properties.apyEdd(), 200, "적용 말일", new TextField());
-		gridBuilder.addText(properties.apyTaxRt(), 200, "세율(%)", new TextField());
-		gridBuilder.addText(properties.raxApyPosTypeCode(), 150, "적용 구분", new TextField());
-		gridBuilder.addBoolean(properties.useYnFlag(), 200, "활성화 구분");
-		gridBuilder.addDate(properties.insDate(), 200, "적용", new TextField());
+		gridBuilder.addText(properties.taxSysTypeCode(), 200, "세제구분", new TextField());
+		gridBuilder.addText(properties.trsRulApyTypeCode(), 150, "경과규정 적용구분", new TextField());
+		gridBuilder.addText(properties.trsRulTgtTypCode(), 200, "경과규정 대상",new TextField());
+		gridBuilder.addText(properties.trsRulXtncTypeCode(), 200, "경과규정 소멸 구분",new TextField());
 		return gridBuilder.getGrid(); 
 	}
 
 	@Override
 	public void retrieve() {
-		GridRetrieveData<Com09_TaxRtModel> service = new GridRetrieveData<Com09_TaxRtModel>(grid.getStore()); 
-//		service.addParam("searText", trCodeNameField.getText());
-		service.retrieve("com.Com09_TaxRate.selectBySearText");
+		GridRetrieveData<Com10_TaxSysModel> service = new GridRetrieveData<Com10_TaxSysModel>(grid.getStore()); 
+		service.retrieve("com.Com10_TaxSys.selectBySearText");
 	}
 
 	@Override
 	public void update(){
-		GridUpdate<Com09_TaxRtModel> service = new GridUpdate<Com09_TaxRtModel>();
+		GridUpdate<Com10_TaxSysModel> service = new GridUpdate<Com10_TaxSysModel>();
 		service.addParam("usrNo", LoginUser.getUsrNo());
-		service.update(grid.getStore(), "com.Com09_TaxRate.update"); 
+		service.update(grid.getStore(), "com.Com10_TaxSys.update"); 
 	}
 	
 	@Override
 	public void insertRow(){
-		Com09_TaxRtModel insertModel = new Com09_TaxRtModel();
-		GridInsertRow<Com09_TaxRtModel> service = new GridInsertRow<Com09_TaxRtModel>();
+		Com10_TaxSysModel insertModel = new Com10_TaxSysModel();
+		GridInsertRow<Com10_TaxSysModel> service = new GridInsertRow<Com10_TaxSysModel>();
 		service.insertRow(grid, insertModel);
 	}
 
@@ -90,9 +88,9 @@ public class Com10_TaxSys extends BorderLayoutContainer implements InterfaceGrid
 			public void onDialogHide(DialogHideEvent event) {
 				switch (event.getHideButton()) {
 				case YES:
-		GridDeleteData<Com09_TaxRtModel> service = new GridDeleteData<Com09_TaxRtModel>();
-		List<Com09_TaxRtModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
-		service.delete(grid.getStore(), checkedList, "com.Com09_TaxRate.delete");
+		GridDeleteData<Com10_TaxSysModel> service = new GridDeleteData<Com10_TaxSysModel>();
+		List<Com10_TaxSysModel> checkedList = grid.getSelectionModel().getSelectedItems() ; 
+		service.delete(grid.getStore(), checkedList, "com.Com10_TaxSys.delete");
 					break;
 				case NO:
 				default:
