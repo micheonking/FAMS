@@ -135,5 +135,4 @@ public class Com10_TaxSysModel implements GridDataModel {
 	public void setUseYnFlag(boolean useYnFlag) {
 		this.useYnFlag = useYnFlag;
 	}
-	
 }

@@ -23,5 +23,10 @@
 		from 	com10_tat_sys 
 		where	com10_tax_sys_id = #{taxSysId}
 	</select>
+	
+	<select id="selectBySearText" resultMap="mapper" parameterType="long" > 
+		select 	*
+		from 	com10_tat_sys 
+	</select>
 
 </mapper>

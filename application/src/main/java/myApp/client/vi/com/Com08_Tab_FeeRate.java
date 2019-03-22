@@ -8,11 +8,14 @@ import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
+import com.sencha.gxt.widget.core.client.event.TriggerClickEvent;
+import com.sencha.gxt.widget.core.client.event.TriggerClickEvent.TriggerClickHandler;
 import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
 
+import myApp.client.field.LookupTriggerField;
 import myApp.client.grid.ComboBoxField;
 import myApp.client.grid.GridBuilder;
 import myApp.client.grid.InterfaceGridOperate;
@@ -28,19 +31,25 @@ import myApp.client.vi.com.model.Com08_FeeRtModelProperties;
 public class Com08_Tab_FeeRate extends BorderLayoutContainer implements InterfaceGridOperate {
 	
 	private Grid<Com08_FeeRtModel> grid = this.buildGrid();
-	private TextField trCodeNameField = new TextField();
+//	private TextField trCodeNameField = new TextField();
 	private ComboBoxField feeRateCombo = new ComboBoxField("");
+	LookupTriggerField  trCoCode  = new LookupTriggerField();
 	
 	public Com08_Tab_FeeRate() {
 		
-//		LabelToolItem code = new LabelToolItem("수수료율 관리");
-//		code.setWidth(60);
-//		
 		SearchBarBuilder searchBarBuilder = new SearchBarBuilder(this);
 		searchBarBuilder.addComboBox(feeRateCombo,"수수료 구분",300,100);
 		feeRateCombo.setValue("전체");
-//		searchBarBuilder.getSearchBar().add(code);
-		searchBarBuilder.addTextField(trCodeNameField, "매매처 ", 300, 60, true);
+		trCoCode.addTriggerClickHandler(new TriggerClickHandler() {
+			
+			@Override
+			public void onTriggerClick(TriggerClickEvent event) {
+				Com08_ReeRateLookupField lookupReeRate = new Com08_ReeRateLookupField();
+				lookupReeRate.open();
+			}
+		});
+
+		searchBarBuilder.addLookupTriggerField(trCoCode, "매매처", 300, 100);
 		searchBarBuilder.addRetrieveButton();
 		searchBarBuilder.addUpdateButton();
 		searchBarBuilder.addInsertButton();
@@ -71,7 +80,7 @@ public class Com08_Tab_FeeRate extends BorderLayoutContainer implements Interfac
 	@Override
 	public void retrieve() {
 		GridRetrieveData<Com08_FeeRtModel> service = new GridRetrieveData<Com08_FeeRtModel>(grid.getStore()); 
-		service.addParam("searText", trCodeNameField.getText());
+		service.addParam("searText", trCoCode.getText());
 		service.retrieve("com.Com08_FeeRate.selectBySearText");
 	}
 
