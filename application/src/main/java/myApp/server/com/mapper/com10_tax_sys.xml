@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
-<mapper namespace="com10_tat_sys">
+<mapper namespace="com10_tax_sys">
 
 	<resultMap 	id="mapper" type="myApp.client.vi.com.model.Com10_TaxSysModel" >
 		<id     column="com10_tax_sys_id"    			property="taxSysId"/>
@@ -16,17 +16,28 @@
 		<result column="com10_ins_dt"      				property="insDate"/>
 		<result column="com10_upd_usr_no " 				property="updUsrNo"/>
 		<result column="com10_upd_dt"      				property="updDate"/>
+		
+		<result column="com10_tax_sys_typ_cd_nm"    		property="taxSysTypeCodeName"/>
+		<result column="com10_tax_rt_typ_cd_nm"     		property="taxRtTypeCodeName"/>
+		<result column="com10_trs_rul_apy_typ_cd_nm"      	property="trsRulApyTypeCodeName"/>
+		<result column="com10_trs_rul_tgt_typ_cd_nm"      	property="trsRulTgtTypCodeName"/>
+		<result column="com10_trs_rul_xtnc_typ_cd_nm"       property="trsRulXtncTypeCodeName"/>
 	</resultMap>
 
 	<select id="selectById" resultMap="mapper" parameterType="long" > 
 		select 	*
-		from 	com10_tat_sys 
+		from 	com10_tax_sys 
 		where	com10_tax_sys_id = #{taxSysId}
 	</select>
 	
 	<select id="selectBySearText" resultMap="mapper" parameterType="long" > 
-		select 	*
-		from 	com10_tat_sys 
+		select 	com10_tax_sys.*
+			,  f_dtl_nm('TAX_RT_TYP_CD'            , com10_tax_sys_typ_cd)           as com10_tax_sys_typ_cd_nm
+			,  f_dtl_nm('TAX_SYS_TYP_CD'           , com10_tax_rt_typ_cd)         	 as com10_tax_rt_typ_cd_nm
+			,  f_dtl_nm('TRS_RUL_APY_TYP_CD'       , com10_trs_rul_apy_typ_cd)       as com10_trs_rul_apy_typ_cd_nm
+			,  f_dtl_nm('TRS_RUL_TGT_TYP_CD'       , com10_trs_rul_tgt_typ_cd)       as com10_trs_rul_tgt_typ_cd_nm
+			,  f_dtl_nm('TRS_RUL_XTNC_TYP_CD'      , com10_trs_rul_xtnc_typ_cd)      as com10_trs_rul_xtnc_typ_cd_nm
+		from 	com10_tax_sys
 	</select>
 
 </mapper>

@@ -15,12 +15,17 @@ public class Com10_TaxSysModel implements GridDataModel {
 	private String  appSdd ;
 	private String  apyEdd ;
 	private String  trsRulXtncTypeCode ;
-	private String  insUsrNo ;
 	private Date    insDate ;
+	private String  insUsrNo ;
 	private String  updUsrNo ;
 	private Date    updDate ;
 	
 	private boolean  useYnFlag ;
+	private String  taxSysTypeCodeName ;
+	private String  taxRtTypeCodeName ;
+	private String  trsRulApyTypeCodeName;
+	private String  trsRulTgtTypCodeName;
+	private String  trsRulXtncTypeCodeName ;
 	
 	@Override
 	public void setKeyId(Long id) {
@@ -135,4 +140,45 @@ public class Com10_TaxSysModel implements GridDataModel {
 	public void setUseYnFlag(boolean useYnFlag) {
 		this.useYnFlag = useYnFlag;
 	}
+
+	public String getTaxSysTypeCodeName() {
+		return taxSysTypeCodeName;
+	}
+
+	public void setTaxSysTypeCodeName(String taxSysTypeCodeName) {
+		this.taxSysTypeCodeName = taxSysTypeCodeName;
+	}
+
+	public String getTaxRtTypeCodeName() {
+		return taxRtTypeCodeName;
+	}
+
+	public void setTaxRtTypeCodeName(String taxRtTypeCodeName) {
+		this.taxRtTypeCodeName = taxRtTypeCodeName;
+	}
+
+	public String getTrsRulApyTypeCodeName() {
+		return trsRulApyTypeCodeName;
+	}
+
+	public void setTrsRulApyTypeCodeName(String trsRulApyTypeCodeName) {
+		this.trsRulApyTypeCodeName = trsRulApyTypeCodeName;
+	}
+
+	public String getTrsRulTgtTypCodeName() {
+		return trsRulTgtTypCodeName;
+	}
+
+	public void setTrsRulTgtTypCodeName(String trsRulTgtTypCodeName) {
+		this.trsRulTgtTypCodeName = trsRulTgtTypCodeName;
+	}
+
+	public String getTrsRulXtncTypeCodeName() {
+		return trsRulXtncTypeCodeName;
+	}
+
+	public void setTrsRulXtncTypeCodeName(String trsRulXtncTypeCodeName) {
+		this.trsRulXtncTypeCodeName = trsRulXtncTypeCodeName;
+	}
+	
 }

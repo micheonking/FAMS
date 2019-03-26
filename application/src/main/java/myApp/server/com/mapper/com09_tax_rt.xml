@@ -17,6 +17,11 @@
 		<result column="com09_ins_dt"      				property="insDate"/>
 		<result column="com09_upd_usr_no " 				property="updUsrNo"/>
 		<result column="com09_upd_dt"      				property="updDate"/>
+		
+		<result column="com09_tax_rt_typ_nm"      		property="taxRtTypeName"/>
+		<result column="com09_tax_rt_apy_typ_nm"   		property="taxRtApyTypeName"/>
+		<result column="com09_tax_rt_apy_pos_typ_nm"    property="taxRtApyPosTypeName"/>
+		<result column="com09_wh_co_typ_nm"      		property="whCoTypeName"/>
 	</resultMap>
 
 	<select id="selectById" resultMap="mapper" parameterType="long" > 
@@ -26,7 +31,11 @@
 	</select>
 	
 	<select id="selectBySearText" resultMap="mapper" parameterType="long" > 
-		select 	*
+		select 	com09_tax_rt.*
+	    	,  F_DTL_NM('TAX_RT_TYP_CD'            , com09_tax_rt_typ_cd)              as com09_tax_rt_typ_nm
+			,  F_DTL_NM('TAX_RT_APY_TYP_CD'        , com09_tax_rt_apy_typ_cd)          as com09_tax_rt_apy_typ_nm
+			,  F_DTL_NM('TAX_RT_APY_POS_TYP_CD'    , com09_tax_rt_apy_pos_typ_cd)      as com09_tax_rt_apy_pos_typ_nm
+			,  F_DTL_NM('WH_CO_TYP_CD'             , com09_wh_co_typ_cd)               as com09_wh_co_typ_nm
 		from 	com09_tax_rt 
 	</select>
 

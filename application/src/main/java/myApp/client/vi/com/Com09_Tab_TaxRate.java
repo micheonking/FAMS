@@ -14,8 +14,6 @@ import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.info.Info;
-import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
-
 import myApp.client.grid.ComboBoxField;
 import myApp.client.grid.GridBuilder;
 import myApp.client.grid.InterfaceGridOperate;
@@ -63,7 +61,6 @@ public class Com09_Tab_TaxRate extends BorderLayoutContainer implements Interfac
 			@Override
 			public void onCollapse(CollapseEvent event) {
 				grid.getSelectionModel().getSelectedItem().setTaxRtTypeCode(taxRtTypeCodeComboBox.getCode());
-				Info.display("세율구분", ""+taxRtTypeCodeComboBox.getCode());
 				grid.getView().refresh(true);
 			}
 		});
@@ -78,7 +75,6 @@ public class Com09_Tab_TaxRate extends BorderLayoutContainer implements Interfac
 			public void onCollapse(CollapseEvent event) {
 				grid.getSelectionModel().getSelectedItem().setTaxRtApyTypeCode(taxRtApyTypeCodeComboBox.getCode());
 				grid.getView().refresh(true);
-				Info.display("적용구분", ""+taxRtApyTypeCodeComboBox.getCode());
 			}
 		});
 		gridBuilder.addText(properties.taxRtApyTypeName(), 200, "적용구분",taxRtApyTypeCodeComboBox);
@@ -88,7 +84,6 @@ public class Com09_Tab_TaxRate extends BorderLayoutContainer implements Interfac
 			public void onCollapse(CollapseEvent event) {
 				grid.getSelectionModel().getSelectedItem().setTaxRtApyPosTypeCode(taxRtApyPosTypeCodeComboBox.getCode());
 				grid.getView().refresh(true);
-				Info.display("세율적용시점구분", ""+taxRtApyPosTypeCodeComboBox.getCode());
 			}
 		});
 		gridBuilder.addText(properties.taxRtApyPosTypeName(), 200, "세율적용시점구분",taxRtApyPosTypeCodeComboBox);
@@ -98,7 +93,6 @@ public class Com09_Tab_TaxRate extends BorderLayoutContainer implements Interfac
 			public void onCollapse(CollapseEvent event) {
 				grid.getSelectionModel().getSelectedItem().setWhCoTypeCode(whCoTypeCodeComboBox.getCode());
 				grid.getView().refresh(true);
-				Info.display("원천징수처", ""+whCoTypeCodeComboBox.getCode());
 			}
 		});
 		gridBuilder.addText(properties.whCoTypeName(), 170, "원천징수처 구분",whCoTypeCodeComboBox);

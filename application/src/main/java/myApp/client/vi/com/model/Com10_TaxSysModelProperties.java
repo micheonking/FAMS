@@ -22,4 +22,10 @@ public interface Com10_TaxSysModelProperties extends PropertyAccess<Com10_TaxSys
 	ValueProvider<Com10_TaxSysModel, Date>		insDate() ;
 	ValueProvider<Com10_TaxSysModel, String>	updUsrNo() ;
 	ValueProvider<Com10_TaxSysModel, Date>		updDate() ;
+	
+	ValueProvider<Com10_TaxSysModel, String>	taxSysTypeCodeName() ;
+	ValueProvider<Com10_TaxSysModel, String>	taxRtTypeCodeName() ;
+	ValueProvider<Com10_TaxSysModel, String>	trsRulApyTypeCodeName() ;
+	ValueProvider<Com10_TaxSysModel, String>	trsRulTgtTypCodeName() ;
+	ValueProvider<Com10_TaxSysModel, String>	trsRulXtncTypeCodeName() ;
 }
