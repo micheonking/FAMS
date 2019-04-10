@@ -8,7 +8,6 @@ import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.Grid;
-import com.sencha.gxt.widget.core.client.info.Info;
 
 import myApp.client.grid.GridBuilder;
 import myApp.client.grid.InterfaceGridOperate;
@@ -46,10 +45,10 @@ public class Sys50_Tab_TermsDict extends BorderLayoutContainer implements Interf
 		Sys50_TermsDictModelProperties properties = GWT.create(Sys50_TermsDictModelProperties.class);
 		GridBuilder<Sys50_TermsDictModel> gridBuilder = new GridBuilder<Sys50_TermsDictModel>(properties.keyId());  
 		gridBuilder.setChecked(SelectionMode.SINGLE);
-		gridBuilder.addText(properties.korName(), 150, "용어명", new TextField());
-		gridBuilder.addText(properties.shtName(), 100, "영문약어", new TextField());
-		gridBuilder.addText(properties.fullName(), 150, "영문Full명", new TextField());
-		gridBuilder.addText(properties.rmk(), 200, "비고", new TextField());
+		gridBuilder.addText(properties.korName(), 250, "용어명", new TextField());
+		gridBuilder.addText(properties.shtName(), 200, "영문약어", new TextField());
+		gridBuilder.addText(properties.fullName(), 300, "영문Full명", new TextField());
+		gridBuilder.addText(properties.rmk(), 350, "비고", new TextField());
 		return gridBuilder.getGrid(); 
 	}
 

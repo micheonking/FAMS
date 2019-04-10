@@ -62,7 +62,15 @@ public class Com00_ItmLookupComboBox extends ButtonBar {
 	public String getItmName() {
 		return itmLookupField.getItmName();
 	}
-	
+
+	public void setItmCode(String itmCode) {
+		itmLookupField.setItmCode(itmCode);
+	}
+
+	public void setItmName(String itmName) {
+		itmLookupField.setItmName(itmName);
+	}
+
 	public String getPrdTypCode() {
 		return itmLClassComboBox.getCode();
 	}

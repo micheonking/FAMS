@@ -9,22 +9,21 @@ import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.widget.core.client.ContentPanel;
-import com.sencha.gxt.widget.core.client.button.ButtonBar;
+import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
-import com.sencha.gxt.widget.core.client.container.BorderLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent;
 import com.sencha.gxt.widget.core.client.event.CollapseEvent.CollapseHandler;
+import com.sencha.gxt.widget.core.client.event.DialogHideEvent.DialogHideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
-import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.LongField;
 import com.sencha.gxt.widget.core.client.form.TextField;
-import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.toolbar.LabelToolItem;
 
@@ -33,18 +32,13 @@ import myApp.client.field.MyDateField;
 import myApp.client.grid.ComboBoxField;
 import myApp.client.grid.CommonComboBoxField;
 import myApp.client.resource.ResourceIcon;
-import myApp.client.service.GridRetrieveData;
-import myApp.client.service.GridUpdate;
-import myApp.client.service.InterfaceCallback;
 import myApp.client.service.InterfaceServiceCall;
 import myApp.client.service.ServiceCall;
 import myApp.client.service.ServiceRequest;
 import myApp.client.service.ServiceResult;
 import myApp.client.utils.InterfaceCallbackResult;
-import myApp.client.utils.InterfaceCallbackResult2;
 import myApp.client.utils.SimpleMessage;
 import myApp.client.vi.LoginUser;
-import myApp.client.vi.com.Com00_ItmLookupComboBox;
 import myApp.client.vi.itm.model.Itm01_ItmModel;
 
 public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmModel> {
@@ -56,6 +50,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 
 	private InterfaceCallbackResult callbackResult;
 
+	LongField           itmId                   = new LongField();
 	TextField           itmCode                 = new TextField();
 	TextField           infoSttDate             = new TextField();
 	TextField           infoEndDate             = new TextField();
@@ -149,24 +144,22 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 
 	//	ComboBoxField       dtlClassCode            = new ComboBoxField();
 
-	public void open() {
+	public void open(boolean isReadOnly) {
 		this.setHeaderVisible(false);
 		this.setBorders(false);
-		setInit();
+		editDriver.initialize(this);
 		setEvent();
-		makeForm();
-//		setReadOnly(true);
-		
-		TextButton updateButton = new TextButton("저장");
-		updateButton.setIcon(ResourceIcon.INSTANCE.save16Button());
-		updateButton.addSelectHandler(new SelectHandler() {
-			@Override
-			public void onSelect(SelectEvent event) {
-				update();
-			}
-		});
-		this.addButton(updateButton);
-		this.setButtonAlign(BoxLayoutPack.CENTER);
+		makeForm(isReadOnly);
+	}
+
+	public void open(String itmCode, boolean isReadOnly, InterfaceCallbackResult callbackResult) {
+		this.callbackResult = callbackResult;
+		open(isReadOnly);
+		if(itmCode == null) {
+			setInit();
+		} else {
+			retrieve(itmCode);
+		}
 	}
 
 	private void setEvent() {
@@ -187,7 +180,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		mclassName.retrieve("sys.Sys00_Common.selectMClassCode", param);
 	}
 
-	private void makeForm() {
+	private void makeForm(boolean isReadOnly) {
 		
 		HorizontalLayoutData labelLayout1 = new HorizontalLayoutData(100, -1, new Margins(10,0,0,0));
 		HorizontalLayoutData labelLayout2 = new HorizontalLayoutData(120, -1, new Margins(10,0,0,0));
@@ -450,8 +443,6 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 
 		row15.add(new LabelToolItem("원발행기관"), labelLayout3);
 		row15.add(orgIssCorpCode, fieldLayout3);
-
-		row15.add(lclassCode);
 		
 		VerticalLayoutContainer vlc = new VerticalLayoutContainer();
 		vlc.add(row01, new VerticalLayoutData(1, 30, new Margins(20,0,0,20)));
@@ -472,20 +463,7 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 
 		this.add(vlc);
 		this.editDriver.edit(itmModel);
-	}
-
-	public void retrieve(String itmCode) {
-		ServiceRequest request = new ServiceRequest("itm.Itm01_Itm.selectByItmCode");
-		request.putStringParam("cmpCode", LoginUser.getCmpCode());
-		request.putStringParam("itmCode", itmCode);
-		ServiceCall service = new ServiceCall();
-		service.execute(request, new InterfaceServiceCall() {
-			@Override
-			public void getServiceResult(ServiceResult result) {
-				itmModel = (Itm01_ItmModel)result.getResult(0);
-				editDriver.edit(itmModel);
-			}
-		});
+		setReadOnly(isReadOnly);
 	}
 
 	private boolean preUpdate(Itm01_ItmModel itmModel) {
@@ -495,19 +473,16 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 			new SimpleMessage("확인", "종목코드는 필수입력 항목입니다.");
 			return false;
 		}
-		
 		//종목명(약명)
 		if(nullChk(itmModel.getItmAbbr())) {
 			new SimpleMessage("확인", "종목명(약명)은 필수입력 항목입니다.");
 			return false;
 		}
-
 		//종목명(풀명)
 		if(nullChk(itmModel.getItmName())) {
 			new SimpleMessage("확인", "종목명(풀명)은 필수입력 항목입니다.");
 			return false;
 		}
-
 		//종목대분류
 		if(nullChk(itmModel.getLclassCode())) {
 			new SimpleMessage("확인", "종목대분류는 필수입력 항목입니다.");
@@ -516,6 +491,11 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		//종목중분류
 		if(nullChk(itmModel.getMclassCode())) {
 			new SimpleMessage("확인", "종목중분류는 필수입력 항목입니다.");
+			return false;
+		}
+		//국가코드
+		if(nullChk(itmModel.getNtnCode())) {
+			new SimpleMessage("확인", "국가코드는 필수입력 항목입니다.");
 			return false;
 		}
 
@@ -530,7 +510,24 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 		}
 	}
 
-	protected void update() {
+	public void retrieve(String itmCode) {
+		ServiceRequest request = new ServiceRequest("itm.Itm01_Itm.selectByItmCode");
+		request.putStringParam("cmpCode", LoginUser.getCmpCode());
+		request.putStringParam("itmCode", itmCode);
+		ServiceCall service = new ServiceCall();
+		service.execute(request, new InterfaceServiceCall() {
+			@Override
+			public void getServiceResult(ServiceResult result) {
+				if(result.getStatus() == 0) {
+					new SimpleMessage("확인", "등록된 종목이 아닙니다.");
+				}
+				itmModel = (Itm01_ItmModel)result.getResult(0);
+				editDriver.edit(itmModel);
+			}
+		});
+	}
+
+	public void update() {
 		this.itmModel = editDriver.flush();
 		if(preUpdate(this.itmModel)) {
 			ServiceRequest request = new ServiceRequest("itm.Itm01_Itm.rowUpdate");
@@ -542,12 +539,52 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 				public void getServiceResult(ServiceResult result) {
 					ServiceResult serviceResult = (ServiceResult)result;
 					if(serviceResult.getStatus() > -1) {
-						new SimpleMessage("확인", serviceResult.getMessage(), 600);
-						return;
+						new SimpleMessage("확인", "저장이 완료되었습니다.");
+						callbackResult.execute(result);
+					} else {
+						new SimpleMessage("확인", serviceResult.getMessage(), 400);
 					}
 				}
 			});
 		}
+	}
+
+	public void delete() {
+		final ConfirmMessageBox msgBox = new ConfirmMessageBox("확인", "삭제하시겠습니까?");
+		msgBox.addDialogHideHandler(new DialogHideHandler() {
+			@Override
+			public void onDialogHide(DialogHideEvent event) {
+				switch (event.getHideButton()) {
+				case YES:
+					itmModel = editDriver.flush();
+					if(preUpdate(itmModel)) {
+						ServiceRequest request = new ServiceRequest("itm.Itm01_Itm.rowDelete");
+						request.putModelParam("itmModel", itmModel);
+						ServiceCall service = new ServiceCall();
+						service.execute(request, new InterfaceServiceCall() {
+							@Override
+							public void getServiceResult(ServiceResult result) {
+								ServiceResult serviceResult = (ServiceResult)result;
+								if(serviceResult.getStatus() > -1) {
+									new SimpleMessage("확인", "삭제되었습니다.");
+									itmModel = null;
+									editDriver.edit(itmModel);
+								} else {
+									new SimpleMessage("확인", serviceResult.getMessage(), 400);
+								}
+								return;
+							}
+						});
+					}
+					break;
+				case NO:
+				default:
+					break;
+				}
+			}
+		});
+		msgBox.setWidth(300);
+		msgBox.show();
 	}
 
 	private void setReadOnly(boolean flag) {
@@ -601,7 +638,11 @@ public class Itm01_Edit_ItmCom extends ContentPanel implements Editor<Itm01_ItmM
 	}
 	
 	public void setInit() {
-		editDriver.initialize(this);
+		this.itmModel = new Itm01_ItmModel();
+		this.itmModel.setCmpCode(LoginUser.getCmpCode());
+		this.itmModel.setInfoSttDateConv(LoginUser.getToday());
+		this.itmModel.setInfoEndDate("99991231");
+		editDriver.edit(itmModel);
 	}
 
 }

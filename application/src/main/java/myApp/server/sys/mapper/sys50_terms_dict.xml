@@ -24,7 +24,7 @@
 	<select id="selectBySearchText" resultMap="mapper" parameterType="String" > 
 		select 	*
 		from 	sys50_terms_dict 
-		where	sys50_kor_nm||sys50_sht_nm||sys50_full_nm like #{searchText}
+		where	upper(sys50_kor_nm||sys50_sht_nm||sys50_full_nm) like upper(#{searchText})
 	</select>
 
 </mapper>

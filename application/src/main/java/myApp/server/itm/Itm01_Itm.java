@@ -56,12 +56,12 @@ public class Itm01_Itm {
 
 	public void rowUpdate(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 		
-		Itm01_ItmModel itmModel = (Itm01_ItmModel)request.getModelParam("itmModel");
 		String usrNo = request.getStringParam("usrNo");
 
-		System.out.println("itm01_itm.java =============");
-		System.out.println("itm01_itm.java ============= keyId   : " + itmModel.getItmId());
-		System.out.println("itm01_itm.java ============= itmCode : " + itmModel.getItmCode());
+		Itm01_ItmModel itmModel = (Itm01_ItmModel)request.getModelParam("itmModel");
+		if(itmModel.getItmId() == null) {
+			itmModel.setItmId(sqlSession.selectOne("getSeq"));
+		}
 
 		List<GridDataModel> list = new ArrayList<GridDataModel>();
 		list.add(itmModel);
@@ -70,14 +70,28 @@ public class Itm01_Itm {
 		updateData.updateModel(sqlSession, list, "itm01_itm", usrNo, result);
 	}
 
+	public void rowDelete(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
+		
+//		Itm01_ItmModel itmModel = (Itm01_ItmModel)request.getModelParam("itmModel");
+//		if(itmModel.getItmId() == null) {
+//			itmModel.setItmId(sqlSession.selectOne("getSeq"));
+//		}
+
+		List<GridDataModel> list = new ArrayList<GridDataModel>();
+		list.add(request.getModelParam("itmModel"));
+
+		UpdateDataModel<GridDataModel> updateData = new UpdateDataModel<GridDataModel>(); 
+		updateData.deleteModel(sqlSession, list, "itm01_itm", result);
+	}
+
 	public void update(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
 		String usrNo = request.getStringParam("usrNo");
-		UpdateDataModel<Itm01_ItmModel> updateModel = new UpdateDataModel<Itm01_ItmModel>();
+		UpdateDataModel<GridDataModel> updateModel = new UpdateDataModel<GridDataModel>();
 		updateModel.updateModel(sqlSession, request.getList(), "itm01_itm", usrNo, result);
 	}
 
 	public void delete(SqlSession sqlSession, ServiceRequest request, ServiceResult result) {
-		UpdateDataModel<Itm01_ItmModel> updateModel = new UpdateDataModel<Itm01_ItmModel>(); 
+		UpdateDataModel<GridDataModel> updateModel = new UpdateDataModel<GridDataModel>(); 
 		updateModel.deleteModel(sqlSession, request.getList(), "itm01_itm", result);
 	}
 }

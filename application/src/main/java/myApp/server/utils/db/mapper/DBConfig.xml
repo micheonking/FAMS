@@ -39,7 +39,8 @@
 	,		data_type
 	,		nullable
 	from 	all_tab_cols
-	where	table_name = #{table_name}  	
+	where	table_name = #{table_name}
+	order by column_id
 </select>
 
 
